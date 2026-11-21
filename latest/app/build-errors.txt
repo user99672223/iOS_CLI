@@ -1,3 +1,2 @@
-xcodebuild: error: Could not resolve package dependencies:
-  /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit/Package.swift:6:23: error: 'v18' is unavailable
-   |                       `- error: 'v18' is unavailable
+/Users/runner/work/iOS_CLI/iOS_CLI/app/Sources/App/UIDemo.swift:34:102: error: expected ',' separator
+/Users/runner/work/iOS_CLI/iOS_CLI/app/Sources/App/UIDemo.swift:34:102: error: Expected ',' separator

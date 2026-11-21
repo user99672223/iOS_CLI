@@ -1,0 +1,2 @@
+/Users/runner/work/iOS_CLI/iOS_CLI/app/Sources/App/UIDemo.swift:34:102: error: expected ',' separator
+/Users/runner/work/iOS_CLI/iOS_CLI/app/Sources/App/UIDemo.swift:34:102: error: Expected ',' separator
