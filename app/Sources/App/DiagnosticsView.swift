@@ -33,7 +33,10 @@ struct DiagnosticsView: View {
                 }
             }
             Section("Windows processes") {
-                if sampler.processes.isEmpty { Text("None").foregroundStyle(.secondary) }
+                if WineSession.isRunning, let main = WineSession.currentCommand {
+                    Text("main  \(main)").font(.caption.monospaced()).lineLimit(3)
+                }
+                if sampler.processes.isEmpty && !WineSession.isRunning { Text("None").foregroundStyle(.secondary) }
                 ForEach(sampler.processes, id: \.self) { p in
                     Text(p).font(.caption.monospaced()).lineLimit(3)
                 }

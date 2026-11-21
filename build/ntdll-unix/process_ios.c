@@ -451,7 +451,7 @@ static pthread_mutex_t ios_child_lock = PTHREAD_MUTEX_INITIALIZER;
  * whether anything still runs; the slot itself is released as before. env.MADEIRA_CHILD_EXIT_TRACK=0 counts an
  * ended child as running until its boot thread returns, as before. */
 #define IOS_CHILD_PATH 260
-static struct { char name[64]; char path[IOS_CHILD_PATH]; double started; int used; void *peb; int exited; double exited_at; int noted; } ios_child_slots[IOS_CHILD_SLOTS];
+static struct { char name[64]; char path[IOS_CHILD_PATH]; double started; int used; void *peb; int exited; double exited_at; int noted; char cmd[512]; } ios_child_slots[IOS_CHILD_SLOTS];
 /* Madeira child-exit: the last processes that ended, with the status each ended with. The slots above are
  * released when a child's boot thread returns (milliseconds after a healthy exit), so the status has to live
  * elsewhere: this ring keeps the last IOS_CHILD_ENDED ends (process_exit_wrapper, through
@@ -559,6 +559,7 @@ static int ios_child_slot_take( const UNICODE_STRING *image )
         ios_child_slots[i].used = 1;
         ios_child_slots[i].started = ios_child_now();
         ios_child_slots[i].noted = 0;
+        ios_child_slots[i].cmd[0] = 0;
         memcpy( ios_child_slots[i].name, name, n + 1 );
         ios_child_path_text( ios_child_slots[i].path, image );
         slot = i;
@@ -567,6 +568,22 @@ static int ios_child_slot_take( const UNICODE_STRING *image )
     if (slot < 0) ios_child_untracked++;
     pthread_mutex_unlock( &ios_child_lock );
     return slot;
+}
+
+/* CLI app: keep the command line for Diagnostics (ASCII, control characters as spaces). */
+static void cli_child_slot_set_cmdline( int slot, const UNICODE_STRING *cmd )
+{
+    unsigned i, n = 0, len;
+    if (slot < 0 || slot >= IOS_CHILD_SLOTS || !cmd || !cmd->Buffer) return;
+    len = cmd->Length / sizeof(WCHAR);
+    pthread_mutex_lock( &ios_child_lock );
+    for (i = 0; i < len && n < sizeof(ios_child_slots[slot].cmd) - 1; i++)
+    {
+        WCHAR c = cmd->Buffer[i];
+        ios_child_slots[slot].cmd[n++] = (c >= 32 && c < 127) ? (char)c : (c < 32 ? ' ' : '?');
+    }
+    ios_child_slots[slot].cmd[n] = 0;
+    pthread_mutex_unlock( &ios_child_lock );
 }
 
 static void ios_child_slot_release( int slot )
@@ -925,6 +942,7 @@ static NTSTATUS spawn_process( const RTL_USER_PROCESS_PARAMETERS *params, int so
     args->argc = argc;
     args->pe_info = *pe_info;
     args->slot = ios_child_slot_take( &params->ImagePathName );
+    cli_child_slot_set_cmdline( args->slot, &params->CommandLine );
 
     if (winedebug) putenv( winedebug );
 
@@ -5210,7 +5228,8 @@ int cli_list_children( char *buf, int len )
         count++;
         if (buf && len - used > 1)
             used += snprintf( buf + used, len - used, "%s\t%s\t%.0f\n", ios_child_slots[i].name,
-                              ios_child_slots[i].path, now - ios_child_slots[i].started );
+                              ios_child_slots[i].cmd[0] ? ios_child_slots[i].cmd : ios_child_slots[i].path,
+                              now - ios_child_slots[i].started );
         if (used >= len) used = len - 1;
     }
     pthread_mutex_unlock( &ios_child_lock );

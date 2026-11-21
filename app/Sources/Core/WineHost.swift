@@ -65,6 +65,8 @@ final class WineSession: @unchecked Sendable {
     var onExit: ((Int32, UInt32) -> Void)?
 
     static var isRunning: Bool { cli_session_running() != 0 }
+    /// The session's main program and arguments (no secrets are passed as arguments).
+    nonisolated(unsafe) static var currentCommand: String?
 
     func start(_ o: Options) throws {
         guard cli_session_running() == 0 else { throw RuntimeError.busy }
@@ -100,6 +102,7 @@ final class WineSession: @unchecked Sendable {
         }
         guard rc == 0 else { throw RuntimeError.startFailed }
         startedAt = Date()
+        Self.currentCommand = o.exe + (o.args.isEmpty ? "" : " " + o.args)
         if o.stdoutPipe { attachReader() } else { watchExit() }
     }
 
