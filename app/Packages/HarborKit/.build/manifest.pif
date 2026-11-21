@@ -5,11 +5,11 @@
       "name" : "HarborKit",
       "path" : "/home/user/iOS_CLI/app/Packages/HarborKit",
       "projects" : [
-        "db9d835ccacaa970ba27f6f460f3fc79855cdde06fc2d6fd8f718dcd492fb7a8",
+        "e493b561c53119bd374143f8016418cd23ef1755c70b6bc7fd07d8a259441a1b",
         "e80ed6ed4e5e2a3806abde51a7917bd89c93701759c47fb099d1a08dbb79dc8c"
       ]
     },
-    "signature" : "4d1008528e30c231fc6c12eeba2cc4d39547f6feac578e35f0b7c1f642c7e83d",
+    "signature" : "c334930396ab54f8b459e35292240b8c4d3f078fef2f74f7167bc2fd07b1cb28",
     "type" : "workspace"
   },
   {
@@ -211,6 +211,14 @@
                 "path" : "ChatStateTests.swift",
                 "sourceTree" : "<group>",
                 "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:harborkit::MAINGROUP::REF_2::REF_1",
+                "name" : "TerminalTextTests.swift",
+                "path" : "TerminalTextTests.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
               }
             ],
             "guid" : "PACKAGE:harborkit::MAINGROUP::REF_2",
@@ -242,6 +250,14 @@
                 "guid" : "PACKAGE:harborkit::MAINGROUP::REF_3::REF_2",
                 "name" : "JSONValue.swift",
                 "path" : "JSONValue.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:harborkit::MAINGROUP::REF_3::REF_3",
+                "name" : "TerminalText.swift",
+                "path" : "TerminalText.swift",
                 "sourceTree" : "<group>",
                 "type" : "file"
               }
@@ -277,6 +293,14 @@
                 "path" : "JSONValue.swift",
                 "sourceTree" : "<group>",
                 "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:harborkit::MAINGROUP::REF_4::REF_3",
+                "name" : "TerminalText.swift",
+                "path" : "TerminalText.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
               }
             ],
             "guid" : "PACKAGE:harborkit::MAINGROUP::REF_4",
@@ -298,16 +322,16 @@
       "projectIsPackage" : "true",
       "projectName" : "HarborKit",
       "targets" : [
-        "e788802613cc59565fa6640a977b72823e7ce921bcd1e859b4c8a428454aa722",
+        "d4ce69183965009bd49e625121f52c6a61ae50ec0769115e8880633d1584d757",
         "aedda1f1172dd4248e24bac91972c88cfabdf2a126105fdb2e58de8ff883dd6c",
         "1570fe07f878ac6927d8d43506b3832af03f094c7a191218521c7ae02b9abf6b",
         "1bba78255db5d69464ae8c5cb00663a2a18bcad0f31c52c212d93176294f364b",
-        "9dfe5cb347e6b68b06f7d3c26e8d6dc27dbb38d0c9635e5f2da5757f4389abcc",
-        "f5152c73a1d15cf6beedafe9ffe7629ce3ccf2505db2fe80d496c5174fcfdb9f",
+        "cefc07de72b2858e0f38ba5177ec307cbfbc8bd8bb36f6aba3c7da60096345fa",
+        "07cb24d4c49876a9db69c80dad22667d3c8ef50f344938a61e6d931cfb0b52f6",
         "aeb3e35d1cd42a5a177a23d1940348b6d154b8ed4005f7b975ea7a066b4daad5"
       ]
     },
-    "signature" : "db9d835ccacaa970ba27f6f460f3fc79855cdde06fc2d6fd8f718dcd492fb7a8",
+    "signature" : "e493b561c53119bd374143f8016418cd23ef1755c70b6bc7fd07d8a259441a1b",
     "type" : "project"
   },
   {
@@ -490,6 +514,15 @@
 
               ],
               "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:harborkit::MAINGROUP::REF_2::REF_1",
+              "guid" : "PACKAGE-PRODUCT:harborkit_HarborKitTests.HarborKitTests::BUILDPHASE_0::1",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
             }
           ],
           "guid" : "PACKAGE-PRODUCT:harborkit_HarborKitTests.HarborKitTests::BUILDPHASE_0",
@@ -533,7 +566,7 @@
       "productTypeIdentifier" : "com.apple.product-type.bundle.unit-test",
       "type" : "standard"
     },
-    "signature" : "e788802613cc59565fa6640a977b72823e7ce921bcd1e859b4c8a428454aa722",
+    "signature" : "d4ce69183965009bd49e625121f52c6a61ae50ec0769115e8880633d1584d757",
     "type" : "target"
   },
   {
@@ -892,6 +925,15 @@
 
               ],
               "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:harborkit::MAINGROUP::REF_3::REF_3",
+              "guid" : "PACKAGE-TARGET:HarborKit::BUILDPHASE_0::3",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
             }
           ],
           "guid" : "PACKAGE-TARGET:HarborKit::BUILDPHASE_0",
@@ -918,7 +960,7 @@
       "productTypeIdentifier" : "org.swift.product-type.library.static",
       "type" : "standard"
     },
-    "signature" : "9dfe5cb347e6b68b06f7d3c26e8d6dc27dbb38d0c9635e5f2da5757f4389abcc",
+    "signature" : "cefc07de72b2858e0f38ba5177ec307cbfbc8bd8bb36f6aba3c7da60096345fa",
     "type" : "target"
   },
   {
@@ -1214,6 +1256,15 @@
 
               ],
               "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:harborkit::MAINGROUP::REF_4::REF_3",
+              "guid" : "PACKAGE-TARGET:HarborKit--26FA74F63756FF71-dynamic::BUILDPHASE_0::3",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
             }
           ],
           "guid" : "PACKAGE-TARGET:HarborKit--26FA74F63756FF71-dynamic::BUILDPHASE_0",
@@ -1239,7 +1290,7 @@
       "productTypeIdentifier" : "com.apple.product-type.library.dynamic",
       "type" : "standard"
     },
-    "signature" : "f5152c73a1d15cf6beedafe9ffe7629ce3ccf2505db2fe80d496c5174fcfdb9f",
+    "signature" : "07cb24d4c49876a9db69c80dad22667d3c8ef50f344938a61e6d931cfb0b52f6",
     "type" : "target"
   },
   {

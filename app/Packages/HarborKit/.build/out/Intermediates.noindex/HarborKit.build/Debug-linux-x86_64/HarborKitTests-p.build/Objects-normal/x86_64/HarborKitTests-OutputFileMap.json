@@ -25,5 +25,15 @@
     "object" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/ChatStateTests.o",
     "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/ChatStateTests.swiftdeps",
     "swiftmodule" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/ChatStateTests~partial.swiftmodule"
+  },
+  "/home/user/iOS_CLI/app/Packages/HarborKit/Tests/HarborKitTests/TerminalTextTests.swift" : {
+    "const-values" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/TerminalTextTests.swiftconstvalues",
+    "dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/TerminalTextTests.d",
+    "diagnostics" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/TerminalTextTests.dia",
+    "index-unit-output-path" : "/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/TerminalTextTests.o",
+    "llvm-bc" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/TerminalTextTests.bc",
+    "object" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/TerminalTextTests.o",
+    "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/TerminalTextTests.swiftdeps",
+    "swiftmodule" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/TerminalTextTests~partial.swiftmodule"
   }
 }

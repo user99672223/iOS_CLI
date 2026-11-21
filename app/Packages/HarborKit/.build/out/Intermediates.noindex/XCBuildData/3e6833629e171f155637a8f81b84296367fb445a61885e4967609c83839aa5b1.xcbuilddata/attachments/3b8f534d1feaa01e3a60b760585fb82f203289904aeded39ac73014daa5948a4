@@ -1,0 +1,49 @@
+{
+  "" : {
+    "diagnostics" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/HarborKit-primary.dia",
+    "emit-module-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/HarborKit-primary-emit-module.d",
+    "emit-module-diagnostics" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/HarborKit-primary-emit-module.dia",
+    "pch" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/HarborKit-primary-Bridging-header.pch",
+    "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/HarborKit-primary.swiftdeps"
+  },
+  "/home/user/iOS_CLI/app/Packages/HarborKit/Sources/HarborKit/ChatState.swift" : {
+    "const-values" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ChatState.swiftconstvalues",
+    "dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ChatState.d",
+    "diagnostics" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ChatState.dia",
+    "index-unit-output-path" : "/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ChatState.o",
+    "llvm-bc" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ChatState.bc",
+    "object" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ChatState.o",
+    "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ChatState.swiftdeps",
+    "swiftmodule" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ChatState~partial.swiftmodule"
+  },
+  "/home/user/iOS_CLI/app/Packages/HarborKit/Sources/HarborKit/ClaudeProtocol.swift" : {
+    "const-values" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ClaudeProtocol.swiftconstvalues",
+    "dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ClaudeProtocol.d",
+    "diagnostics" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ClaudeProtocol.dia",
+    "index-unit-output-path" : "/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ClaudeProtocol.o",
+    "llvm-bc" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ClaudeProtocol.bc",
+    "object" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ClaudeProtocol.o",
+    "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ClaudeProtocol.swiftdeps",
+    "swiftmodule" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/ClaudeProtocol~partial.swiftmodule"
+  },
+  "/home/user/iOS_CLI/app/Packages/HarborKit/Sources/HarborKit/JSONValue.swift" : {
+    "const-values" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/JSONValue.swiftconstvalues",
+    "dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/JSONValue.d",
+    "diagnostics" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/JSONValue.dia",
+    "index-unit-output-path" : "/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/JSONValue.o",
+    "llvm-bc" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/JSONValue.bc",
+    "object" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/JSONValue.o",
+    "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/JSONValue.swiftdeps",
+    "swiftmodule" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/JSONValue~partial.swiftmodule"
+  },
+  "/home/user/iOS_CLI/app/Packages/HarborKit/Sources/HarborKit/TerminalText.swift" : {
+    "const-values" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.swiftconstvalues",
+    "dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.d",
+    "diagnostics" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.dia",
+    "index-unit-output-path" : "/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.o",
+    "llvm-bc" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.bc",
+    "object" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.o",
+    "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.swiftdeps",
+    "swiftmodule" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText~partial.swiftmodule"
+  }
+}

@@ -1,4 +1,5 @@
 import Foundation
+import HarborKit
 import os
 
 /// Drives `claude setup-token` (an interactive terminal program) to get a
@@ -20,8 +21,6 @@ final class SignInFlow: ObservableObject {
     private var session: WineSession?
     private let log = Logger(subsystem: "cli.app", category: "signin")
 
-    static let tokenPattern = #"sk-ant-oat[0-9]{2}-[A-Za-z0-9_\-]{20,}"#
-    static let urlPattern = #"https://(claude\.ai|console\.anthropic\.com|platform\.claude\.com)/oauth/authorize[^\s"'\u001b\u0007]*"#
 
     func start() {
         guard phase == .idle || isFailed else { return }
@@ -70,15 +69,14 @@ final class SignInFlow: ObservableObject {
         if raw.count > 200_000 { raw = String(raw.suffix(100_000)) }
         let plain = Self.stripANSI(raw)
         // Only a complete token: followed by whitespace (it may arrive in pieces).
-        if let r = plain.range(of: Self.tokenPattern + #"(?=\s)"#, options: .regularExpression) {
-            let token = String(plain[r])
+        if let token = TerminalText.token(in: plain, final: false) {
             Credentials.save(token)
             raw = ""
             phase = .done
             log.log("sign-in token stored")
             cancel()
-        } else if signInURL == nil, let r = plain.range(of: Self.urlPattern, options: .regularExpression) {
-            signInURL = URL(string: String(plain[r]))
+        } else if signInURL == nil, let url = TerminalText.signInURL(in: plain) {
+            signInURL = url
             if phase == .starting { phase = .waitingForBrowser }
         }
         screen = Self.redact(Self.lastLines(plain, 40))
@@ -88,8 +86,8 @@ final class SignInFlow: ObservableObject {
         session = nil
         if phase == .done { return }
         let plain = Self.stripANSI(raw)
-        if let r = plain.range(of: Self.tokenPattern, options: .regularExpression) {
-            Credentials.save(String(plain[r]))
+        if let token = TerminalText.token(in: plain, final: true) {
+            Credentials.save(token)
             phase = .done
             return
         }
@@ -97,44 +95,9 @@ final class SignInFlow: ObservableObject {
                         : "Sign-in ended without a token (exit code \(code)).")
     }
 
-    // MARK: text helpers
+    // MARK: text helpers (tested in HarborKit)
 
-    /// Removes VT escape sequences (CSI, OSC, single-character escapes).
-    static func stripANSI(_ s: String) -> String {
-        var out = ""
-        out.reserveCapacity(s.count)
-        var it = s.unicodeScalars.makeIterator()
-        while let c = it.next() {
-            if c == "\u{1B}" {
-                guard let n = it.next() else { break }
-                if n == "[" {                       // CSI ... final byte 0x40-0x7E
-                    while let x = it.next(), !(0x40...0x7E).contains(x.value) {}
-                    continue
-                } else if n == "]" {                // OSC ... BEL or ESC \
-                    var prev: Unicode.Scalar = " "
-                    while let x = it.next() {
-                        if x == "\u{07}" || (prev == "\u{1B}" && x == "\\") { break }
-                        prev = x
-                    }
-                    continue
-                } else { continue }                 // two-character escape
-            }
-            if c == "\r" { continue }
-            if c.value < 0x20 && c != "\n" && c != "\t" { continue }
-            out.unicodeScalars.append(c)
-        }
-        return out
-    }
-
-    static func redact(_ s: String) -> String {
-        s.replacingOccurrences(of: #"sk-ant-[A-Za-z0-9_\-]+"#, with: "sk-ant-•••• (hidden)", options: .regularExpression)
-    }
-
-    static func lastLines(_ s: String, _ n: Int) -> String {
-        let lines = s.split(separator: "\n", omittingEmptySubsequences: false)
-            .map { $0.trimmingCharacters(in: .whitespaces) }
-        var compact: [String] = []
-        for l in lines where !(l.isEmpty && compact.last?.isEmpty == true) { compact.append(l) }
-        return compact.suffix(n).joined(separator: "\n")
-    }
+    static func stripANSI(_ s: String) -> String { TerminalText.stripANSI(s) }
+    static func redact(_ s: String) -> String { TerminalText.redact(s) }
+    static func lastLines(_ s: String, _ n: Int) -> String { TerminalText.lastLines(s, n) }
 }

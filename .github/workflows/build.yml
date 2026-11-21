@@ -11,6 +11,10 @@ on:
         description: 'Extra self-test launch arguments'
         required: false
         default: ''
+      release_tag:
+        description: 'Publish a GitHub Release with this tag (empty: no release)'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -252,3 +256,34 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: tools/ci/publish-results.sh results "uitest-$SLUG"
+
+  release:
+    needs: [app, uitest]
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_tag != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: Harbor-ipa
+          path: dist
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.inputs.release_tag }}
+        run: |
+          cp app/Runtime/madeira-jit.js dist/harbor-jit.js
+          SHA=$(sha256sum dist/Harbor.ipa | cut -d' ' -f1)
+          JSSHA=$(sha256sum dist/harbor-jit.js | cut -d' ' -f1)
+          cat > notes.md <<EOF
+          Unsigned IPA for LiveContainer (see docs/INSTALL.md).
+
+          | File | SHA-256 |
+          |---|---|
+          | Harbor.ipa | \`$SHA\` |
+          | harbor-jit.js | \`$JSSHA\` |
+
+          Built from ${GITHUB_SHA} by workflow run ${GITHUB_RUN_ID}. Claude Code itself is not included: the app downloads it on first run and verifies it against Anthropic's release manifest.
+          EOF
+          gh release create "$TAG" dist/Harbor.ipa dist/Harbor.ipa.sha256 dist/harbor-jit.js \
+            --target "$GITHUB_SHA" --title "Harbor $TAG" --notes-file notes.md --prerelease

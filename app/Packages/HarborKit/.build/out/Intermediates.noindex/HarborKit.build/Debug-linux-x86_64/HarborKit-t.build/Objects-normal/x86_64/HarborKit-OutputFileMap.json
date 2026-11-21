@@ -35,5 +35,15 @@
     "object" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/JSONValue.o",
     "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/JSONValue.swiftdeps",
     "swiftmodule" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/JSONValue~partial.swiftmodule"
+  },
+  "/home/user/iOS_CLI/app/Packages/HarborKit/Sources/HarborKit/TerminalText.swift" : {
+    "const-values" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.swiftconstvalues",
+    "dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.d",
+    "diagnostics" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.dia",
+    "index-unit-output-path" : "/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.o",
+    "llvm-bc" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.bc",
+    "object" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.o",
+    "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.swiftdeps",
+    "swiftmodule" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText~partial.swiftmodule"
   }
 }
