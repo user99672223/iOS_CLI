@@ -170,8 +170,10 @@ jobs:
       - name: Build for device (unsigned) and package the IPA
         run: |
           rc=0
+          TESTED=$(python3 -c 'import json; r=json.load(open("results/selftest-iphone15/selftest/report.json")); print(r["metrics"].get("claude_version_installed","") if r.get("passed") else "")' 2>/dev/null || true)
+          echo "self-test passed with Claude Code: ${TESTED:-none}"
           xcodebuild -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug \
-            -sdk iphoneos -destination 'generic/platform=iOS' \
+            -sdk iphoneos -destination 'generic/platform=iOS' HARBOR_TESTED_CLAUDE_VERSION="${TESTED:-untested}" \
             -derivedDataPath DerivedData CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build > results/build-device.log 2>&1 || rc=$?
           grep -E "error:|Undefined symbols|referenced from|ld: |BUILD (SUCCEEDED|FAILED)" results/build-device.log | head -150 || true
           test $rc -eq 0 && test -x DerivedData/Build/Products/Debug-iphoneos/Harbor.app/Harbor

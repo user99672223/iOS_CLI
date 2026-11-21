@@ -82,6 +82,19 @@ final class SelfTest {
             report.metrics["cmd_ver_seconds"] = String(format: "%.1f", Date().timeIntervalSince(t))
         }
 
+        // 2b. Live output capture hook: cmd's writes to its stdout are teed to logs/proc/<pid>.log.
+        if want("capture") {
+            t = Date()
+            LiveOutputWatcher.reset()
+            var o = WineSession.Options(exe: "cmd.exe", args: "/c echo capture-ok")
+            o.env = ["CLI_CAPTURE_DIR": LiveOutputWatcher.directory.path]
+            let r = await WineSession.run(o, timeout: 180)
+            let files = (try? FileManager.default.contentsOfDirectory(at: LiveOutputWatcher.directory, includingPropertiesForKeys: nil)) ?? []
+            let captured = files.compactMap { try? String(contentsOf: $0, encoding: .utf8) }.joined(separator: "\n")
+            record("capture", captured.contains("capture-ok") && captured.hasPrefix("#pid"),
+                   "files=\(files.count) out=\(r.output.trimmingCharacters(in: .whitespacesAndNewlines)) captured=\(captured.prefix(300))", since: t)
+        }
+
         // 3. A second session in the same app process (relaunch).
         if want("relaunch") {
             t = Date()

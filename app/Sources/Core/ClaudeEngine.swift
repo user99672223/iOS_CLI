@@ -39,6 +39,8 @@ enum ClaudeEnvironment {
             "LANG": "en_US.UTF-8",
         ]
         if let token, !token.isEmpty { env["CLAUDE_CODE_OAUTH_TOKEN"] = token }
+        // Live command output (build/ntdll-unix/cli_capture.c).
+        env["CLI_CAPTURE_DIR"] = LiveOutputWatcher.directory.path
         return env
     }
 }

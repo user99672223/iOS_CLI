@@ -37,6 +37,8 @@
 		<string>stikdebug</string>
 		<string>livecontainer</string>
 	</array>
+	<key>HarborTestedClaudeVersion</key>
+	<string>$(HARBOR_TESTED_CLAUDE_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIBackgroundModes</key>

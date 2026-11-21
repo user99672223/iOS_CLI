@@ -5,7 +5,7 @@ import Foundation
 /// calls. Each file starts with "#pid <pid> <unix time> <command line>".
 @MainActor
 final class LiveOutputWatcher {
-    static var directory: URL { AppPaths.logs.appendingPathComponent("proc", isDirectory: true) }
+    nonisolated static var directory: URL { AppPaths.logs.appendingPathComponent("proc", isDirectory: true) }
 
     private var offsets: [String: UInt64] = [:]
     private var owner: [String: String] = [:]   // file name -> tool id
