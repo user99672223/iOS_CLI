@@ -1,0 +1,29 @@
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild test -skipMacroValidation -skipPackagePluginValidation -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug -destination "platform=iOS Simulator,name=iPad Pro 13-inch (M5),OS=26.5" -derivedDataPath DerivedData -resultBundlePath results/ui-ipad-pro-13-inch-m5-.xcresult
+
+Resolve Package Graph
+
+Package: harborkit
+
+
+Resolved source packages:
+  HarborKit: (null)
+
+xcodebuild: error: Could not resolve package dependencies:
+  'v18' is unavailable
+  /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit/Package.swift:6:23: error: 'v18' is unavailable
+ 4 | let package = Package(
+ 5 |     name: "HarborKit",
+ 6 |     platforms: [.iOS(.v18), .macOS(.v14)],
+   |                       `- error: 'v18' is unavailable
+ 7 |     products: [.library(name: "HarborKit", targets: ["HarborKit"])],
+ 8 |     targets: [
+
+PackageDescription.SupportedPlatform.IOSVersion.v18:4:23: note: 'v18' was introduced in PackageDescription 6.0
+2 |   struct IOSVersion {
+3 | @available(_PackageDescription 6.0)
+4 |     public static let v18: PackageDescription.SupportedPlatform.IOSVersion  }
+  |                       `- note: 'v18' was introduced in PackageDescription 6.0
+5 | }
+6 |
+
