@@ -1,0 +1,19 @@
+2026-11-21 22:22:36.558746+0000 HarborUITests-Runner[8167:31004] [Default] Running tests...
+2026-11-21 22:22:36.680603+0000 HarborUITests-Runner[8167:31004] [UIKit App Config] Update the Info.plist: Launch screens will soon be required.
+objc[8167]: Class UIAccessibilityLoaderWebShared is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebCore.axbundle/WebCore (0x107b34310) and /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebKit.axbundle/WebKit (0x107a98398). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'All tests' started at 2026-11-21 22:22:48.132.
+Test Suite 'HarborUITests.xctest' started at 2026-11-21 22:22:48.133.
+Test Suite 'ScreenshotTests' started at 2026-11-21 22:22:48.133.
+Test Case '-[HarborUITests.ScreenshotTests testChatFlows]' started.
+    t =     0.00s Start Test at 2026-11-21 22:22:48.134
+    t =     1.71s Set Up
+    t =     1.71s Setting appearance mode to Light
+    t =     1.88s     Wait for com.apple.DocumentManager.DockFolderViewService to idle
+    t =     2.03s     Wait for com.apple.springboard to idle
+    t =     2.13s Setting device orientation to Portrait
+    t =     2.16s     Device orientation changed to Portrait
+    t =     2.17s     Wait for com.apple.DocumentManager.DockFolderViewService to idle
+    t =     2.18s     Wait for com.apple.springboard to idle
+    t =     2.20s Open app.harbor.cli
+    t =     2.20s     Launch app.harbor.cli
