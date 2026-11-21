@@ -1,0 +1,53 @@
+20:59:24.064 xcodebuild[5612:21249] Got a sim device notification for iPad Pro 13-inch (M5): {
+    notification = "availableDevices_changed";
+}
+20:59:24.067 xcodebuild[5612:21249] Got a sim device notification for iPad Pro 13-inch (M5): {
+    device = "iPad Pro 13-inch (M5) (2A020491-3EBC-4783-8622-F8314CC00294, iOS 26.5, Booting)";
+    "last_booted_at" = "2026-11-21 20:59:24 +0000";
+    "new_state" = 2;
+    notification = "device_state";
+    "prev_state" = 1;
+}
+20:59:24.067 xcodebuild[5612:21249] Sim iPad Pro 13-inch (M5) state changed to 2
+20:59:24.070 xcodebuild[5612:29772] Got a sim device notification for iPad Pro 13-inch (M5): {
+    "SimDeviceNotification_NewBootStatus" = "SimDeviceBootInfo { status = 0 (Booting), elapsed = 0.000000, isTerminal = 0, info = (null) }";
+    device = "iPad Pro 13-inch (M5) (2A020491-3EBC-4783-8622-F8314CC00294, iOS 26.5, Booting)";
+    notification = "SimDeviceNotificationType_BootStatus";
+}
+20:59:24.890 xcodebuild[5612:29772] Got a sim device notification for iPad Pro 13-inch (M5): {
+    notification = "availableDevices_changed";
+}
+20:59:24.890 xcodebuild[5612:29772] Got a sim device notification for iPad Pro 13-inch (M5): {
+    device = "iPad Pro 13-inch (M5) (2A020491-3EBC-4783-8622-F8314CC00294, iOS 26.5, Booted)";
+    "new_state" = 3;
+    notification = "device_state";
+    "prev_state" = 2;
+}
+20:59:24.890 xcodebuild[5612:29772] Sim iPad Pro 13-inch (M5) state changed to 3
+20:59:24.890 xcodebuild[5612:29772] Sim iPad Pro 13-inch (M5): Unregistering for sim device notification with token 3
+20:59:24.890 xcodebuild[5612:29772] Calling -[SimDevice getenv:error:] for TESTMANAGERD_SIM_SOCK
+20:59:25.155 xcodebuild[5612:29772] Sim iPad Pro 13-inch (M5) is booted but getenv returned nil for test connection socket path; getenv error: Error Domain=NSPOSIXErrorDomain Code=2 "No such file or directory".
+ Will retry in 1s (1 attempts so far).
+20:59:26.224 xcodebuild[5612:29772] Calling -[SimDevice getenv:error:] for TESTMANAGERD_SIM_SOCK
+20:59:26.391 xcodebuild[5612:29772] Sim iPad Pro 13-inch (M5) has testmanagerd socket at /private/var/tmp/com.apple.launchd.9LUJiWXimU/com.apple.testmanagerd.unix-domain.socket
+20:59:26.391 xcodebuild[5612:29772] Validating test connection socket path (/private/var/tmp/com.apple.launchd.9LUJiWXimU/com.apple.testmanagerd.unix-domain.socket)
+20:59:26.470 xcodebuild[5612:29772] Constructing transport for test connection socket
+20:59:26.470 xcodebuild[5612:29772] Connected socket 40 to testmanagerd for Sim iPad Pro 13-inch (M5)
+20:59:27.618 xcodebuild[5612:29772] Initiating control session with IDE capabilities: <XCTCapabilities: 0x98d325e10>: {
+}
+20:59:40.872 xcodebuild[5612:21221] Got reply to control session initiation request (result:error): <XCTCapabilities: 0x98d325da0>: {
+    "authorize test session capability" = 1;
+    "automation mode" = 1;
+    "daemon container sandbox extension" = 1;
+    "initiate daemon control session capability" = 4;
+    "initiate test runner session capability" = 2;
+    "record UI interaction capability" = 2;
+    "recording events as source code" = 1;
+    "report crashes capability" = 1;
+    "request log archive capability" = 1;
+    "supports delayed attachment transfers" = 1;
+}: (null)
+20:59:41.291 xcodebuild[5612:21221] Requesting crash report collection for process names: FrontBoard, DTServiceHub, HarborUITests-Runner, runningboardd, xctest, debugserver, backboardd, assertiond, SpringBoard, HarborUITests, Harbor, testmanagerd
+20:59:41.698 xcodebuild[5612:21221] Got reply to crash report collection request (error: (null))
+21:02:39.735 xcodebuild[5612:36896] Requesting authorization for pid 10464
+21:02:39.740 xcodebuild[5612:35549] Got reply to authorization request for pid 10464 (result:error): 1: (null)

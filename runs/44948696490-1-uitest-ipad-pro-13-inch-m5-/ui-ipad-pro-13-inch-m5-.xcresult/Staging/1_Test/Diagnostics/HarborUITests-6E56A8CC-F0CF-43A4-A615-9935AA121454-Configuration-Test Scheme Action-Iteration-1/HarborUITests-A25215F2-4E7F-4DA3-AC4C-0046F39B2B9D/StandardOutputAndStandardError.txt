@@ -1,0 +1,112 @@
+2026-11-21 21:02:39.084600+0000 HarborUITests-Runner[10464:36732] [Default] Running tests...
+2026-11-21 21:02:39.206534+0000 HarborUITests-Runner[10464:36732] [UIKit App Config] Update the Info.plist: Launch screens will soon be required.
+2026-11-21 21:02:39.210437+0000 HarborUITests-Runner[10464:38425] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2026-11-21 21:02:39.252880+0000 HarborUITests-Runner[10464:38427] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+objc[10464]: Class UIAccessibilityLoaderWebShared is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebCore.axbundle/WebCore (0x106c40310) and /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebKit.axbundle/WebKit (0x106ba4398). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'All tests' started at 2026-11-21 21:02:53.769.
+Test Suite 'HarborUITests.xctest' started at 2026-11-21 21:02:53.771.
+Test Suite 'ScreenshotTests' started at 2026-11-21 21:02:53.772.
+Test Case '-[HarborUITests.ScreenshotTests testChatFlows]' started.
+    t =     0.00s Start Test at 2026-11-21 21:02:53.773
+    t =     1.55s Set Up
+    t =     1.55s Setting appearance mode to Light
+    t =     1.69s     Wait for com.apple.DocumentManager.DockFolderViewService to idle
+    t =     1.87s     Wait for com.apple.springboard to idle
+    t =     2.29s Setting device orientation to Portrait
+    t =     2.30s     Device orientation changed to Portrait
+    t =     2.37s     Wait for com.apple.DocumentManager.DockFolderViewService to idle
+    t =     2.37s     Wait for com.apple.springboard to idle
+    t =     2.38s Open app.harbor.cli
+    t =     2.38s     Launch app.harbor.cli
+    t =    19.95s         Setting up automation session
+    t =    21.81s         Wait for app.harbor.cli to idle
+    t =    41.01s Waiting 20.0s for "composer" TextView to exist
+    t =    42.07s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    42.08s         Checking existence of `"composer" TextView`
+    t =    42.87s         Capturing element debug description
+    t =    43.05s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    43.05s         Checking existence of `"composer" TextView`
+    t =    43.21s         Capturing element debug description
+    t =    44.05s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    44.05s         Checking existence of `"composer" TextView`
+    t =    44.18s         Capturing element debug description
+    t =    45.03s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    45.03s         Checking existence of `"composer" TextView`
+    t =    45.19s         Capturing element debug description
+    t =    46.03s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    46.03s         Checking existence of `"composer" TextView`
+    t =    46.24s         Capturing element debug description
+    t =    47.05s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    47.05s         Checking existence of `"composer" TextView`
+    t =    47.27s         Capturing element debug description
+    t =    48.02s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    48.02s         Checking existence of `"composer" TextView`
+    t =    48.21s         Capturing element debug description
+    t =    49.05s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    49.05s         Checking existence of `"composer" TextView`
+    t =    49.15s         Capturing element debug description
+    t =    50.01s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    50.01s         Checking existence of `"composer" TextView`
+    t =    50.13s         Capturing element debug description
+    t =    51.07s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    51.07s         Checking existence of `"composer" TextView`
+    t =    51.19s         Capturing element debug description
+    t =    52.01s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    52.01s         Checking existence of `"composer" TextView`
+    t =    52.16s         Capturing element debug description
+    t =    53.05s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    53.05s         Checking existence of `"composer" TextView`
+    t =    53.16s         Capturing element debug description
+    t =    54.07s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    54.07s         Checking existence of `"composer" TextView`
+    t =    54.21s         Capturing element debug description
+    t =    55.06s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    55.07s         Checking existence of `"composer" TextView`
+    t =    55.20s         Capturing element debug description
+    t =    56.05s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    56.05s         Checking existence of `"composer" TextView`
+    t =    56.14s         Capturing element debug description
+    t =    57.05s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    57.05s         Checking existence of `"composer" TextView`
+    t =    57.24s         Capturing element debug description
+    t =    58.05s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    58.05s         Checking existence of `"composer" TextView`
+    t =    58.28s         Capturing element debug description
+    t =    59.05s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    59.05s         Checking existence of `"composer" TextView`
+    t =    59.17s         Capturing element debug description
+    t =    60.02s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    60.03s         Checking existence of `"composer" TextView`
+    t =    60.25s         Capturing element debug description
+    t =    61.01s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextView`
+    t =    61.01s         Checking existence of `"composer" TextView`
+    t =    61.15s         Capturing element debug description
+    t =    61.16s     Checking existence of `"composer" TextView`
+    t =    61.35s Collecting debug information to assist test failure triage
+    t =    61.35s     Requesting snapshot of accessibility hierarchy for app with pid 11307
+    t =    95.82s Waiting 5.0s for "composer" TextField to exist
+    t =    96.85s     Checking `Expect predicate `existsNoRetry == 1` for object "composer" TextField`
+    t =    96.86s         Checking existence of `"composer" TextField`
+    t =   100.98s     Checking existence of `"composer" TextField`
+    t =   107.25s Added attachment named 'ipad-chat-light-portrait'
+    t =   107.32s Tap "settings" Button
+    t =   107.32s     Wait for app.harbor.cli to idle
+    t =   107.49s     Find the "settings" Button
+    t =   112.01s     Check for interrupting elements affecting "settings" Button
+    t =   114.09s         Wait for com.apple.springboard to idle
+    t =   114.87s     Synthesize event
+    t =   115.64s     Wait for app.harbor.cli to idle
+    t =   120.67s Added attachment named 'ipad-settings-light'
+    t =   120.68s Tap "Done" Button
+    t =   120.68s     Wait for app.harbor.cli to idle
+    t =   120.94s     Find the "Done" Button
+    t =   132.02s     Check for interrupting elements affecting "Done" Button
+    t =   139.42s         Wait for com.apple.springboard to idle
+    t =   139.54s     Synthesize event
+    t =   140.26s         Scroll element to visible
+    t =   140.33s         Find the "Done" Button
+    t =   163.04s         Computed hit point {-1, -1} after scrolling to visible
+    t =   164.78s     Wait for app.harbor.cli to idle
+    t =   166.11s Checking existence of `"diagnostics" Button`
+    t =   168.15s Checking existence of `"sessions" Button`
