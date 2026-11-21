@@ -3226,6 +3226,46 @@ static uint8_t exc_peek8( uint64_t addr )
 
 static struct ios_fault_progress ios_fault_progress_last;
 
+/* Harbor: system-register reads that Windows answers for user mode but iOS
+ * traps (EL0 MRS of CurrentEL and the ID_AA64* registers). claude.exe (Bun)
+ * probes `mrs x16, CurrentEL` in its CPU-feature check and died on SIGILL.
+ * Emulated like Windows: CurrentEL reads EL0; ID registers read the Apple
+ * M1 baseline (a subset of every iPhone this runs on), others 0. */
+static int ios_emulate_sysreg_read( arm_thread_state64_t *st )
+{
+    uint64_t pc = (uint64_t)__darwin_arm_thread_state64_get_pc( *st );
+    uint32_t insn = 0;
+    vm_size_t got = sizeof(insn);
+    uint64_t val;
+    unsigned int rt;
+    if (vm_read_overwrite( mach_task_self(), (vm_address_t)pc, sizeof(insn),
+                           (vm_address_t)&insn, &got ) != KERN_SUCCESS || got != sizeof(insn))
+        return 0;
+    if ((insn & 0xfff00000u) != 0xd5300000u) return 0;          /* MRS Xt, <sysreg> */
+    rt = insn & 0x1f;
+    if ((insn & 0xffffffe0u) == 0xd5384240u) val = 0;            /* CurrentEL: EL0 */
+    else if ((insn & 0xfffff800u) == 0xd5380000u)                /* op0=3 op1=0 CRn=0: ID space */
+    {
+        switch ((insn >> 5) & 0x3f)                              /* CRm:op2 */
+        {
+        case (6 << 3) | 0: val = 0x0221100110212120ull; break;   /* ID_AA64ISAR0_EL1 */
+        case (4 << 3) | 0: val = 0x0000000000000011ull; break;   /* ID_AA64PFR0_EL1: EL0/EL1 AArch64 */
+        default: val = 0; break;
+        }
+    }
+    else return 0;
+    {
+        static int n;
+        if (n++ < 8) dprintf( 2, "[sysreg] emulated mrs 0x%08x at pc=0x%llx -> x%u=0x%llx\n",
+                              insn, (unsigned long long)pc, rt, (unsigned long long)val );
+    }
+    if (rt < 29) st->__x[rt] = val;
+    else if (rt == 29) __darwin_arm_thread_state64_set_fp( *st, (void *)(uintptr_t)val );
+    else if (rt == 30) __darwin_arm_thread_state64_set_lr_fptr( *st, (void *)(uintptr_t)val );
+    __darwin_arm_thread_state64_set_pc_fptr( *st, (void *)(uintptr_t)(pc + 4) );
+    return 1;
+}
+
 static void *ios_mach_exception_thread( void *arg )
 {
     mach_port_t port = (mach_port_t)(uintptr_t)arg;
@@ -3743,6 +3783,8 @@ static void *ios_mach_exception_thread( void *arg )
         if (kr == KERN_SUCCESS)
         {
             uintptr_t fault_addr = (uintptr_t)req->code[1];
+            if (!handled && req->exception == EXC_BAD_INSTRUCTION && ios_emulate_sysreg_read( &state ))
+                handled = 1;
 #ifdef WINE_IOS
             /* ml939: THE SUB-FLOOR SERVICE BELONGS HERE, NOT IN segv_handler.
              *
