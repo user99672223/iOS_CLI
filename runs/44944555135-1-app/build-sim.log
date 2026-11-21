@@ -1,0 +1,34 @@
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild -skipMacroValidation -skipPackagePluginValidation -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug -sdk iphonesimulator -destination "generic/platform=iOS Simulator" ARCHS=arm64 -derivedDataPath DerivedData build
+
+Build settings from command line:
+    ARCHS = arm64
+    SDKROOT = iphonesimulator26.5
+
+Resolve Package Graph
+
+Package: harborkit
+
+
+Resolved source packages:
+  HarborKit: (null)
+
+2026-11-21 20:10:50.347 xcodebuild[1851:8530] Writing error result bundle to /var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/ResultBundle_2026-21-11_20-10-0050.xcresult
+xcodebuild: error: Could not resolve package dependencies:
+  'v18' is unavailable
+  /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit/Package.swift:6:23: error: 'v18' is unavailable
+ 4 | let package = Package(
+ 5 |     name: "HarborKit",
+ 6 |     platforms: [.iOS(.v18), .macOS(.v14)],
+   |                       `- error: 'v18' is unavailable
+ 7 |     products: [.library(name: "HarborKit", targets: ["HarborKit"])],
+ 8 |     targets: [
+
+PackageDescription.SupportedPlatform.IOSVersion.v18:4:23: note: 'v18' was introduced in PackageDescription 6.0
+2 |   struct IOSVersion {
+3 | @available(_PackageDescription 6.0)
+4 |     public static let v18: PackageDescription.SupportedPlatform.IOSVersion  }
+  |                       `- note: 'v18' was introduced in PackageDescription 6.0
+5 | }
+6 |
+
