@@ -19806,6 +19806,12 @@ static inline int mprotect_exec( void *base, size_t size, int unix_prot )
             size_t tramp_prealloc = ios_x18_tramp_prealloc_scan(image_base, image_size);
             size_t data_delta = ios_jit_data_align_delta(image_base, image_size);
             size_t alloc_size = image_alloc + tramp_prealloc + (data_delta ? page_size : 0);
+            /* Harbor: an image too big for the tramps behind it to be in B/BL reach
+             * of all its .text (claude.exe: 104 MB of .text in a 361 MB image; the
+             * patcher refused and every x18 use stayed live, so `mov x21, x18`
+             * read 0 and a once-lock skipped its init) gets them IN FRONT of
+             * it: [tramps][data_delta pad][image], same allocation size. */
+            size_t tramp_front_off = (size_t)-1;
             uint64_t image_tag = ios_pool_image_tag( image_base, image_size, alloc_size );
             size_t offset;
             /* ios_image_reload_mode: the same image again at the base of its
@@ -19839,6 +19845,13 @@ static inline int mprotect_exec( void *base, size_t size, int unix_prot )
                 if (offset == (size_t)-1) offset = ios_pool_low_image_range( alloc_size );
                 if (offset == (size_t)-1 && ios_pool_recycle_code_range( alloc_size ))
                     offset = ios_pool_alloc_range_tagged(alloc_size, jit_pool_size - ios_jit_tail_reserved, image_tag);
+            }
+            if (!reload_jit && offset != (size_t)-1 && tramp_prealloc && image_alloc > 0x6000000)
+            {
+                tramp_front_off = offset;
+                offset += tramp_prealloc;
+                dprintf(2, "[x18-tramp] %s: %lu MB image, tramps placed in front of it\n",
+                        ios_pe_module_name( image_base, image_size ), (unsigned long)(image_alloc >> 20));
             }
             if (!reload_jit && offset != (size_t)-1 && data_delta)
             {
@@ -20370,7 +20383,8 @@ static inline int mprotect_exec( void *base, size_t size, int unix_prot )
                          * copy diverged from the source and patching it
                          * would emit copy-specific branches — refuse (x18
                          * insns degrade to recoverable runtime faults). */
-                        size_t tramp_pool_off = ios_jit_tramp_align_on()
+                        size_t tramp_pool_off = tramp_front_off != (size_t)-1 ? tramp_front_off
+                            : ios_jit_tramp_align_on()
                             ? ios_jit_tramp_offset( offset, image_alloc, data_delta ) : offset + image_alloc;
                         if (tramp_alloc > tramp_prealloc)
                         {
