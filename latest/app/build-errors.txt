@@ -1,2 +1,1 @@
-/Users/runner/work/iOS_CLI/iOS_CLI/app/Sources/App/UIDemo.swift:34:102: error: expected ',' separator
-/Users/runner/work/iOS_CLI/iOS_CLI/app/Sources/App/UIDemo.swift:34:102: error: Expected ',' separator
+/Users/runner/work/iOS_CLI/iOS_CLI/app/Harbor.xcodeproj: Harbor: clang: error: linker command failed with exit code 1 (use -v to see invocation)
