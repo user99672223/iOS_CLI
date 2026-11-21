@@ -29,6 +29,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         let args = ProcessInfo.processInfo.arguments
         _ = AppPaths.documents; _ = AppPaths.appSupport   // before Wine sets HOME
+        if !Self.isSelfTest { AppLog.start() }
         if Self.isSelfTest {
             Task { @MainActor in
                 await SelfTest(arguments: args).run()
@@ -49,5 +50,23 @@ struct SelfTestScreen: View {
             ProgressView()
             Text("Running self-test…").font(.headline)
         }
+    }
+}
+
+/// Everything the app and Wine print goes to this launch's log file.
+enum AppLog {
+    static func start() {
+        let path = AppPaths.wineLog.path
+        let fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0o644)
+        if fd >= 0 { dup2(fd, STDERR_FILENO); close(fd) }
+        setvbuf(stderr, nil, _IONBF, 0)
+        let v = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?"
+        line("Harbor \(v) started; host app \(JITEnabler.hostBundleID ?? "?"), pid \(getpid())")
+    }
+
+    static func line(_ s: String) {
+        let f = DateFormatter()
+        f.dateFormat = "HH:mm:ss.SSS"
+        FileHandle.standardError.write(Data("[\(f.string(from: Date()))] [app] \(s)\n".utf8))
     }
 }

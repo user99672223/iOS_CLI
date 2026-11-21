@@ -15,12 +15,40 @@ enum AppPaths {
     }()
     /// The Wine prefix (not visible in the Files app).
     static var prefix: URL { appSupport.appendingPathComponent("wine", isDirectory: true) }
-    static var logs: URL {
-        let u = documents.appendingPathComponent("logs", isDirectory: true)
-        try? FileManager.default.createDirectory(at: u, withIntermediateDirectories: true)
+    /// Plain log folder, outside the app: inside LiveContainer it is in
+    /// LiveContainer's own Documents (Files → On My iPhone → LiveContainer →
+    /// Harbor Logs); otherwise in Harbor's Documents.
+    static let logs: URL = {
+        let fm = FileManager.default
+        if ProcessInfo.processInfo.arguments.contains("--selftest") {
+            let u = documents.appendingPathComponent("logs", isDirectory: true)
+            try? fm.createDirectory(at: u, withIntermediateDirectories: true)
+            return u
+        }
+        var base = documents
+        if let lc = ProcessInfo.processInfo.environment["LP_HOME_PATH"], !lc.isEmpty {
+            base = URL(fileURLWithPath: lc).appendingPathComponent("Documents", isDirectory: true)
+        }
+        var u = base.appendingPathComponent("Harbor Logs", isDirectory: true)
+        try? fm.createDirectory(at: u, withIntermediateDirectories: true)
+        if !fm.isWritableFile(atPath: u.path) {
+            u = documents.appendingPathComponent("Harbor Logs", isDirectory: true)
+            try? fm.createDirectory(at: u, withIntermediateDirectories: true)
+        }
         return u
-    }
-    static var wineLog: URL { logs.appendingPathComponent("wine.log") }
+    }()
+    /// One file per app launch, named by date and time; the 10 newest are kept.
+    static let wineLog: URL = {
+        if ProcessInfo.processInfo.arguments.contains("--selftest") { return logs.appendingPathComponent("wine.log") }
+        let fm = FileManager.default
+        let old = ((try? fm.contentsOfDirectory(atPath: logs.path)) ?? [])
+            .filter { $0.hasPrefix("harbor-") && $0.hasSuffix(".log") }.sorted()
+        for name in old.dropLast(9) { try? fm.removeItem(at: logs.appendingPathComponent(name)) }
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.dateFormat = "yyyy-MM-dd_HH-mm-ss"
+        return logs.appendingPathComponent("harbor-\(f.string(from: Date())).log")
+    }()
     static var driveC: URL { prefix.appendingPathComponent("drive_c", isDirectory: true) }
     /// Where Claude Code and Git live inside the prefix.
     static var toolsDir: URL { driveC.appendingPathComponent("tools", isDirectory: true) }
@@ -113,6 +141,7 @@ final class WineHost: @unchecked Sendable {
         var jitInfo = cli_jit_info()
         cli_jit_query(&jitInfo)
         if jitInfo.pool_ready == 0 && jitInfo.simulator == 0 {
+            FileHandle.standardError.write(Data("[app] refused to start Wine: no JIT memory\n".utf8))
             setState(.failed("JIT isn't ready yet. Enable JIT in Setup first (StikDebug must be attached)."))
             return
         }

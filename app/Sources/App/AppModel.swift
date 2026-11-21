@@ -58,6 +58,7 @@ final class AppModel: ObservableObject {
         if UIDemo.apply(to: self) { return }
         BackgroundKeeper.shared.install()
         refreshJIT()
+        AppLog.line("launch: JIT \(jit), tools \(toolsInstalled), signed in \(signedIn)")
         // Make the JIT pool as soon as a debugger is attached: the script
         // detaches right after, which keeps Wine's signals off the debugger.
         if jit == .ready || jit == .simulator { makePool() }
@@ -83,7 +84,9 @@ final class AppModel: ObservableObject {
     }
 
     func refreshJIT() {
+        let before = jit
         jit = JITEnabler.state
+        if jit != before { AppLog.line("JIT state: \(jit)") }
         cli_jit_query(&jitInfo)
         if jit == .ready, jitInfo.pool_ready == 0 { makePool() }
     }
@@ -94,6 +97,7 @@ final class AppModel: ObservableObject {
         guard !jitPreparing, jitInfo.pool_ready == 0 else { return }
         jitPreparing = true
         let mb = Self.poolMB
+        AppLog.line("asking the debugger for \(mb) MB of JIT memory")
         Thread.detachNewThread { [weak self] in
             var info = cli_jit_info()
             let rc = cli_jit_setup(size_t(mb), &info)
@@ -103,6 +107,7 @@ final class AppModel: ObservableObject {
     }
 
     private func poolDone(rc: Int32, info: cli_jit_info) {
+        AppLog.line(rc == 0 ? "JIT memory ready (\(info.pool_size >> 20) MB)" : "JIT memory failed: \(JITStatus.error(info))")
         jitPreparing = false
         jitInfo = info
         jitError = rc == 0 ? nil : JITStatus.error(info)
@@ -127,6 +132,7 @@ final class AppModel: ObservableObject {
     func enableJIT() async {
         jitError = nil
         if jit == .ready || jitInfo.pool_ready != 0 { makePool(); return }
+        AppLog.line("opening StikDebug for pid \(getpid()), return to \(JITEnabler.hostBundleID ?? "?")")
         guard await JITEnabler.requestFromStikDebug() else {
             jitError = "StikDebug is not installed or did not open. Use LiveContainer's “Launch with JIT” with the Harbor JIT script instead."
             return
