@@ -30,14 +30,18 @@ jobs:
           } > probe-${{ matrix.runner }}.txt 2>&1
           cat probe-${{ matrix.runner }}.txt
       - uses: actions/upload-artifact@v4
-        with: { name: probe-${{ matrix.runner }}, path: probe-*.txt }
+        with:
+          name: probe-${{ matrix.runner }}
+          path: probe-*.txt
   publish:
     needs: probe
     if: always()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
-        with: { path: in, merge-multiple: true }
+        with:
+          path: in
+          merge-multiple: true
       - run: |
           git init -q out && cd out
           git config user.name ci && git config user.email ci@users.noreply.github.com
