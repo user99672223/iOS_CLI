@@ -1,2 +1,0 @@
-#pid 152 1795296413 C:\tools\git\clangarm64\bin\bash.exe -lc "echo ok && git --version && cd /c/workspace && git init -q rt && cd rt && echo hi > f && git add f && git -c user.name=t -c user.email=t@t commit -qm m && git log --oneline | wc -l"
-bash.exe: UTF8 manifest not supported
