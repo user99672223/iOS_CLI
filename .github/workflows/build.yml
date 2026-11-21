@@ -151,12 +151,13 @@ jobs:
           (cd app && xcodegen generate)
       - name: Build for the simulator
         run: |
-          set -o pipefail
           mkdir -p results
+          rc=0
           xcodebuild -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug \
             -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' ARCHS=arm64 \
-            -derivedDataPath DerivedData build 2>&1 | tee results/build-sim.log | grep -E "error:|warning: .*(undefined|duplicate)|BUILD" || true
-          test -d DerivedData/Build/Products/Debug-iphonesimulator/Harbor.app
+            -derivedDataPath DerivedData build > results/build-sim.log 2>&1 || rc=$?
+          grep -E "error:|Undefined symbols|referenced from|ld: |BUILD (SUCCEEDED|FAILED)" results/build-sim.log | head -150 || true
+          test $rc -eq 0 && test -x DerivedData/Build/Products/Debug-iphonesimulator/Harbor.app/Harbor
       - name: Self-test in the simulator
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -164,11 +165,12 @@ jobs:
           tools/ci/selftest-sim.sh DerivedData/Build/Products/Debug-iphonesimulator/Harbor.app results/selftest-iphone15 "iPhone 15" ${{ github.event.inputs.selftest_args }} | tee results/selftest-summary.txt
       - name: Build for device (unsigned) and package the IPA
         run: |
-          set -o pipefail
+          rc=0
           xcodebuild -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug \
             -sdk iphoneos -destination 'generic/platform=iOS' \
-            -derivedDataPath DerivedData CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build 2>&1 \
-            | tee results/build-device.log | grep -E "error:|BUILD" || true
+            -derivedDataPath DerivedData CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build > results/build-device.log 2>&1 || rc=$?
+          grep -E "error:|Undefined symbols|referenced from|ld: |BUILD (SUCCEEDED|FAILED)" results/build-device.log | head -150 || true
+          test $rc -eq 0 && test -x DerivedData/Build/Products/Debug-iphoneos/Harbor.app/Harbor
           tools/ci/package-ipa.sh DerivedData/Build/Products/Debug-iphoneos/Harbor.app dist
           cp dist/Harbor.ipa.sha256 results/
       - uses: actions/upload-artifact@v4

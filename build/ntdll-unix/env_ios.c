@@ -1495,6 +1495,12 @@ static void get_initial_console( RTL_USER_PROCESS_PARAMETERS *params )
              * but a real size gives the guest something sane to render into. */
             if (!params->dwXCountChars) params->dwXCountChars = 80;
             if (!params->dwYCountChars) params->dwYCountChars = 24;
+            /* CLI app: a wide console keeps long URLs and tokens on one line. */
+            {
+                const char *cols = getenv( "MADEIRA_CONSOLE_COLS" ), *rows = getenv( "MADEIRA_CONSOLE_ROWS" );
+                if (cols && atoi( cols ) >= 20 && atoi( cols ) <= 2000) params->dwXCountChars = atoi( cols );
+                if (rows && atoi( rows ) >= 5 && atoi( rows ) <= 500) params->dwYCountChars = atoi( rows );
+            }
             output_fd = 1;
         }
     }

@@ -25,7 +25,12 @@ enum AppPaths {
     static var toolsDir: URL { driveC.appendingPathComponent("tools", isDirectory: true) }
     static var claudeExe: URL { toolsDir.appendingPathComponent("claude/claude.exe") }
     static var gitDir: URL { toolsDir.appendingPathComponent("git", isDirectory: true) }
-    static var userProfile: URL { driveC.appendingPathComponent("users/\(NSUserName())", isDirectory: true) }
+    /// %USERPROFILE% (the runtime sets USER=user for Wine).
+    static var userProfile: URL { driveC.appendingPathComponent("users/user", isDirectory: true) }
+    /// Claude Code's working folder (C:\workspace).
+    static var workspace: URL { driveC.appendingPathComponent("workspace", isDirectory: true) }
+    /// %USERPROFILE%\.claude
+    static var claudeConfig: URL { userProfile.appendingPathComponent(".claude", isDirectory: true) }
 
     /// unix path inside drive_c -> C:\ path
     static func windowsPath(_ url: URL) -> String {

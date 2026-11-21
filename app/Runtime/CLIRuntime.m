@@ -271,6 +271,9 @@ void cli_seed_prefix_if_needed(const char *prefix_path) {
     }
 }
 
+/* Called by WineServerBridge.m before the server thread starts (Madeira name). */
+void madeira_seed_prefix_if_needed(const char *prefix_path) { cli_seed_prefix_if_needed(prefix_path); }
+
 int cli_link_dll_farm(const char *prefix_path) {
     @autoreleasepool {
         NSFileManager *fm = NSFileManager.defaultManager;
@@ -347,6 +350,9 @@ static void *session_thread(void *arg) {
         setenv("WINEPREFIX", s->prefix, 1);
         setenv("HOME", s->prefix, 1);
         setenv("WINELOADERNOEXEC", "1", 1);
+        /* Fixed Windows user name: the profile is C:\users\user on every
+         * device and in the simulator (ntdll's set_home_dir reads USER). */
+        setenv("USER", "user", 1);
         setenv("WINEDLLPATH", NSBundle.mainBundle.bundlePath.UTF8String, 1);
         if (!getenv("WINEDEBUG")) setenv("WINEDEBUG", "err+all,err-virtual", 1);
         setenv("MADEIRA_WIN32U", "1", 1);
@@ -410,6 +416,13 @@ static void *session_thread(void *arg) {
         g_exit_code = wine_ios_exit_code;
     }
 done:
+    /* Per-session variables must not leak into the next session. */
+    for (char **e = s->env; e && *e; e++) {
+        char *eq = strchr(*e, '=');
+        if (!eq) continue;
+        *eq = 0; unsetenv(*e); *eq = '=';
+    }
+    unsetenv("MADEIRA_INITIAL_CWD");
     /* Close our end of stdout so the reader sees EOF once everything drained. */
     if (s->stdout_pipe) { int nul = open("/dev/null", O_WRONLY); if (nul >= 0) { dup2(nul, STDOUT_FILENO); close(nul); } }
     __atomic_store_n(&g_running, 0, __ATOMIC_RELEASE);

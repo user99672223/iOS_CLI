@@ -6,29 +6,42 @@ struct HarborApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
+            if AppDelegate.isSelfTest {
+                SelfTestScreen()
+            } else {
+                RootView()
+                    .environmentObject(AppModel.shared)
+                    .task { AppModel.shared.launch() }
+            }
         }
     }
 }
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
+    static let isSelfTest = ProcessInfo.processInfo.arguments.contains("--selftest")
+
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         let args = ProcessInfo.processInfo.arguments
-        if args.contains("--selftest") {
+        if Self.isSelfTest {
             Task { @MainActor in
                 await SelfTest(arguments: args).run()
-                // Give the report writer a moment, then end the process for CI.
                 try? await Task.sleep(nanoseconds: 300_000_000)
                 exit(0)
             }
+        }
+        if let i = args.firstIndex(of: "--ui-demo"), i + 1 < args.count {
+            UIDemo.install(args[i + 1])
         }
         return true
     }
 }
 
-struct RootView: View {
+struct SelfTestScreen: View {
     var body: some View {
-        Text("Harbor")
+        VStack(spacing: 12) {
+            ProgressView()
+            Text("Running self-test…").font(.headline)
+        }
     }
 }

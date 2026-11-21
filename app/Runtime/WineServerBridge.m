@@ -159,6 +159,8 @@ int wineserver_start(const char *prefix_path) {
         extern int wineserver_ready;
         __atomic_store_n(&wineserver_ready, 0, __ATOMIC_RELEASE);
     }
+    /* CLI app: a later session in the same app run starts a fresh server. */
+    g_wineserver_should_stop = 0;
     g_wineserver_running = 1;
 
     /* 2026-07-04 perf: the wineserver thread used to be created at LOWERED
