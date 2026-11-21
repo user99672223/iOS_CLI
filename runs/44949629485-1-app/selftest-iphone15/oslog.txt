@@ -1,0 +1,17 @@
+Timestamp               Ty Process[PID:TID]
+2026-11-21 21:16:06.823 Df Harbor[16996:d695] [cli.runtime:wine] JIT pool (simulator): RX=0x300000000 RW=0x7000000000 size=0x40000000 maxprot=2
+2026-11-21 21:16:06.834 Df Harbor[16996:d695] [cli.app:selftest] selftest jit_pool: PASS
+2026-11-21 21:16:07.004 Df Harbor[16996:d6a3] [cli.runtime:wine] prefix seeded
+2026-11-21 21:16:07.039 Df Harbor[16996:d6a3] [cli.runtime:wine] linked 122 farm files into system32
+2026-11-21 21:16:07.155 Df Harbor[16996:d6c2] [cli.runtime:wine] launch C:\134windows\134system32\134harbor-host.exe (0 args)
+2026-11-21 21:16:07.533 Df Harbor[16996:d6a3] [cli.app:host] host ready (pid 32)
+2026-11-21 21:16:08.193 Df Harbor[16996:d695] [cli.app:selftest] selftest cmd_ver: PASS
+2026-11-21 21:16:08.497 Df Harbor[16996:d695] [cli.app:selftest] selftest capture: PASS
+2026-11-21 21:16:08.917 Df Harbor[16996:d695] [cli.app:selftest] selftest relaunch: PASS
+2026-11-21 21:16:48.303 Df Harbor[16996:d695] [cli.app:installer] installed Claude Code 2.1.330
+2026-11-21 21:16:52.301 Df Harbor[16996:d695] [cli.app:selftest] selftest install: PASS
+2026-11-21 21:26:52.436 Df Harbor[16996:d695] [cli.app:selftest] selftest claude_version: FAIL
+2026-11-21 21:26:53.111 Df Harbor[16996:d695] [cli.app:selftest] selftest git_bash: FAIL
+2026-11-21 21:28:58.411 Df Harbor[16996:d695] [cli.app:selftest] selftest setup_token: FAIL
+2026-11-21 21:29:02.861 Df Harbor[16996:d695] [cli.app:selftest] selftest stream_json: FAIL
+2026-11-21 21:29:02.871 Df Harbor[16996:d695] [cli.app:selftest] selftest finished: FAILED

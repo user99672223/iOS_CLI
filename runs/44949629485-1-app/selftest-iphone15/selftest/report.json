@@ -1,0 +1,90 @@
+{
+  "finished" : "2026-11-21T21:29:02Z",
+  "jit" : {
+    "address_space" : "0x102060000-0x7ffffe000000",
+    "cs_debugged" : "false",
+    "debugger_attached" : "false",
+    "error" : "",
+    "exe_window" : "0x140000000",
+    "method" : "simulator-dualmap",
+    "pool_ready" : "true",
+    "pool_rw" : "0x7000000000",
+    "pool_rx" : "0x300000000",
+    "pool_size_mb" : "1024",
+    "simulator" : "true"
+  },
+  "memory" : {
+    "available" : "0 MB",
+    "footprint_peak" : "2951 MB",
+    "phys_footprint" : "2595 MB",
+    "physical_memory" : "7168 MB",
+    "vm_max" : "0x7ffffe000000",
+    "vm_min" : "0x102060000"
+  },
+  "metrics" : {
+    "claude_version_installed" : "2.1.330",
+    "claude_version_seconds" : "600.1",
+    "cmd_ver_seconds" : "1.4",
+    "footprint_after_claude_version" : "1396 MB",
+    "stream_json_init_seconds" : "4.4"
+  },
+  "passed" : false,
+  "platform" : "simulator",
+  "started" : "2026-11-21T21:16:06Z",
+  "steps" : [
+    {
+      "detail" : "method=simulator-dualmap",
+      "name" : "jit_pool",
+      "ok" : true,
+      "seconds" : 0.008860945701599121
+    },
+    {
+      "detail" : "exit=0 timedOut=false out=Microsoft Windows 10.0.19045",
+      "name" : "cmd_ver",
+      "ok" : true,
+      "seconds" : 1.356503963470459
+    },
+    {
+      "detail" : "files=1 out=capture-ok captured=#pid 68 1795295768 C:\\windows\\system32\\cmd.exe \/c echo capture-ok\ncapture-ok\r\n",
+      "name" : "capture",
+      "ok" : true,
+      "seconds" : 0.30378103256225586
+    },
+    {
+      "detail" : "exit=0 out=relaunch-ok",
+      "name" : "relaunch",
+      "ok" : true,
+      "seconds" : 0.41934502124786377
+    },
+    {
+      "detail" : "claude=2.1.330 git=2.56.1",
+      "name" : "install",
+      "ok" : true,
+      "seconds" : 43.379541993141174
+    },
+    {
+      "detail" : "exit=ffffffff timedOut=true out=============================================================",
+      "name" : "claude_version",
+      "ok" : false,
+      "seconds" : 600.1308320760727
+    },
+    {
+      "detail" : "exit=1 timedOut=false out=bash.exe: UTF8 manifest not supported",
+      "name" : "git_bash",
+      "ok" : false,
+      "seconds" : 0.6651980876922607
+    },
+    {
+      "detail" : "url=none screen=",
+      "name" : "setup_token",
+      "ok" : false,
+      "seconds" : 125.29715406894684
+    },
+    {
+      "detail" : "no initialize response; phase=failed(\"Claude Code could not be started. \") lines=",
+      "name" : "stream_json",
+      "ok" : false,
+      "seconds" : 4.430148005485535
+    }
+  ]
+}
