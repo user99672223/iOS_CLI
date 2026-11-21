@@ -3,37 +3,37 @@ Command line invocation:
 
 Resolve Package Graph
 
-Fetching from https://github.com/gonzalezreal/textual (cached)
-
 Fetching from https://github.com/weichsel/ZIPFoundation (cached)
 
-Fetching from https://github.com/pointfreeco/swift-concurrency-extras (cached)
+Fetching from https://github.com/gonzalezreal/textual (cached)
 
 Fetching from https://github.com/gonzalezreal/swiftui-math (cached)
 
-Creating working copy of package ‘swift-concurrency-extras’
-
-Checking out 1.4.3 of package ‘swift-concurrency-extras’
-
-Creating working copy of package ‘textual’
-
-Checking out 0.5.0 of package ‘textual’
-
-Creating working copy of package ‘swiftui-math’
-
-Checking out 0.1.0 of package ‘swiftui-math’
+Fetching from https://github.com/pointfreeco/swift-concurrency-extras (cached)
 
 Creating working copy of package ‘ZIPFoundation’
 
 Checking out 0.9.20 of package ‘ZIPFoundation’
 
+Creating working copy of package ‘textual’
+
+Checking out 0.5.0 of package ‘textual’
+
+Creating working copy of package ‘swift-concurrency-extras’
+
+Checking out 1.4.3 of package ‘swift-concurrency-extras’
+
+Creating working copy of package ‘swiftui-math’
+
+Checking out 0.1.0 of package ‘swiftui-math’
+
 
 Resolved source packages:
-  textual: https://github.com/gonzalezreal/textual @ 0.5.0
   swift-concurrency-extras: https://github.com/pointfreeco/swift-concurrency-extras @ 1.4.3
+  textual: https://github.com/gonzalezreal/textual @ 0.5.0
+  swiftui-math: https://github.com/gonzalezreal/swiftui-math @ 0.1.0
   ZIPFoundation: https://github.com/weichsel/ZIPFoundation @ 0.9.20
   HarborKit: /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
-  swiftui-math: https://github.com/gonzalezreal/swiftui-math @ 0.1.0
 
 Writing result bundle at path:
 	/Users/runner/work/iOS_CLI/iOS_CLI/results/ui-iphone-15.xcresult
@@ -44,7 +44,7 @@ xcodebuild: error: Unable to find a device matching the provided destination spe
 	The requested device could not be found because no available devices matched the request.
 
 	Available destinations for the "Harbor" scheme:
-		{ platform:macOS, arch:arm64, variant:Designed for [iPad,iPhone], id:89759b48fd1860d39142cb6ccb856b33c5b7ee63, name:My Mac }
+		{ platform:macOS, arch:arm64, variant:Designed for [iPad,iPhone], id:e7f5e0688ca8c9a172a3c2a3739fee6d2c08d260, name:My Mac }
 		{ platform:iOS, id:dvtdevice-DVTiPhonePlaceholder-iphoneos:placeholder, name:Any iOS Device }
 		{ platform:iOS Simulator, id:dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder, name:Any iOS Simulator Device }
 		{ platform:visionOS Simulator, arch:arm64, variant:Designed for [iPad,iPhone], id:9C68DD66-0BB9-4C08-B7BF-9A91F7FA547B, OS:26.2, name:Apple Vision Pro }
