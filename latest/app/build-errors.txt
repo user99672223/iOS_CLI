@@ -1,1 +1,10 @@
-/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/equatable/Package.swift:PACKAGE-TARGET:EquatableMacros: error: Macro “EquatableMacros” from package “Equatable” must be enabled before it can be used
+/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Closure.swift:1:8: error: unable to resolve module dependency: 'SwiftSyntax'
+/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/equatable/Sources/EquatableMacros/EquatableIgnoredMacro.swift:1:8: error: unable to resolve module dependency: 'SwiftCompilerPlugin'
+/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/equatable/Sources/EquatableMacros/EquatableIgnoredMacro.swift:2:8: error: unable to resolve module dependency: 'SwiftDiagnostics'
+/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/equatable/Sources/EquatableMacros/EquatableIgnoredMacro.swift:4:8: error: unable to resolve module dependency: 'SwiftSyntaxBuilder'
+/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/equatable/Sources/EquatableMacros/EquatableIgnoredMacro.swift:5:8: error: unable to resolve module dependency: 'SwiftSyntaxMacros'
+/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/equatable/Sources/EquatableMacros/Closure.swift:1:8: error: Unable to resolve module dependency: 'SwiftSyntax'
+/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/equatable/Sources/EquatableMacros/EquatableIgnoredMacro.swift:1:8: error: Unable to resolve module dependency: 'SwiftCompilerPlugin'
+/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/equatable/Sources/EquatableMacros/EquatableIgnoredMacro.swift:2:8: error: Unable to resolve module dependency: 'SwiftDiagnostics'
+/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/equatable/Sources/EquatableMacros/EquatableIgnoredMacro.swift:4:8: error: Unable to resolve module dependency: 'SwiftSyntaxBuilder'
+/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/equatable/Sources/EquatableMacros/EquatableIgnoredMacro.swift:5:8: error: Unable to resolve module dependency: 'SwiftSyntaxMacros'
