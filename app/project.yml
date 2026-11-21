@@ -49,7 +49,7 @@ targets:
         INFOPLIST_FILE: Info.plist
         SWIFT_OBJC_BRIDGING_HEADER: Runtime/Harbor-Bridging-Header.h
         LIBRARY_SEARCH_PATHS: "$(SRCROOT)/../out/$(PLATFORM_NAME)"
-        OTHER_LDFLAGS: "-lntdll_unix -lwineserver -lwin32u_unix -lz -Wl,-headerpad_max_install_names"
+        OTHER_LDFLAGS: "-lntdll_unix -lwineserver -lwin32u_unix -lz -framework IOKit -Wl,-headerpad_max_install_names -Wl,-U,_winios_cursor_set -Wl,-U,_winios_cursor_show -Wl,-U,_winios_direct_cursor_clip -Wl,-U,_winios_direct_cursor_pos -Wl,-U,_winios_direct_cursor_reader -Wl,-U,_winios_direct_cursor_set -Wl,-U,_winios_direct_cursor_show -Wl,-U,_winios_direct_cursor_wanted -Wl,-U,_winios_direct_cursor_warp -Wl,-U,_winios_display_mode_changed -Wl,-U,_winios_dump_srcbits -Wl,-U,_winios_mouse_routing_enabled -Wl,-U,_winios_pCreateWindow -Wl,-U,_winios_pDestroyCursorIcon -Wl,-U,_winios_pDestroyWindow -Wl,-U,_winios_pProcessEvents -Wl,-U,_winios_pSetCursor -Wl,-U,_winios_pShowWindow -Wl,-U,_winios_pWindowPosChanged -Wl,-U,_winios_surface_present -Wl,-U,_winios_swapchain_drawable -Wl,-U,_winios_swapchain_hwnd -Wl,-U,_winios_swapchain_hwnd_at -Wl,-U,_winios_swapchain_slot_generation -Wl,-U,_winios_swapchain_take -Wl,-U,_winios_window_frame -Wl,-U,_winios_window_geometry -Wl,-U,_winios_window_lineage -Wl,-U,_winios_window_visibility -Wl,-U,_madeira_wmt_released_class"
         CLANG_ENABLE_OBJC_ARC: YES
         GCC_C_LANGUAGE_STANDARD: gnu11
         TARGETED_DEVICE_FAMILY: "1,2"
