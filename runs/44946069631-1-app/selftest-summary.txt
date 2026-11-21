@@ -1,0 +1,7 @@
+runtime: com.apple.CoreSimulator.SimRuntime.iOS-26-5
+data container: /Users/runner/Library/Developer/CoreSimulator/Devices/1CF3AD68-51F4-4FE9-A563-0592847292AE/data/Containers/Data/Application/3B3E49ED-936E-4607-8991-D413EA350E80
+app is gone before finishing
+self-test took 51 s
+FAILED
+ok   jit_pool 0.0 method=simulator-dualmap
+ok   cmd_ver 1.5 exit=0 crash=0 timedOut=false out=Microsoft Windows 10.0.19045

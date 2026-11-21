@@ -1,0 +1,10 @@
+Timestamp               Ty Process[PID:TID]
+2026-11-21 20:35:10.135 Df Harbor[17410:d764] [cli.runtime:wine] JIT pool (simulator): RX=0x300000000 RW=0x7000000000 size=0x40000000 maxprot=2
+2026-11-21 20:35:10.138 Df Harbor[17410:d764] [cli.app:selftest] selftest jit_pool: PASS
+2026-11-21 20:35:10.699 Df Harbor[17410:d777] [cli.runtime:wine] prefix seeded
+2026-11-21 20:35:10.753 Df Harbor[17410:d777] [cli.runtime:wine] linked 121 farm files into system32
+2026-11-21 20:35:11.025 Df Harbor[17410:d796] [cli.runtime:wine] launch C:\134windows\134system32\134cmd.exe (2 args)
+2026-11-21 20:35:11.562 Df Harbor[17410:d796] [cli.runtime:wine] program exited with code 0
+2026-11-21 20:35:11.563 Df Harbor[17410:d796] [cli.runtime:wine] session finished
+2026-11-21 20:35:11.652 Df Harbor[17410:d764] [cli.app:selftest] selftest cmd_ver: PASS
+2026-11-21 20:35:11.657 Df Harbor[17410:d780] [cli.runtime:wine] linked 121 farm files into system32

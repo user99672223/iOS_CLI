@@ -1,0 +1,38 @@
+{
+  "jit" : {
+    "address_space" : "0x102200000-0x7ffffe000000",
+    "cs_debugged" : "false",
+    "debugger_attached" : "false",
+    "error" : "",
+    "exe_window" : "0x140000000",
+    "method" : "simulator-dualmap",
+    "pool_ready" : "true",
+    "pool_rw" : "0x7000000000",
+    "pool_rx" : "0x300000000",
+    "pool_size_mb" : "1024",
+    "simulator" : "true"
+  },
+  "memory" : {
+
+  },
+  "metrics" : {
+
+  },
+  "passed" : false,
+  "platform" : "simulator",
+  "started" : "2026-11-21T20:35:10Z",
+  "steps" : [
+    {
+      "detail" : "method=simulator-dualmap",
+      "name" : "jit_pool",
+      "ok" : true,
+      "seconds" : 0.002819061279296875
+    },
+    {
+      "detail" : "exit=0 crash=0 timedOut=false out=Microsoft Windows 10.0.19045",
+      "name" : "cmd_ver",
+      "ok" : true,
+      "seconds" : 1.5126841068267822
+    }
+  ]
+}
