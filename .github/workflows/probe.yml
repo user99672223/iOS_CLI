@@ -1,0 +1,46 @@
+name: Runner probe
+on:
+  push:
+    paths: ['.github/workflows/probe.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  probe:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [macos-26, macos-15, macos-latest]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Probe
+        run: |
+          set +e
+          {
+            echo "## ${{ matrix.runner }}"
+            sw_vers; uname -a; sysctl -n hw.ncpu hw.memsize machdep.cpu.brand_string
+            ls -d /Applications/Xcode*
+            xcodebuild -version
+            xcrun --sdk iphoneos --show-sdk-version
+            xcrun --sdk iphonesimulator --show-sdk-version
+            xcrun simctl list runtimes
+            xcrun simctl list devicetypes | grep -E "iPhone 1[5-9]|iPad Pro|iPad Air" | head -20
+            df -h /
+            brew --version | head -1
+          } > probe-${{ matrix.runner }}.txt 2>&1
+          cat probe-${{ matrix.runner }}.txt
+      - uses: actions/upload-artifact@v4
+        with: { name: probe-${{ matrix.runner }}, path: probe-*.txt }
+  publish:
+    needs: probe
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { path: in, merge-multiple: true }
+      - run: |
+          git init -q out && cd out
+          git config user.name ci && git config user.email ci@users.noreply.github.com
+          git fetch -q --depth 1 "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ci-results && git checkout -q FETCH_HEAD || git checkout -q --orphan ci-results
+          mkdir -p probe && cp ../in/* probe/
+          git add -A && git commit -qm "probe ${{ github.run_id }}" && git push -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" HEAD:refs/heads/ci-results
