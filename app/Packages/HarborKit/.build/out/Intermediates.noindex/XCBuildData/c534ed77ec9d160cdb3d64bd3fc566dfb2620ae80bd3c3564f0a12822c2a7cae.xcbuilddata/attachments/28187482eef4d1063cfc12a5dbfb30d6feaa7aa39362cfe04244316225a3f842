@@ -1,0 +1,29 @@
+{
+  "" : {
+    "diagnostics" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/HarborKitTests-primary.dia",
+    "emit-module-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/HarborKitTests-primary-emit-module.d",
+    "emit-module-diagnostics" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/HarborKitTests-primary-emit-module.dia",
+    "pch" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/HarborKitTests-primary-Bridging-header.pch",
+    "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/HarborKitTests-primary.swiftdeps"
+  },
+  "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/DerivedSources/test_anchor.swift" : {
+    "const-values" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/test_anchor.swiftconstvalues",
+    "dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/test_anchor.d",
+    "diagnostics" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/test_anchor.dia",
+    "index-unit-output-path" : "/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/test_anchor.o",
+    "llvm-bc" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/test_anchor.bc",
+    "object" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/test_anchor.o",
+    "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/test_anchor.swiftdeps",
+    "swiftmodule" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/test_anchor~partial.swiftmodule"
+  },
+  "/home/user/iOS_CLI/app/Packages/HarborKit/Tests/HarborKitTests/ChatStateTests.swift" : {
+    "const-values" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/ChatStateTests.swiftconstvalues",
+    "dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/ChatStateTests.d",
+    "diagnostics" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/ChatStateTests.dia",
+    "index-unit-output-path" : "/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/ChatStateTests.o",
+    "llvm-bc" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/ChatStateTests.bc",
+    "object" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/ChatStateTests.o",
+    "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/ChatStateTests.swiftdeps",
+    "swiftmodule" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKitTests-p.build/Objects-normal/x86_64/ChatStateTests~partial.swiftmodule"
+  }
+}

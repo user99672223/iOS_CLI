@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 MINGW_BIN="$("$ROOT/tools/ci/setup-mingw.sh")"
 export PATH="$MINGW_BIN:$PATH"
+if command -v brew >/dev/null; then export PATH="$(brew --prefix bison)/bin:$(brew --prefix flex)/bin:$PATH"; fi
 # macOS: the same arm64 host tree the unix side uses (wine-host.sh), as Madeira.
 # Linux (x86_64 host) works for most modules but not Wine's host-arch helpers.
 if [ "$(uname -s)" = Darwin ]; then B="$ROOT/wine/build-macos"; else B="$ROOT/wine/build-farm"; fi

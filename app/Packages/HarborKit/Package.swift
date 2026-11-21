@@ -1,0 +1,12 @@
+// swift-tools-version:5.9
+import PackageDescription
+
+let package = Package(
+    name: "HarborKit",
+    platforms: [.iOS(.v17), .macOS(.v14)],
+    products: [.library(name: "HarborKit", targets: ["HarborKit"])],
+    targets: [
+        .target(name: "HarborKit"),
+        .testTarget(name: "HarborKitTests", dependencies: ["HarborKit"]),
+    ]
+)

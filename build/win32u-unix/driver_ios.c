@@ -3072,7 +3072,7 @@ struct client_surface *nulldrv_client_surface_create( HWND hwnd )
 }
 
 /* ml1920: same-task controller snapshots supplied by the app. */
-#include "../../app/Madeira/Winios/WiniosGamepad.h"
+#include "../hidpad/winios/WiniosGamepad.h"
 
 /* Byte-for-byte XINPUT_STATE (a DWORD packet number followed by
  * XINPUT_GAMEPAD). Not #included from xinput.h: that is a PE-side SDK header

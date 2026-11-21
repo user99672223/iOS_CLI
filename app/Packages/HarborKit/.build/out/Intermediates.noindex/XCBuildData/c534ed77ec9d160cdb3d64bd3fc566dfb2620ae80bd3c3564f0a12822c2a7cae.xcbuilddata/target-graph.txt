@@ -1,0 +1,13 @@
+Target dependency graph (5 targets)
+Target 'AllIncludingTests' in project 'Aggregate'
+➜ Explicit dependency on target 'HarborKitTests-product' in project 'HarborKit'
+➜ Explicit dependency on target 'HarborKitTests-test-runner' in project 'HarborKit'
+➜ Explicit dependency on target 'HarborKit-product' in project 'HarborKit'
+➜ Explicit dependency on target 'HarborKit' in project 'HarborKit'
+Target 'HarborKit-product' in project 'HarborKit'
+➜ Explicit dependency on target 'HarborKit' in project 'HarborKit'
+Target 'HarborKitTests-test-runner' in project 'HarborKit'
+➜ Explicit dependency on target 'HarborKitTests-product' in project 'HarborKit'
+Target 'HarborKitTests-product' in project 'HarborKit'
+➜ Explicit dependency on target 'HarborKit' in project 'HarborKit'
+Target 'HarborKit' in project 'HarborKit' (no dependencies)
