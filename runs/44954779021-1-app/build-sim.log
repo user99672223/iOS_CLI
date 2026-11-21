@@ -1,0 +1,535 @@
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild -skipMacroValidation -skipPackagePluginValidation -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug -sdk iphonesimulator -destination "generic/platform=iOS Simulator" ARCHS=arm64 -derivedDataPath DerivedData build
+
+Build settings from command line:
+    ARCHS = arm64
+    SDKROOT = iphonesimulator26.5
+
+Resolve Package Graph
+
+Fetching from https://github.com/gonzalezreal/textual (cached)
+
+Fetching from https://github.com/weichsel/ZIPFoundation (cached)
+
+Fetching from https://github.com/pointfreeco/swift-concurrency-extras (cached)
+
+Fetching from https://github.com/gonzalezreal/swiftui-math (cached)
+
+Creating working copy of package ‘swift-concurrency-extras’
+
+Checking out 1.4.3 of package ‘swift-concurrency-extras’
+
+Creating working copy of package ‘textual’
+
+Checking out 0.5.0 of package ‘textual’
+
+Creating working copy of package ‘swiftui-math’
+
+Checking out 0.1.0 of package ‘swiftui-math’
+
+Creating working copy of package ‘ZIPFoundation’
+
+Checking out 0.9.20 of package ‘ZIPFoundation’
+
+
+Resolved source packages:
+  textual: https://github.com/gonzalezreal/textual @ 0.5.0
+  swift-concurrency-extras: https://github.com/pointfreeco/swift-concurrency-extras @ 1.4.3
+  swiftui-math: https://github.com/gonzalezreal/swiftui-math @ 0.1.0
+  ZIPFoundation: https://github.com/weichsel/ZIPFoundation @ 0.9.20
+  HarborKit: /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (14 targets)
+    Target 'Harbor' in project 'Harbor'
+        ➜ Explicit dependency on target 'HarborKit' in project 'HarborKit'
+        ➜ Explicit dependency on target 'ZIPFoundation' in project 'ZIPFoundation'
+        ➜ Explicit dependency on target 'Textual' in project 'textual'
+    Target 'Textual' in project 'textual'
+        ➜ Explicit dependency on target 'Textual' in project 'textual'
+        ➜ Explicit dependency on target 'textual_Textual' in project 'textual'
+        ➜ Explicit dependency on target 'ConcurrencyExtras' in project 'swift-concurrency-extras'
+        ➜ Explicit dependency on target 'SwiftUIMath' in project 'swiftui-math'
+    Target 'Textual' in project 'textual'
+        ➜ Explicit dependency on target 'textual_Textual' in project 'textual'
+        ➜ Explicit dependency on target 'ConcurrencyExtras' in project 'swift-concurrency-extras'
+        ➜ Explicit dependency on target 'SwiftUIMath' in project 'swiftui-math'
+    Target 'SwiftUIMath' in project 'swiftui-math'
+        ➜ Explicit dependency on target 'SwiftUIMath' in project 'swiftui-math'
+        ➜ Explicit dependency on target 'swiftui-math_SwiftUIMath' in project 'swiftui-math'
+    Target 'SwiftUIMath' in project 'swiftui-math'
+        ➜ Explicit dependency on target 'swiftui-math_SwiftUIMath' in project 'swiftui-math'
+    Target 'swiftui-math_SwiftUIMath' in project 'swiftui-math' (no dependencies)
+    Target 'ConcurrencyExtras' in project 'swift-concurrency-extras'
+        ➜ Explicit dependency on target 'ConcurrencyExtras' in project 'swift-concurrency-extras'
+    Target 'ConcurrencyExtras' in project 'swift-concurrency-extras' (no dependencies)
+    Target 'textual_Textual' in project 'textual' (no dependencies)
+    Target 'ZIPFoundation' in project 'ZIPFoundation'
+        ➜ Explicit dependency on target 'ZIPFoundation' in project 'ZIPFoundation'
+        ➜ Explicit dependency on target 'ZIPFoundation_ZIPFoundation' in project 'ZIPFoundation'
+    Target 'ZIPFoundation' in project 'ZIPFoundation'
+        ➜ Explicit dependency on target 'ZIPFoundation_ZIPFoundation' in project 'ZIPFoundation'
+    Target 'ZIPFoundation_ZIPFoundation' in project 'ZIPFoundation' (no dependencies)
+    Target 'HarborKit' in project 'HarborKit'
+        ➜ Explicit dependency on target 'HarborKit' in project 'HarborKit'
+    Target 'HarborKit' in project 'HarborKit' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x objective-c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+ReadFileContents /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/docc/features.json
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /Users/runner/work/iOS_CLI/iOS_CLI/app/Resources/Assets.xcassets
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+Build description signature: b815e64853489c62b7f4e46b079d724d
+Build description path: /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/XCBuildData/b815e64853489c62b7f4e46b079d724d.xcbuilddata
+ClangStatCache /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Harbor.xcodeproj
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -o /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache
+
+CreateBuildDirectory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Harbor.xcodeproj
+    builtin-create-build-directory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products
+
+CreateBuildDirectory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Harbor.xcodeproj
+    builtin-create-build-directory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor-b0932ffcb61e3224def70fce9b89d4c8-VFS-iphonesimulator/all-product-headers.yaml
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Harbor.xcodeproj
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor-b0932ffcb61e3224def70fce9b89d4c8-VFS-iphonesimulator/all-product-headers.yaml
+
+CreateBuildDirectory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Harbor.xcodeproj
+    builtin-create-build-directory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator
+
+CreateBuildDirectory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Harbor.xcodeproj
+    builtin-create-build-directory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ExplicitPrecompiledModules
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Harbor.xcodeproj
+    builtin-create-build-directory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/PackageFrameworks
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Harbor.xcodeproj
+    builtin-create-build-directory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/PackageFrameworks
+
+CreateBuildDirectory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Harbor.xcodeproj
+    builtin-create-build-directory /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/textual_Textual.build/textual_Textual.DependencyStaticMetadataFileList (in target 'textual_Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/textual_Textual.build/textual_Textual.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/textual_Textual.build/textual_Textual.DependencyMetadataFileList (in target 'textual_Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/textual_Textual.build/textual_Textual.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/textual_Textual.build/empty-textual_Textual.plist (in target 'textual_Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/textual_Textual.build/empty-textual_Textual.plist
+
+MkDir /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/textual_Textual.bundle (in target 'textual_Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    /bin/mkdir -p /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/textual_Textual.bundle
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/swiftui-math_SwiftUIMath.build/swiftui-math_SwiftUIMath.DependencyStaticMetadataFileList (in target 'swiftui-math_SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/swiftui-math_SwiftUIMath.build/swiftui-math_SwiftUIMath.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/swiftui-math_SwiftUIMath.build/swiftui-math_SwiftUIMath.DependencyMetadataFileList (in target 'swiftui-math_SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/swiftui-math_SwiftUIMath.build/swiftui-math_SwiftUIMath.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/swiftui-math_SwiftUIMath.build/empty-swiftui-math_SwiftUIMath.plist (in target 'swiftui-math_SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/swiftui-math_SwiftUIMath.build/empty-swiftui-math_SwiftUIMath.plist
+
+MkDir /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/swiftui-math_SwiftUIMath.bundle (in target 'swiftui-math_SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    /bin/mkdir -p /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/swiftui-math_SwiftUIMath.bundle
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.build/empty-ZIPFoundation_ZIPFoundation.plist (in target 'ZIPFoundation_ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.build/empty-ZIPFoundation_ZIPFoundation.plist
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.build/ZIPFoundation_ZIPFoundation.DependencyStaticMetadataFileList (in target 'ZIPFoundation_ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.build/ZIPFoundation_ZIPFoundation.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.build/ZIPFoundation_ZIPFoundation.DependencyMetadataFileList (in target 'ZIPFoundation_ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.build/ZIPFoundation_ZIPFoundation.DependencyMetadataFileList
+
+MkDir /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.bundle (in target 'ZIPFoundation_ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    /bin/mkdir -p /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.bundle
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/ZIPFoundation.modulemap (in target 'ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/ZIPFoundation.modulemap
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/ZIPFoundation.DependencyStaticMetadataFileList (in target 'ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/ZIPFoundation.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/ZIPFoundation.DependencyMetadataFileList (in target 'ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/ZIPFoundation.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation_const_extract_protocols.json (in target 'ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation.SwiftFileList (in target 'ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation.SwiftFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation.SwiftConstValuesFileList (in target 'ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation.LinkFileList (in target 'ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation.LinkFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation-OutputFileMap.json (in target 'ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/DerivedSources/resource_bundle_accessor.swift (in target 'ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/DerivedSources/resource_bundle_accessor.swift
+
+Copy /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/ZIPFoundation.modulemap /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/ZIPFoundation.modulemap (in target 'ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/ZIPFoundation.modulemap /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Textual.modulemap (in target 'Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Textual.modulemap
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Textual.DependencyStaticMetadataFileList (in target 'Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Textual.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Textual.DependencyMetadataFileList (in target 'Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Textual.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Objects-normal/arm64/Textual_const_extract_protocols.json (in target 'Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Objects-normal/arm64/Textual_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Objects-normal/arm64/Textual.SwiftFileList (in target 'Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Objects-normal/arm64/Textual.SwiftFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Objects-normal/arm64/Textual.SwiftConstValuesFileList (in target 'Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Objects-normal/arm64/Textual.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Objects-normal/arm64/Textual.LinkFileList (in target 'Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Objects-normal/arm64/Textual.LinkFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Objects-normal/arm64/Textual-OutputFileMap.json (in target 'Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Objects-normal/arm64/Textual-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/DerivedSources/resource_bundle_accessor.swift (in target 'Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/DerivedSources/resource_bundle_accessor.swift
+
+Copy /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/Textual.modulemap /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Textual.modulemap (in target 'Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/Textual.build/Textual.modulemap /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/SwiftUIMath.modulemap (in target 'SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/SwiftUIMath.modulemap
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/SwiftUIMath.DependencyStaticMetadataFileList (in target 'SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/SwiftUIMath.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/SwiftUIMath.DependencyMetadataFileList (in target 'SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/SwiftUIMath.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/Objects-normal/arm64/SwiftUIMath_const_extract_protocols.json (in target 'SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/Objects-normal/arm64/SwiftUIMath_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/Objects-normal/arm64/SwiftUIMath.SwiftFileList (in target 'SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/Objects-normal/arm64/SwiftUIMath.SwiftFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/Objects-normal/arm64/SwiftUIMath.SwiftConstValuesFileList (in target 'SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/Objects-normal/arm64/SwiftUIMath.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/Objects-normal/arm64/SwiftUIMath.LinkFileList (in target 'SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/Objects-normal/arm64/SwiftUIMath.LinkFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/Objects-normal/arm64/SwiftUIMath-OutputFileMap.json (in target 'SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/Objects-normal/arm64/SwiftUIMath-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/DerivedSources/resource_bundle_accessor.swift (in target 'SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/DerivedSources/resource_bundle_accessor.swift
+
+Copy /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/SwiftUIMath.modulemap /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/SwiftUIMath.modulemap (in target 'SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/SwiftUIMath.build/SwiftUIMath.modulemap /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/Objects-normal/arm64/HarborKit_const_extract_protocols.json (in target 'HarborKit' from project 'HarborKit')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/Objects-normal/arm64/HarborKit_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/Objects-normal/arm64/HarborKit.SwiftFileList (in target 'HarborKit' from project 'HarborKit')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/Objects-normal/arm64/HarborKit.SwiftFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/Objects-normal/arm64/HarborKit.SwiftConstValuesFileList (in target 'HarborKit' from project 'HarborKit')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/Objects-normal/arm64/HarborKit.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/Objects-normal/arm64/HarborKit.LinkFileList (in target 'HarborKit' from project 'HarborKit')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/Objects-normal/arm64/HarborKit.LinkFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/Objects-normal/arm64/HarborKit-OutputFileMap.json (in target 'HarborKit' from project 'HarborKit')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/Objects-normal/arm64/HarborKit-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/HarborKit.modulemap (in target 'HarborKit' from project 'HarborKit')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/HarborKit.modulemap
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/HarborKit.DependencyStaticMetadataFileList (in target 'HarborKit' from project 'HarborKit')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/HarborKit.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/HarborKit.DependencyMetadataFileList (in target 'HarborKit' from project 'HarborKit')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/HarborKit.DependencyMetadataFileList
+
+Copy /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/HarborKit.modulemap /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/HarborKit.modulemap (in target 'HarborKit' from project 'HarborKit')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/HarborKit.build/Debug-iphonesimulator/HarborKit.build/HarborKit.modulemap /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/e6072d4f65d7061329687fe24e3d63a7-common-args.resp (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/e6072d4f65d7061329687fe24e3d63a7-common-args.resp
+'-std=gnu11' -fobjc-arc -fobjc-weak -fmodules -gmodules '-fmodules-cache-path=/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/ModuleCache.noindex' -fpascal-strings -O0 -fno-common '-DDEBUG=1' '-DOBJC_OLD_DISPATCH_PROTOTYPES=0' -g '-fobjc-abi-version=2' -fobjc-legacy-dispatch -iquote /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-generated-files.hmap -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-own-target-headers.hmap -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-all-non-framework-target-headers.hmap -ivfsoverlay /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor-b0932ffcb61e3224def70fce9b89d4c8-VFS-iphonesimulator/all-product-headers.yaml -iquote /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-project-headers.hmap -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/include -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/DerivedSources-normal/arm64 -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/DerivedSources/arm64 -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/DerivedSources -F/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/PackageFrameworks -F/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/PackageFrameworks -F/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/PackageFrameworks -F/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/PackageFrameworks -F/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/PackageFrameworks -F/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator '-fmodule-map-file=/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/HarborKit.modulemap' '-fmodule-map-file=/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/ZIPFoundation.modulemap' '-fmodule-map-file=/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/ConcurrencyExtras.modulemap' '-fmodule-map-file=/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/SwiftUIMath.modulemap' '-fmodule-map-file=/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/Textual.modulemap'
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/Harbor_const_extract_protocols.json (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/Harbor_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/Harbor.SwiftFileList (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/Harbor.SwiftFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/Harbor.SwiftConstValuesFileList (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/Harbor.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/Harbor.LinkFileList (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/Harbor.LinkFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/Harbor-OutputFileMap.json (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/Harbor-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/7187679823f38a2a940e0043cdf9d637-common-args.resp (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Objects-normal/arm64/7187679823f38a2a940e0043cdf9d637-common-args.resp
+'-std=gnu11' -fmodules -gmodules '-fmodules-cache-path=/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/ModuleCache.noindex' -fpascal-strings -O0 -fno-common '-DDEBUG=1' -g -iquote /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-generated-files.hmap -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-own-target-headers.hmap -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-all-non-framework-target-headers.hmap -ivfsoverlay /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor-b0932ffcb61e3224def70fce9b89d4c8-VFS-iphonesimulator/all-product-headers.yaml -iquote /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-project-headers.hmap -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/include -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/DerivedSources-normal/arm64 -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/DerivedSources/arm64 -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/DerivedSources -F/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/PackageFrameworks -F/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/PackageFrameworks -F/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/PackageFrameworks -F/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/PackageFrameworks -F/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/PackageFrameworks -F/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator '-fmodule-map-file=/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/HarborKit.modulemap' '-fmodule-map-file=/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/ZIPFoundation.modulemap' '-fmodule-map-file=/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/ConcurrencyExtras.modulemap' '-fmodule-map-file=/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/SwiftUIMath.modulemap' '-fmodule-map-file=/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/Textual.modulemap'
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor.hmap (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor.hmap
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor.DependencyStaticMetadataFileList (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor.DependencyMetadataFileList (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-project-headers.hmap (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-project-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-own-target-headers.hmap (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-own-target-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-generated-files.hmap (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-generated-files.hmap
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-all-target-headers.hmap (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-all-target-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-all-non-framework-target-headers.hmap (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-DebugDylibPath-normal-arm64.txt (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-DebugDylibPath-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-DebugDylibInstallName-normal-arm64.txt (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/Harbor-DebugDylibInstallName-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/DerivedSources/Entitlements-Simulated.plist (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/Harbor.build/Debug-iphonesimulator/Harbor.build/DerivedSources/Entitlements-Simulated.plist
+
+MkDir /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/Harbor.app (in target 'Harbor' from project 'Harbor')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app
+    /bin/mkdir -p /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/Harbor.app
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras_const_extract_protocols.json (in target 'ConcurrencyExtras' from project 'swift-concurrency-extras')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swift-concurrency-extras
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras.SwiftFileList (in target 'ConcurrencyExtras' from project 'swift-concurrency-extras')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swift-concurrency-extras
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras.SwiftFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras.SwiftConstValuesFileList (in target 'ConcurrencyExtras' from project 'swift-concurrency-extras')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swift-concurrency-extras
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras.LinkFileList (in target 'ConcurrencyExtras' from project 'swift-concurrency-extras')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swift-concurrency-extras
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras.LinkFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras-OutputFileMap.json (in target 'ConcurrencyExtras' from project 'swift-concurrency-extras')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swift-concurrency-extras
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/ConcurrencyExtras.modulemap (in target 'ConcurrencyExtras' from project 'swift-concurrency-extras')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swift-concurrency-extras
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/ConcurrencyExtras.modulemap
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/ConcurrencyExtras.DependencyStaticMetadataFileList (in target 'ConcurrencyExtras' from project 'swift-concurrency-extras')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swift-concurrency-extras
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/ConcurrencyExtras.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/ConcurrencyExtras.DependencyMetadataFileList (in target 'ConcurrencyExtras' from project 'swift-concurrency-extras')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swift-concurrency-extras
+    write-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/ConcurrencyExtras.DependencyMetadataFileList
+
+Copy /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator/ConcurrencyExtras.modulemap /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/ConcurrencyExtras.modulemap (in target 'ConcurrencyExtras' from project 'swift-concurrency-extras')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swift-concurrency-extras
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphonesimulator/ConcurrencyExtras.build/ConcurrencyExtras.modulemap /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/GeneratedModuleMaps-iphonesimulator
+
+ProcessInfoPlistFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/textual_Textual.bundle/Info.plist /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/textual_Textual.build/empty-textual_Textual.plist (in target 'textual_Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    builtin-infoPlistUtility /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/textual.build/Debug-iphonesimulator/textual_Textual.build/empty-textual_Textual.plist -producttype com.apple.product-type.bundle -expandbuildsettings -format binary -platform iphonesimulator -o /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/textual_Textual.bundle/Info.plist
+
+CpResource /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/textual_Textual.bundle/prism-bundle.js /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual/Sources/Textual/Internal/Highlighter/Prism/prism-bundle.js (in target 'textual_Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual/Sources/Textual/Internal/Highlighter/Prism/prism-bundle.js /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/textual_Textual.bundle
+
+ProcessInfoPlistFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/swiftui-math_SwiftUIMath.bundle/Info.plist /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/swiftui-math_SwiftUIMath.build/empty-swiftui-math_SwiftUIMath.plist (in target 'swiftui-math_SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    builtin-infoPlistUtility /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/swiftui-math.build/Debug-iphonesimulator/swiftui-math_SwiftUIMath.build/empty-swiftui-math_SwiftUIMath.plist -producttype com.apple.product-type.bundle -expandbuildsettings -format binary -platform iphonesimulator -o /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/swiftui-math_SwiftUIMath.bundle/Info.plist
+
+CpResource /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/swiftui-math_SwiftUIMath.bundle/mathFonts.bundle /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math/Sources/SwiftUIMath/mathFonts.bundle (in target 'swiftui-math_SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math/Sources/SwiftUIMath/mathFonts.bundle /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/swiftui-math_SwiftUIMath.bundle
+
+ProcessInfoPlistFile /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.bundle/Info.plist /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.build/empty-ZIPFoundation_ZIPFoundation.plist (in target 'ZIPFoundation_ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    builtin-infoPlistUtility /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.build/empty-ZIPFoundation_ZIPFoundation.plist -producttype com.apple.product-type.bundle -expandbuildsettings -format binary -platform iphonesimulator -o /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.bundle/Info.plist
+
+CpResource /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.bundle/PrivacyInfo.xcprivacy /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation/Sources/ZIPFoundation/Resources/PrivacyInfo.xcprivacy (in target 'ZIPFoundation_ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation/Sources/ZIPFoundation/Resources/PrivacyInfo.xcprivacy /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.bundle
+
+CodeSign /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/textual_Textual.bundle (in target 'textual_Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/textual_Textual.bundle
+
+RegisterExecutionPolicyException /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/textual_Textual.bundle (in target 'textual_Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    builtin-RegisterExecutionPolicyException /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/textual_Textual.bundle
+
+Touch /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/textual_Textual.bundle (in target 'textual_Textual' from project 'textual')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/textual
+    /usr/bin/touch -c /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/textual_Textual.bundle
+
+CodeSign /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.bundle (in target 'ZIPFoundation_ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.bundle
+
+CodeSign /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/swiftui-math_SwiftUIMath.bundle (in target 'swiftui-math_SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/swiftui-math_SwiftUIMath.bundle
+
+RegisterExecutionPolicyException /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.bundle (in target 'ZIPFoundation_ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    builtin-RegisterExecutionPolicyException /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.bundle
+
+Touch /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.bundle (in target 'ZIPFoundation_ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/ZIPFoundation
+    /usr/bin/touch -c /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/ZIPFoundation_ZIPFoundation.bundle
+
+RegisterExecutionPolicyException /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/swiftui-math_SwiftUIMath.bundle (in target 'swiftui-math_SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    builtin-RegisterExecutionPolicyException /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/swiftui-math_SwiftUIMath.bundle
+
+Touch /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/swiftui-math_SwiftUIMath.bundle (in target 'swiftui-math_SwiftUIMath' from project 'swiftui-math')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/swiftui-math
+    /usr/bin/touch -c /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/swiftui-math_SwiftUIMath.bundle
+
+SwiftDriver ZIPFoundation normal arm64 com.apple.xcode.tools.swift.compiler (in target 'ZIPFoundation' from project 'ZIPFoundation')
+    cd /Users/runner/work/iOS_CLI/iOS_CLI/app/Harbor.xcodeproj
+    builtin-SwiftDriver -- /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name ZIPFoundation -Onone @/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation.SwiftFileList -DSWIFT_PACKAGE -DDEBUG -DSWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE -DXcode -plugin-path /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios12.0-simulator -g -module-cache-path /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -suppress-warnings -index-store-path /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator -F /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/Developer/Library/Frameworks -c -j3 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -output-file-map /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/ModuleCache.noindex/Session.modulevalidation -package-name zipfoundation -Xcc -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation_const_extract_protocols.json -Xcc -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/DerivedSources-normal/arm64 -Xcc -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/DerivedSources/arm64 -Xcc -I/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/Build/Intermediates.noindex/ZIPFoundation.build/Debug-iphonesimulator/ZIPFoundation.build/Objects-normal/arm64/ZIPFoundation-Swift.h -working-directory /Users/runner/work/iOS_CLI/iOS_CLI/app/Harbor.xcodeproj -experimental-emit-module-separately -disable-cmo
