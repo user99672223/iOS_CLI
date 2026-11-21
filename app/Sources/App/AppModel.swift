@@ -155,10 +155,10 @@ final class AppModel: ObservableObject {
 
     /// Stop the running claude.exe (if any), wait for it to exit, then run `next`.
     private func restart(_ next: @escaping @MainActor () -> Void) {
-        if engine.isRunning || WineSession.isRunning {
+        if engine.isRunning {
             engine.stop()
             Task { @MainActor in
-                for _ in 0..<100 where WineSession.isRunning { try? await Task.sleep(nanoseconds: 100_000_000) }
+                await engine.waitUntilStopped()
                 next()
             }
         } else {
@@ -178,10 +178,20 @@ final class AppModel: ObservableObject {
     func resetPrefix() {
         engine.stop()
         Task { @MainActor in
-            for _ in 0..<100 where WineSession.isRunning { try? await Task.sleep(nanoseconds: 100_000_000) }
-            try? FileManager.default.removeItem(at: AppPaths.prefix)
-            toolsInstalled = false
-            screen = .setup
+            await engine.waitUntilStopped()
+            // Wine keeps the prefix open while the app runs: clear it, keeping the downloaded tools.
+            let fm = FileManager.default
+            let keep = AppPaths.appSupport.appendingPathComponent("tools-keep")
+            try? fm.removeItem(at: keep)
+            try? fm.moveItem(at: AppPaths.toolsDir, to: keep)
+            for name in ["drive_c/workspace", "drive_c/users/user"] {
+                try? fm.removeItem(at: AppPaths.prefix.appendingPathComponent(name))
+            }
+            try? fm.moveItem(at: keep, to: AppPaths.toolsDir)
+            try? ToolInstaller.writeConfiguration()
+            refreshSessions()
+            toolsInstalled = ToolInstaller.isInstalled
+            startEngine(resumeLatest: false)
         }
     }
 }

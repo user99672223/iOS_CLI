@@ -76,9 +76,9 @@ final class SelfTest {
         // 2. cmd /c ver
         if want("cmd_ver") {
             t = Date()
-            let r = await WineSession.run(.init(exe: "cmd.exe", args: "/c ver"), timeout: 300)
+            let r = await HostProcess.run(.init(exe: "cmd.exe", args: "/c ver"), timeout: 300)
             let ok = !r.timedOut && r.output.contains("Windows")
-            record("cmd_ver", ok, "exit=\(r.exit) crash=\(String(r.crash, radix: 16)) timedOut=\(r.timedOut) out=\(r.output.trimmingCharacters(in: .whitespacesAndNewlines))", since: t)
+            record("cmd_ver", ok, "exit=\(String(r.exit, radix: 16)) timedOut=\(r.timedOut) out=\(r.output.trimmingCharacters(in: .whitespacesAndNewlines))", since: t)
             report.metrics["cmd_ver_seconds"] = String(format: "%.1f", Date().timeIntervalSince(t))
         }
 
@@ -86,9 +86,8 @@ final class SelfTest {
         if want("capture") {
             t = Date()
             LiveOutputWatcher.reset()
-            var o = WineSession.Options(exe: "cmd.exe", args: "/c echo capture-ok")
-            o.env = ["CLI_CAPTURE_DIR": LiveOutputWatcher.directory.path]
-            let r = await WineSession.run(o, timeout: 180)
+            let o = WineHost.Options(exe: "cmd.exe", args: "/c echo capture-ok")
+            let r = await HostProcess.run(o, timeout: 180)
             let files = (try? FileManager.default.contentsOfDirectory(at: LiveOutputWatcher.directory, includingPropertiesForKeys: nil)) ?? []
             let captured = files.compactMap { try? String(contentsOf: $0, encoding: .utf8) }.joined(separator: "\n")
             record("capture", captured.contains("capture-ok") && captured.hasPrefix("#pid"),
@@ -98,7 +97,7 @@ final class SelfTest {
         // 3. A second session in the same app process (relaunch).
         if want("relaunch") {
             t = Date()
-            let r = await WineSession.run(.init(exe: "cmd.exe", args: "/c echo relaunch-ok"), timeout: 180)
+            let r = await HostProcess.run(.init(exe: "cmd.exe", args: "/c echo relaunch-ok"), timeout: 180)
             record("relaunch", r.output.contains("relaunch-ok"), "exit=\(r.exit) out=\(r.output.trimmingCharacters(in: .whitespacesAndNewlines))", since: t)
         }
 
@@ -120,13 +119,13 @@ final class SelfTest {
         // 5. claude.exe --version
         if want("claude_version") {
             t = Date()
-            var o = WineSession.Options(exe: AppPaths.windowsPath(AppPaths.claudeExe), args: "--version")
+            var o = WineHost.Options(exe: AppPaths.windowsPath(AppPaths.claudeExe), args: "--version")
             o.env = ClaudeEnvironment.make(token: nil)
             o.workdir = AppPaths.windowsPath(AppPaths.workspace)
-            let r = await WineSession.run(o, timeout: 600)
+            let r = await HostProcess.run(o, timeout: 600)
             let out = r.output.trimmingCharacters(in: .whitespacesAndNewlines)
             record("claude_version", out.contains("Claude Code") || out.range(of: #"\d+\.\d+\.\d+"#, options: .regularExpression) != nil,
-                   "exit=\(r.exit) crash=\(String(r.crash, radix: 16)) timedOut=\(r.timedOut) out=\(out)", since: t)
+                   "exit=\(String(r.exit, radix: 16)) timedOut=\(r.timedOut) out=\(out)", since: t)
             report.metrics["claude_version_seconds"] = String(format: "%.1f", Date().timeIntervalSince(t))
             report.metrics["footprint_after_claude_version"] = MemoryStats.mb(MemoryStats.physFootprint)
         }
@@ -135,10 +134,10 @@ final class SelfTest {
         if want("git_bash") {
             t = Date()
             let bin = AppPaths.windowsPath(AppPaths.gitDir.appendingPathComponent("clangarm64/bin"))
-            var o = WineSession.Options(exe: bin + "\\bash.exe", args: "-lc \"echo ok && git --version && cd /c/workspace && git init -q rt && cd rt && echo hi > f && git add f && git -c user.name=t -c user.email=t@t commit -qm m && git log --oneline | wc -l\"")
+            var o = WineHost.Options(exe: bin + "\\bash.exe", args: "-lc \"echo ok && git --version && cd /c/workspace && git init -q rt && cd rt && echo hi > f && git add f && git -c user.name=t -c user.email=t@t commit -qm m && git log --oneline | wc -l\"")
             o.env = ClaudeEnvironment.make(token: nil)
             o.workdir = AppPaths.windowsPath(AppPaths.workspace)
-            let r = await WineSession.run(o, timeout: 300)
+            let r = await HostProcess.run(o, timeout: 300)
             let out = r.output.trimmingCharacters(in: .whitespacesAndNewlines)
             record("git_bash", out.contains("ok") && out.contains("git version"), "exit=\(r.exit) timedOut=\(r.timedOut) out=\(out)", since: t)
         }
@@ -156,7 +155,7 @@ final class SelfTest {
             }
             let screen = flow.screen
             flow.cancel()
-            for _ in 0..<100 where WineSession.isRunning { try? await Task.sleep(nanoseconds: 100_000_000) }
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
             record("setup_token", gotURL, "url=\(flow.signInURL?.host ?? "none") screen=\(screen.suffix(600))", since: t)
         }
 
@@ -218,7 +217,7 @@ final class SelfTest {
             record("stream_json", done && auth, "no token: expected auth error; done=\(done) text=\(text.prefix(300)) result=\(resultLine.prefix(400))", since: t)
         }
         engine.stop()
-        for _ in 0..<100 where WineSession.isRunning { try? await Task.sleep(nanoseconds: 100_000_000) }
+        await engine.waitUntilStopped()
     }
 
     private func finish() {

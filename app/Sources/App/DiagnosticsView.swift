@@ -33,10 +33,11 @@ struct DiagnosticsView: View {
                 }
             }
             Section("Windows processes") {
-                if WineSession.isRunning, let main = WineSession.currentCommand {
-                    Text("main  \(main)").font(.caption.monospaced()).lineLimit(3)
+                row("Wine host", sampler.hostState)
+                ForEach(sampler.hostProcesses, id: \.self) { p in
+                    Text(p).font(.caption.monospaced()).lineLimit(3)
                 }
-                if sampler.processes.isEmpty && !WineSession.isRunning { Text("None").foregroundStyle(.secondary) }
+                if sampler.processes.isEmpty && sampler.hostProcesses.isEmpty { Text("None").foregroundStyle(.secondary) }
                 ForEach(sampler.processes, id: \.self) { p in
                     Text(p).font(.caption.monospaced()).lineLimit(3)
                 }
@@ -89,6 +90,8 @@ final class DiagnosticsSampler: ObservableObject {
     @Published var thermal = ""
     @Published var processes: [String] = []
     @Published var logTail = ""
+    @Published var hostState = ""
+    @Published var hostProcesses: [String] = []
     private var timer: Timer?
 
     func start() {
@@ -137,6 +140,15 @@ final class DiagnosticsSampler: ObservableObject {
             return f.count >= 3 ? "\(f[0])  (\(f[2]) s)\n\(f[1])" : String(line)
         } : []
         logTail = Self.tail(AppPaths.wineLog, lines: 30)
+        switch WineHost.shared.state {
+        case .stopped: hostState = "Not started"
+        case .starting: hostState = "Starting"
+        case .ready: hostState = "Running (pid \(WineHost.shared.hostPID))"
+        case .failed(let m): hostState = m
+        }
+        hostProcesses = WineHost.shared.running.sorted { $0.startedAt < $1.startedAt }.map {
+            "pid \($0.pid)  \(Int(Date().timeIntervalSince($0.startedAt))) s\n\(SignInFlow.redact($0.commandLine))"
+        }
     }
 
     static func tail(_ url: URL, lines: Int) -> String {

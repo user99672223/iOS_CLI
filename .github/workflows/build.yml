@@ -80,6 +80,22 @@ jobs:
           path: out/${{ matrix.platform }}
           retention-days: 3
 
+  # harbor-host.exe: the Wine session's persistent launcher (host/harbor-host.c).
+  host:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: toolchains
+          key: mingw-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tools/ci/setup-mingw.sh') }}
+      - run: tools/ci/build-host.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: host
+          path: out/host
+          retention-days: 3
+
   # The aarch64-windows DLL farm, built in the arm64 macOS-configured Wine tree.
   farm:
     runs-on: macos-26
@@ -123,7 +139,7 @@ jobs:
           retention-days: 3
 
   app:
-    needs: [native, farm]
+    needs: [native, farm, host]
     runs-on: macos-26
     timeout-minutes: 150
     steps:
@@ -144,6 +160,10 @@ jobs:
         with:
           name: farm
           path: out/farm
+      - uses: actions/download-artifact@v4
+        with:
+          name: host
+          path: out/host
       - uses: actions/cache@v4
         with:
           path: ~/Library/Caches/org.swift.swiftpm
@@ -198,7 +218,7 @@ jobs:
           python3 -c 'import json,sys; r=json.load(open("results/selftest-iphone15/selftest/report.json")); sys.exit(0 if r.get("passed") else 1)'
 
   uitest:
-    needs: [native, farm]
+    needs: [native, farm, host]
     strategy:
       fail-fast: false
       matrix:
@@ -219,6 +239,10 @@ jobs:
         with:
           name: farm
           path: out/farm
+      - uses: actions/download-artifact@v4
+        with:
+          name: host
+          path: out/host
       - uses: actions/cache@v4
         with:
           path: ~/Library/Caches/org.swift.swiftpm

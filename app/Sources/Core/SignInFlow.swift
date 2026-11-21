@@ -5,7 +5,7 @@ import os
 /// Drives `claude setup-token` (an interactive terminal program) to get a
 /// long-lived OAuth token for the owner's Claude subscription.
 ///
-/// The program runs with a console (conhost, MADEIRA_FORCE_CONSOLE) so its
+/// The program runs in a pseudo console (ConPTY, via harbor-host) so its
 /// terminal UI works; its VT output is shown in a minimal terminal view with
 /// any token redacted. The sign-in URL it prints is offered as a button, the
 /// code from the browser is typed back into it, and the token it prints is
@@ -18,35 +18,35 @@ final class SignInFlow: ObservableObject {
     @Published private(set) var signInURL: URL?
     @Published private(set) var screen = ""     // redacted terminal text
     private var raw = ""
-    private var session: WineSession?
+    private var process: HostProcess?
     private let log = Logger(subsystem: "cli.app", category: "signin")
-
 
     func start() {
         guard phase == .idle || isFailed else { return }
-        guard !WineSession.isRunning else { phase = .failed("Claude Code is running; stop it first."); return }
         phase = .starting
         raw = ""; screen = ""; signInURL = nil
-        var o = WineSession.Options(exe: AppPaths.windowsPath(AppPaths.claudeExe), args: "setup-token")
+        var o = WineHost.Options(exe: AppPaths.windowsPath(AppPaths.claudeExe), args: "setup-token")
         o.workdir = AppPaths.windowsPath(AppPaths.workspace)
         var env = ClaudeEnvironment.make(token: nil)
-        env["MADEIRA_FORCE_CONSOLE"] = "1"
-        env["MADEIRA_CONSOLE_COLS"] = "400"
-        env["MADEIRA_CONSOLE_ROWS"] = "40"
         env["TERM"] = "xterm-256color"
         env["NO_COLOR"] = "1"
         env["BROWSER"] = "none"
         o.env = env
-        o.stdinPipe = true
-        o.stdoutPipe = true
-        let s = WineSession()
-        s.onOutput = { [weak self] d in
-            let text = String(decoding: d, as: UTF8.self)
-            Task { @MainActor in self?.receive(text) }
+        o.pseudoConsole = true   // setup-token is a terminal program (ConPTY)
+        Task { @MainActor in
+            do {
+                let p = try await WineHost.shared.spawn(o)
+                self.process = p
+                p.resize(cols: 400, rows: 40)   // wide: URLs and tokens stay on one line
+                p.onOutput { [weak self] d, _ in
+                    let text = String(decoding: d, as: UTF8.self)
+                    Task { @MainActor in self?.receive(text) }
+                }
+                p.onExit { [weak self] code in Task { @MainActor in self?.exited(code) } }
+            } catch {
+                self.phase = .failed("\(error)")
+            }
         }
-        s.onExit = { [weak self] code, crash in Task { @MainActor in self?.exited(code, crash) } }
-        do { try s.start(o) } catch { phase = .failed("\(error)"); return }
-        session = s
     }
 
     var isFailed: Bool { if case .failed = phase { return true }; return false }
@@ -54,14 +54,13 @@ final class SignInFlow: ObservableObject {
     /// The code shown by the browser after signing in.
     func submit(code: String) {
         let c = code.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !c.isEmpty, let session else { return }
-        _ = session.write(Data((c + "\r").utf8))
+        guard !c.isEmpty, let process else { return }
+        process.write(Data((c + "\r").utf8))
         phase = .waitingForToken
     }
 
     func cancel() {
-        session?.closeStdin()
-        cli_session_shutdown()
+        process?.kill()
     }
 
     private func receive(_ chunk: String) {
@@ -82,8 +81,8 @@ final class SignInFlow: ObservableObject {
         screen = Self.redact(Self.lastLines(plain, 40))
     }
 
-    private func exited(_ code: Int32, _ crash: UInt32) {
-        session = nil
+    private func exited(_ code: UInt32) {
+        process = nil
         if phase == .done { return }
         let plain = Self.stripANSI(raw)
         if let token = TerminalText.token(in: plain, final: true) {
@@ -91,7 +90,7 @@ final class SignInFlow: ObservableObject {
             phase = .done
             return
         }
-        phase = .failed(crash != 0 ? String(format: "Claude Code stopped (0x%08X)", crash)
+        phase = .failed(code >= 0xC000_0000 && code != 0xFFFF_FFFF ? String(format: "Claude Code stopped (0x%08X)", code)
                         : "Sign-in ended without a token (exit code \(code)).")
     }
 

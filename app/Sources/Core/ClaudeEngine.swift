@@ -55,12 +55,14 @@ final class ClaudeEngine: ObservableObject {
     @Published var model: String = UserDefaults.standard.string(forKey: "model") ?? ""
 
     private let log = Logger(subsystem: "cli.app", category: "engine")
-    private var session: WineSession?
+    private var process: HostProcess?
+    private var generation = 0
     private var lines = LineBuffer()
     private var requestSeq = 0
     private var pendingOutput: [ClaudeProtocol.Event] = []
     private var flushScheduled = false
     private var interrupting = false
+    private var stderrTail = ""
     /// Raw protocol lines, for the self-test and diagnostics (no user content is logged elsewhere).
     var onRawLine: ((String) -> Void)?
 
@@ -68,37 +70,44 @@ final class ClaudeEngine: ObservableObject {
     var workspaceWindowsPath: String { AppPaths.windowsPath(AppPaths.workspace) }
 
     func start(resume sessionID: String?, history: ChatState? = nil) {
-        guard !WineSession.isRunning else {
-            phase = .failed("Another Windows program is still running")
-            return
-        }
+        if let old = process { old.closeStdin(); old.kill() }
+        process = nil
+        generation += 1
+        let gen = generation
         chat = history ?? ChatState()
         lines = LineBuffer()
+        stderrTail = ""
+        pendingOutput.removeAll()
         phase = .starting
         try? FileManager.default.createDirectory(at: AppPaths.workspace, withIntermediateDirectories: true)
         let args = ClaudeProtocol.arguments(resume: sessionID, model: model.isEmpty ? nil : model)
-        var o = WineSession.Options(exe: AppPaths.windowsPath(AppPaths.claudeExe))
+        var o = WineHost.Options(exe: AppPaths.windowsPath(AppPaths.claudeExe))
         o.args = WinQuote.line(args)
         o.workdir = workspaceWindowsPath
         o.env = ClaudeEnvironment.make(token: Credentials.token)
-        o.stdinPipe = true
-        o.stdoutPipe = true
-        let s = WineSession()
-        s.onOutput = { [weak self] data in
-            Task { @MainActor in self?.receive(data) }
+        Task { @MainActor in
+            do {
+                let p = try await WineHost.shared.spawn(o)
+                guard gen == self.generation else { p.kill(); return }
+                self.process = p
+                p.onOutput { [weak self] data, isErr in
+                    Task { @MainActor in
+                        guard let self, gen == self.generation else { return }
+                        if isErr { self.stderr(data) } else { self.receive(data) }
+                    }
+                }
+                p.onExit { [weak self] code in
+                    Task { @MainActor in
+                        guard let self, gen == self.generation else { return }
+                        self.exited(code: code)
+                    }
+                }
+                self.send(raw: ClaudeProtocol.initialize(id: self.nextRequestID()))
+                self.phase = .ready
+            } catch {
+                self.phase = .failed("\(error)")
+            }
         }
-        s.onExit = { [weak self] code, crash in
-            Task { @MainActor in self?.exited(code: code, crash: crash) }
-        }
-        do {
-            try s.start(o)
-        } catch {
-            phase = .failed("\(error)")
-            return
-        }
-        session = s
-        send(raw: ClaudeProtocol.initialize(id: nextRequestID()))
-        phase = .ready
     }
 
     /// UI demo / screenshots: show a conversation without running anything.
@@ -107,9 +116,17 @@ final class ClaudeEngine: ObservableObject {
         phase = .ready
     }
 
+    /// Ends claude.exe: EOF on its stdin (it exits after the current turn), then terminate.
     func stop() {
-        session?.closeStdin()
-        cli_session_shutdown()
+        guard let p = process else { return }
+        p.closeStdin()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { if p.isRunning { p.kill() } }
+    }
+
+    /// Resolves once the current claude.exe has exited (or after `timeout`).
+    func waitUntilStopped(timeout: TimeInterval = 10) async {
+        let end = Date().addingTimeInterval(timeout)
+        while let p = process, p.isRunning, Date() < end { try? await Task.sleep(nanoseconds: 100_000_000) }
     }
 
     func send(text: String, images: [ClaudeProtocol.ImageAttachment] = []) {
@@ -133,10 +150,16 @@ final class ClaudeEngine: ObservableObject {
     private func nextRequestID() -> String { requestSeq += 1; return "req_\(requestSeq)_\(UUID().uuidString.prefix(8))" }
 
     private func send(raw line: String) {
-        guard let session else { return }
-        let ok = session.write(Data((line + "\n").utf8))
-        if !ok { log.error("stdin write failed") }
+        process?.write(Data((line + "\n").utf8))
     }
+
+    private func stderr(_ data: Data) {
+        stderrTail += String(decoding: data, as: UTF8.self)
+        if stderrTail.count > 4000 { stderrTail = String(stderrTail.suffix(3000)) }
+    }
+
+    /// The end of claude.exe's stderr (diagnostics, error messages), token-redacted.
+    var errorOutput: String { TerminalText.redact(stderrTail) }
 
     private func receive(_ data: Data) {
         for line in lines.append(data) {
@@ -181,16 +204,19 @@ final class ClaudeEngine: ObservableObject {
         chat.appendLiveOutput(toolID: toolID, text)
     }
 
-    private func exited(code: Int32, crash: UInt32) {
+    private func exited(code: UInt32) {
         if let rest = lines.flush(), let e = ClaudeProtocol.parse(line: rest) { pendingOutput.append(e) }
         for e in pendingOutput { chat.apply(e) }
         pendingOutput.removeAll()
         chat.endTurn(interrupted: interrupting)
-        session = nil
-        if crash != 0 {
-            phase = .failed(String(format: "Claude Code stopped unexpectedly (0x%08X). See Diagnostics for the log.", crash))
+        process = nil
+        let tail = errorOutput.split(separator: "\n").suffix(3).joined(separator: " ")
+        if code >= 0xC000_0000 && code != 0xFFFF_FFFF {
+            phase = .failed(String(format: "Claude Code stopped unexpectedly (0x%08X). See Diagnostics for the log.", code))
+        } else if code == 0xFFFF_FFFF {
+            phase = .failed("Claude Code could not be started. \(tail)")
         } else if code != 0 {
-            phase = .failed("Claude Code exited with code \(code)")
+            phase = .failed("Claude Code exited with code \(code). \(tail)")
         } else {
             phase = .stopped
         }

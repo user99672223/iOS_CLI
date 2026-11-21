@@ -100,7 +100,7 @@ struct SettingsView: View {
                     updateMessage = "Claude Code \(r.version) is the latest version."
                 } else {
                     model.engine.stop()
-                    for _ in 0..<100 where WineSession.isRunning { try? await Task.sleep(nanoseconds: 100_000_000) }
+                    await model.engine.waitUntilStopped()
                     try await ToolInstaller.shared.installClaude()
                     updateMessage = "Updated to \(r.version). It was tested with \(SelfTestInfo.testedClaudeVersion)."
                     model.startEngine(resumeLatest: true)

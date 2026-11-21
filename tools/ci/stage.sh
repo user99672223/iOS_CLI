@@ -12,4 +12,5 @@ done
 for f in c_10000 c_932 c_936 c_949 c_950; do cp "$ROOT/wine/nls/$f.nls" "$R/nls/extra/"; done
 cp -R "$ROOT/out/farm/aarch64-windows" "$R/aarch64-windows"
 rm -f "$R/aarch64-windows/.farm-manifest"
+cp "$ROOT/out/host/harbor-host.exe" "$R/aarch64-windows/"
 echo "staged: $(ls "$R/aarch64-windows" | wc -l) farm files, $(du -sh "$R/aarch64-windows" | cut -f1)"
