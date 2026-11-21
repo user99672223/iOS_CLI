@@ -2712,7 +2712,33 @@ static int ios_x18_derived_base( uint64_t fault_pc, int rn )
         if (!ios_fault_read_insn( t + 12, &p )) return 0;
     }
     rd = p & 31; pn = (p >> 5) & 31; pm = (p >> 16) & 31;
-    if (rd != rn) return 0;
+    if (rd != rn)
+    {
+        /* CLI app: Bun (claude.exe) reads TLS as `mov x9, x18; cmp x8, #0x2f0;
+         * ldr x21, [x9, x8, lsl #3]` -- the copy is two or three instructions
+         * back. Look up to 4 back, through instructions that cannot write rn:
+         * compares/tests (destination xzr) and loads into another register. */
+        int k;
+        for (k = 2; k <= 4; k++)
+        {
+            uint32_t q, prev;
+            if (!ios_fault_read_insn( fault_pc - 4 * (k - 1), &prev )) return 0;
+            /* the instruction between must not write rn and must not branch */
+            if ((prev & 0x7c000000u) == 0x14000000u || (prev & 0x7e000000u) == 0x34000000u ||
+                (prev & 0xfe000000u) == 0x54000000u || (prev & 0xfffffc1fu) == 0xd61f0000u) return 0;
+            if ((int)(prev & 31) == rn && (prev & 31) != 31)
+            {
+                /* stores do not write Rt; anything else may */
+                if (!((prev & 0x3b000000u) == 0x39000000u && !((prev >> 22) & 1))) return 0;
+            }
+            if (!ios_fault_read_insn( fault_pc - 4 * k, &q )) return 0;
+            if ((int)(q & 31) != rn) continue;
+            if ((q & 0xffffffe0u) == (0xaa0003e0u | (18u << 16))) return 1;      /* MOV Xd, X18 */
+            if ((q & 0xff800000u) == 0x91000000u && ((q >> 5) & 31) == 18) return 1; /* ADD Xd, X18, #imm */
+            return 0;
+        }
+        return 0;
+    }
     if ((p & 0xffe00000u) == 0x8b200000u) return pn == 18;                       /* ADD Xd, X18, Wm/Xm, ext */
     if ((p & 0xff200000u) == 0x8b000000u) return pn == 18 ||                     /* ADD Xd, X18, Xm, shift */
                                                  (pm == 18 && !((p >> 10) & 0x3f));

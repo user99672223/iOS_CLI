@@ -21,7 +21,8 @@ struct SignInView: View {
                         if case .failed(let m) = flow.phase { Text(m).foregroundStyle(.red).font(.footnote) }
                     }
                     Section("Already have a token?") {
-                        SecureField("sk-ant-oat01-…", text: $pasted)
+                        TextField("sk-ant-oat01-…", text: $pasted, axis: .vertical)
+                            .font(.caption.monospaced())
                             .textInputAutocapitalization(.never).autocorrectionDisabled()
                         Button("Use this token") {
                             Credentials.save(pasted)

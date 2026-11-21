@@ -31,7 +31,7 @@ enum Credentials {
 
     @discardableResult
     static func save(_ token: String) -> String {
-        let t = token.trimmingCharacters(in: .whitespacesAndNewlines)
+        let t = clean(token)
         if keychainWrite(t), keychainRead() == t {
             try? FileManager.default.removeItem(at: fallbackURL)
             return "keychain"
@@ -48,11 +48,13 @@ enum Credentials {
         try? FileManager.default.removeItem(at: fallbackURL)
     }
 
-    /// Looks like a Claude OAuth token (format check only).
-    static func looksValid(_ s: String) -> Bool {
-        let t = s.trimmingCharacters(in: .whitespacesAndNewlines)
-        return t.hasPrefix("sk-ant-") && t.count > 40 && !t.contains(" ")
+    /// The token without any whitespace or line breaks (pasting can add them).
+    static func clean(_ s: String) -> String {
+        String(s.unicodeScalars.filter { !CharacterSet.whitespacesAndNewlines.contains($0) })
     }
+
+    /// Any non-empty pasted token is accepted.
+    static func looksValid(_ s: String) -> Bool { !clean(s).isEmpty }
 
     // MARK: Keychain
 
