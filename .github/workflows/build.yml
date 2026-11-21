@@ -49,7 +49,7 @@ jobs:
         id: libs
         with:
           path: out/${{ matrix.platform }}
-          key: native-v1-${{ matrix.platform }}-${{ steps.keys.outputs.xcode }}-${{ steps.keys.outputs.wine }}-${{ hashFiles('build/ntdll-unix/**', 'build/wineserver/**', 'build/win32u-unix/**', 'build/madsync/**', 'build/crypto-unix/**', 'build/hidpad/**', 'build/*.h', 'build/platform.sh', 'tools/ci/native.sh', 'tools/ci/wine-host.sh') }}
+          key: native-v1-${{ matrix.platform }}-${{ steps.keys.outputs.xcode }}-${{ steps.keys.outputs.wine }}-${{ hashFiles('build/ntdll-unix/**', 'build/wineserver/**', 'build/win32u-unix/**', 'build/madsync/**', 'build/crypto-unix/**', 'build/hidpad/**', 'build/*.h', 'build/platform.sh', 'tools/ci/native.sh') }}
       - uses: actions/cache@v4
         if: steps.libs.outputs.cache-hit != 'true'
         with:
