@@ -1,0 +1,50 @@
+{
+  "jit" : {
+    "address_space" : "0x1028d8000-0x7ffffe000000",
+    "cs_debugged" : "false",
+    "debugger_attached" : "false",
+    "error" : "",
+    "exe_window" : "0x140000000",
+    "method" : "simulator-dualmap",
+    "pool_ready" : "true",
+    "pool_rw" : "0x7000000000",
+    "pool_rx" : "0x300000000",
+    "pool_size_mb" : "1024",
+    "simulator" : "true"
+  },
+  "memory" : {
+
+  },
+  "metrics" : {
+    "cmd_ver_seconds" : "0.8"
+  },
+  "passed" : false,
+  "platform" : "simulator",
+  "started" : "2026-11-21T21:01:51Z",
+  "steps" : [
+    {
+      "detail" : "method=simulator-dualmap",
+      "name" : "jit_pool",
+      "ok" : true,
+      "seconds" : 0.0024199485778808594
+    },
+    {
+      "detail" : "exit=0 timedOut=false out=Microsoft Windows 10.0.19045",
+      "name" : "cmd_ver",
+      "ok" : true,
+      "seconds" : 0.7851970195770264
+    },
+    {
+      "detail" : "files=1 out=capture-ok captured=#pid 68 1795294912 C:\\windows\\system32\\cmd.exe \/c echo capture-ok\ncapture-ok\r\n",
+      "name" : "capture",
+      "ok" : true,
+      "seconds" : 0.1316080093383789
+    },
+    {
+      "detail" : "exit=0 out=relaunch-ok",
+      "name" : "relaunch",
+      "ok" : true,
+      "seconds" : 0.18002104759216309
+    }
+  ]
+}
