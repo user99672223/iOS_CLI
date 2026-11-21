@@ -1,0 +1,168 @@
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug -sdk iphonesimulator -destination "generic/platform=iOS Simulator" ARCHS=arm64 -derivedDataPath DerivedData build
+
+Build settings from command line:
+    ARCHS = arm64
+    SDKROOT = iphonesimulator26.5
+
+Resolve Package Graph
+
+Fetching from https://github.com/microsoft/SwiftStreamingMarkdown
+
+Fetching from https://github.com/appstefan/highlightswift
+
+Fetching from https://github.com/junyan72/iosMath
+
+Fetching from https://github.com/weichsel/ZIPFoundation
+
+Fetching from https://github.com/markiv/SwiftUI-Shimmer
+
+Fetching from https://github.com/ordo-one/equatable
+
+Fetching from https://github.com/swiftlang/swift-markdown.git
+
+Fetching from https://github.com/swiftlang/swift-cmark.git
+
+Fetching from https://github.com/swiftlang/swift-syntax.git
+
+Creating working copy of package ‘ZIPFoundation’
+
+Checking out 0.9.20 of package ‘ZIPFoundation’
+
+Creating working copy of package ‘equatable’
+
+Checking out 1.4.1 of package ‘equatable’
+
+Creating working copy of package ‘highlightswift’
+
+Checking out 99c431b38a1444a5fd6a4978307fbbefe3a7af53 of package ‘highlightswift’
+
+Creating working copy of package ‘swift-markdown’
+
+Checking out 0.7.3 of package ‘swift-markdown’
+
+Creating working copy of package ‘SwiftStreamingMarkdown’
+
+Checking out 5f7c04e0558df6146f90d482edb62cb456986bda of package ‘SwiftStreamingMarkdown’
+
+Creating working copy of package ‘swift-cmark’
+
+Checking out 0.9.0 of package ‘swift-cmark’
+
+Creating working copy of package ‘SwiftUI-Shimmer’
+
+Checking out 1.5.1 of package ‘SwiftUI-Shimmer’
+
+Creating working copy of package ‘iosMath’
+
+Checking out ba9ab7729b151329c54fd895a7c1859981d9484c of package ‘iosMath’
+
+Creating working copy of package ‘swift-syntax’
+
+Checking out 603.0.2 of package ‘swift-syntax’
+
+Downloading package prebuilt https://download.swift.org/prebuilts/swift-syntax/603.0.2/swiftlang-6.3.3.1.3-macosx26.5-MacroSupport.zip
+
+
+Resolved source packages:
+  HarborKit: /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
+  ZIPFoundation: https://github.com/weichsel/ZIPFoundation @ 0.9.20
+  swift-markdown: https://github.com/swiftlang/swift-markdown.git @ 0.7.3
+  SwiftStreamingMarkdown: https://github.com/microsoft/SwiftStreamingMarkdown @ 5f7c04e
+  Equatable: https://github.com/ordo-one/equatable @ 1.4.1
+  cmark-gfm: https://github.com/swiftlang/swift-cmark.git @ 0.9.0
+  iosMath: https://github.com/junyan72/iosMath @ ba9ab77
+  swift-syntax: https://github.com/swiftlang/swift-syntax.git @ 603.0.2
+  SwiftUI-Shimmer: https://github.com/markiv/SwiftUI-Shimmer @ 1.5.1
+  HighlightSwift: https://github.com/appstefan/highlightswift @ 99c431b
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+/Users/runner/work/iOS_CLI/iOS_CLI/DerivedData/SourcePackages/checkouts/equatable/Package.swift:PACKAGE-TARGET:EquatableMacros: error: Macro “EquatableMacros” from package “Equatable” must be enabled before it can be used
+note: Building targets in dependency order
+note: Target dependency graph (27 targets)
+    Target 'Harbor' in project 'Harbor'
+        ➜ Explicit dependency on target 'HarborKit' in project 'HarborKit'
+        ➜ Explicit dependency on target 'ZIPFoundation' in project 'ZIPFoundation'
+        ➜ Explicit dependency on target 'SwiftStreamingMarkdown' in project 'SwiftStreamingMarkdown'
+    Target 'SwiftStreamingMarkdown' in project 'SwiftStreamingMarkdown'
+        ➜ Explicit dependency on target 'SwiftStreamingMarkdown' in project 'SwiftStreamingMarkdown'
+        ➜ Explicit dependency on target 'SwiftStreamingMarkdown_SwiftStreamingMarkdown' in project 'SwiftStreamingMarkdown'
+        ➜ Explicit dependency on target 'Equatable' in project 'Equatable'
+        ➜ Explicit dependency on target 'Markdown' in project 'swift-markdown'
+        ➜ Explicit dependency on target 'HighlightSwift' in project 'HighlightSwift'
+        ➜ Explicit dependency on target 'iosMath' in project 'iosMath'
+        ➜ Explicit dependency on target 'Shimmer' in project 'SwiftUI-Shimmer'
+    Target 'SwiftStreamingMarkdown' in project 'SwiftStreamingMarkdown'
+        ➜ Explicit dependency on target 'SwiftStreamingMarkdown_SwiftStreamingMarkdown' in project 'SwiftStreamingMarkdown'
+        ➜ Explicit dependency on target 'Equatable' in project 'Equatable'
+        ➜ Explicit dependency on target 'Markdown' in project 'swift-markdown'
+        ➜ Explicit dependency on target 'HighlightSwift' in project 'HighlightSwift'
+        ➜ Explicit dependency on target 'iosMath' in project 'iosMath'
+        ➜ Explicit dependency on target 'Shimmer' in project 'SwiftUI-Shimmer'
+    Target 'Shimmer' in project 'SwiftUI-Shimmer'
+        ➜ Explicit dependency on target 'Shimmer' in project 'SwiftUI-Shimmer'
+    Target 'Shimmer' in project 'SwiftUI-Shimmer' (no dependencies)
+    Target 'iosMath' in project 'iosMath'
+        ➜ Explicit dependency on target 'iosMath' in project 'iosMath'
+        ➜ Explicit dependency on target 'iosMath_iosMath' in project 'iosMath'
+    Target 'iosMath' in project 'iosMath'
+        ➜ Explicit dependency on target 'iosMath_iosMath' in project 'iosMath'
+    Target 'iosMath_iosMath' in project 'iosMath' (no dependencies)
+    Target 'HighlightSwift' in project 'HighlightSwift'
+        ➜ Explicit dependency on target 'HighlightSwift' in project 'HighlightSwift'
+        ➜ Explicit dependency on target 'HighlightSwift_HighlightSwift' in project 'HighlightSwift'
+    Target 'HighlightSwift' in project 'HighlightSwift'
+        ➜ Explicit dependency on target 'HighlightSwift_HighlightSwift' in project 'HighlightSwift'
+    Target 'HighlightSwift_HighlightSwift' in project 'HighlightSwift' (no dependencies)
+    Target 'Markdown' in project 'swift-markdown'
+        ➜ Explicit dependency on target 'Markdown' in project 'swift-markdown'
+        ➜ Explicit dependency on target 'CAtomic' in project 'swift-markdown'
+        ➜ Explicit dependency on target 'cmark-gfm' in project 'cmark-gfm'
+        ➜ Explicit dependency on target 'cmark-gfm-extensions' in project 'cmark-gfm'
+    Target 'Markdown' in project 'swift-markdown'
+        ➜ Explicit dependency on target 'CAtomic' in project 'swift-markdown'
+        ➜ Explicit dependency on target 'cmark-gfm' in project 'cmark-gfm'
+        ➜ Explicit dependency on target 'cmark-gfm-extensions' in project 'cmark-gfm'
+    Target 'cmark-gfm-extensions' in project 'cmark-gfm'
+        ➜ Explicit dependency on target 'cmark-gfm-extensions' in project 'cmark-gfm'
+        ➜ Explicit dependency on target 'cmark-gfm' in project 'cmark-gfm'
+    Target 'cmark-gfm-extensions' in project 'cmark-gfm'
+        ➜ Explicit dependency on target 'cmark-gfm' in project 'cmark-gfm'
+    Target 'cmark-gfm' in project 'cmark-gfm'
+        ➜ Explicit dependency on target 'cmark-gfm' in project 'cmark-gfm'
+    Target 'cmark-gfm' in project 'cmark-gfm' (no dependencies)
+    Target 'CAtomic' in project 'swift-markdown' (no dependencies)
+    Target 'Equatable' in project 'Equatable'
+        ➜ Explicit dependency on target 'Equatable' in project 'Equatable'
+        ➜ Explicit dependency on target 'EquatableMacros' in project 'Equatable'
+    Target 'Equatable' in project 'Equatable'
+        ➜ Explicit dependency on target 'EquatableMacros' in project 'Equatable'
+    Target 'EquatableMacros' in project 'Equatable' (no dependencies)
+    Target 'SwiftStreamingMarkdown_SwiftStreamingMarkdown' in project 'SwiftStreamingMarkdown' (no dependencies)
+    Target 'ZIPFoundation' in project 'ZIPFoundation'
+        ➜ Explicit dependency on target 'ZIPFoundation' in project 'ZIPFoundation'
+        ➜ Explicit dependency on target 'ZIPFoundation_ZIPFoundation' in project 'ZIPFoundation'
+    Target 'ZIPFoundation' in project 'ZIPFoundation'
+        ➜ Explicit dependency on target 'ZIPFoundation_ZIPFoundation' in project 'ZIPFoundation'
+    Target 'ZIPFoundation_ZIPFoundation' in project 'ZIPFoundation' (no dependencies)
+    Target 'HarborKit' in project 'HarborKit'
+        ➜ Explicit dependency on target 'HarborKit' in project 'HarborKit'
+    Target 'HarborKit' in project 'HarborKit' (no dependencies)
+
+** BUILD FAILED **
+
+
+The following build commands failed:
+	ComputeTargetDependencyGraph
+	Building project Harbor with scheme Harbor and configuration Debug
+(2 failures)
