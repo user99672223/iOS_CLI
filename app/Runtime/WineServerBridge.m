@@ -78,8 +78,10 @@ static char *g_prefix_path = NULL;
 static void *wineserver_thread_func(void *arg) {
     @autoreleasepool {
         // Set up file-based logging
+        /* CLI app: the launcher passes the log path (HOME is the prefix by now). */
+        const char *cliLog = getenv("CLI_WINE_LOG");
         NSString *docs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
-        NSString *logPath = [docs stringByAppendingPathComponent:@"logs/wine.log"];
+        NSString *logPath = cliLog ? [NSString stringWithUTF8String:cliLog] : [docs stringByAppendingPathComponent:@"logs/wine.log"];
         pthread_mutex_lock(&g_ws_bridge_log_mutex);
         if (g_ws_bridge_log) fclose(g_ws_bridge_log);
         g_ws_bridge_log = fopen(logPath.UTF8String, "a");

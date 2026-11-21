@@ -72,6 +72,7 @@ struct SetupView: View {
             .sheet(isPresented: $model.showSignIn, onDismiss: { model.finishSetupIfReady() }) { SignInView() }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                 model.refreshJIT()
+                model.watchForDebugger()
             }
         }
     }

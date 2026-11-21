@@ -61,12 +61,32 @@ final class AppModel: ObservableObject {
         if jit == .ready || jit == .simulator { makePool() }
         sessions = SessionStore.list()
         screen = setupComplete ? .chat : .setup
-        if screen == .chat { startEngine(resumeLatest: true) }
+        if screen == .chat { startEngine(resumeLatest: true) } else { watchForDebugger() }
+    }
+
+    /// The debugger (LiveContainer "Launch with JIT" + StikDebug) can attach
+    /// after the app started: make the pool as soon as it does, then go on.
+    private var watching = false
+    func watchForDebugger() {
+        guard !watching, jitInfo.pool_ready == 0, jit != .simulator else { return }
+        watching = true
+        Task { @MainActor in
+            defer { watching = false }
+            for _ in 0..<240 {   // two minutes
+                try? await Task.sleep(nanoseconds: 500_000_000)
+                refreshJIT()
+                if jitInfo.pool_ready != 0 { break }
+            }
+        }
     }
 
     func refreshJIT() {
         jit = JITEnabler.state
         cli_jit_query(&jitInfo)
+        if jit == .ready, jitInfo.pool_ready == 0 {
+            makePool()
+            if screen == .setup { finishSetupIfReady() }
+        }
     }
 
     func makePool() {
@@ -74,7 +94,7 @@ final class AppModel: ObservableObject {
         let rc = cli_jit_setup(size_t(Self.poolMB), &info)
         jitInfo = info
         jitError = rc == 0 ? nil : JITStatus.error(info)
-        refreshJIT()
+        jit = JITEnabler.state
     }
 
     func enableJIT() async {

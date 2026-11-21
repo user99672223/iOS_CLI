@@ -454,6 +454,7 @@ int cli_session_start(const cli_session_params *p) {
 
     /* Logging: fd 2 is the Wine log (ERR channels, dprintf) and the
      * program's stderr. */
+    if (p->log_path) setenv("CLI_WINE_LOG", p->log_path, 1);
     if (p->log_path) {
         int fd = open(p->log_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
         if (fd >= 0) { dup2(fd, STDERR_FILENO); close(fd); }

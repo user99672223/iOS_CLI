@@ -4,14 +4,14 @@ import os
 /// Paths used by the app. Inside LiveContainer, NSHomeDirectory() is the
 /// guest's data container, so these follow it automatically.
 enum AppPaths {
-    static var documents: URL {
-        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    }
-    static var appSupport: URL {
+    /// Computed once, before Wine changes HOME for the whole process
+    /// (iOS derives these folders from HOME). AppDelegate touches them first.
+    static let documents: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    static let appSupport: URL = {
         let u = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         try? FileManager.default.createDirectory(at: u, withIntermediateDirectories: true)
         return u
-    }
+    }()
     /// The Wine prefix (not visible in the Files app: it holds the token-bearing config).
     static var prefix: URL { appSupport.appendingPathComponent("wine", isDirectory: true) }
     static var logs: URL {

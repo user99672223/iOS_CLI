@@ -41,6 +41,7 @@ targets:
         buildPhase: resources
       - path: Resources/prefix-template.tar.gz
         buildPhase: resources
+      - path: Resources/Assets.xcassets
     settings:
       base:
         PRODUCT_NAME: Harbor

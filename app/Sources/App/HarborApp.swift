@@ -23,6 +23,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         let args = ProcessInfo.processInfo.arguments
+        _ = AppPaths.documents; _ = AppPaths.appSupport   // before Wine sets HOME
         if Self.isSelfTest {
             Task { @MainActor in
                 await SelfTest(arguments: args).run()
