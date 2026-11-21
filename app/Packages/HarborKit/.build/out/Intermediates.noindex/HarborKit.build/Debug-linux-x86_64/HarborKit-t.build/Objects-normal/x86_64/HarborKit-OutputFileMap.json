@@ -36,6 +36,16 @@
     "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/JSONValue.swiftdeps",
     "swiftmodule" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/JSONValue~partial.swiftmodule"
   },
+  "/home/user/iOS_CLI/app/Packages/HarborKit/Sources/HarborKit/LineDiff.swift" : {
+    "const-values" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/LineDiff.swiftconstvalues",
+    "dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/LineDiff.d",
+    "diagnostics" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/LineDiff.dia",
+    "index-unit-output-path" : "/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/LineDiff.o",
+    "llvm-bc" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/LineDiff.bc",
+    "object" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/LineDiff.o",
+    "swift-dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/LineDiff.swiftdeps",
+    "swiftmodule" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/LineDiff~partial.swiftmodule"
+  },
   "/home/user/iOS_CLI/app/Packages/HarborKit/Sources/HarborKit/TerminalText.swift" : {
     "const-values" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.swiftconstvalues",
     "dependencies" : "/home/user/iOS_CLI/app/Packages/HarborKit/.build/out/Intermediates.noindex/HarborKit.build/Debug-linux-x86_64/HarborKit-t.build/Objects-normal/x86_64/TerminalText.d",

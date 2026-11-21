@@ -5,11 +5,11 @@
       "name" : "HarborKit",
       "path" : "/home/user/iOS_CLI/app/Packages/HarborKit",
       "projects" : [
-        "e493b561c53119bd374143f8016418cd23ef1755c70b6bc7fd07d8a259441a1b",
+        "6835911219401b560b54f70327da7236bda4e0f546fd14f1a5ffec5393531b8a",
         "e80ed6ed4e5e2a3806abde51a7917bd89c93701759c47fb099d1a08dbb79dc8c"
       ]
     },
-    "signature" : "c334930396ab54f8b459e35292240b8c4d3f078fef2f74f7167bc2fd07b1cb28",
+    "signature" : "ba9bd8cf5eee0e37a38b2f4629d1b8bb9ae975ac559ab5f7368c824a9280f186",
     "type" : "workspace"
   },
   {
@@ -256,6 +256,14 @@
               {
                 "fileType" : "sourcecode.swift",
                 "guid" : "PACKAGE:harborkit::MAINGROUP::REF_3::REF_3",
+                "name" : "LineDiff.swift",
+                "path" : "LineDiff.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:harborkit::MAINGROUP::REF_3::REF_4",
                 "name" : "TerminalText.swift",
                 "path" : "TerminalText.swift",
                 "sourceTree" : "<group>",
@@ -297,6 +305,14 @@
               {
                 "fileType" : "sourcecode.swift",
                 "guid" : "PACKAGE:harborkit::MAINGROUP::REF_4::REF_3",
+                "name" : "LineDiff.swift",
+                "path" : "LineDiff.swift",
+                "sourceTree" : "<group>",
+                "type" : "file"
+              },
+              {
+                "fileType" : "sourcecode.swift",
+                "guid" : "PACKAGE:harborkit::MAINGROUP::REF_4::REF_4",
                 "name" : "TerminalText.swift",
                 "path" : "TerminalText.swift",
                 "sourceTree" : "<group>",
@@ -326,12 +342,12 @@
         "aedda1f1172dd4248e24bac91972c88cfabdf2a126105fdb2e58de8ff883dd6c",
         "1570fe07f878ac6927d8d43506b3832af03f094c7a191218521c7ae02b9abf6b",
         "1bba78255db5d69464ae8c5cb00663a2a18bcad0f31c52c212d93176294f364b",
-        "cefc07de72b2858e0f38ba5177ec307cbfbc8bd8bb36f6aba3c7da60096345fa",
-        "07cb24d4c49876a9db69c80dad22667d3c8ef50f344938a61e6d931cfb0b52f6",
+        "e5c8dcc6c64f7789e9da5e31f80c2ff8c36fbf69b1c41cfbd046ba7165a8e799",
+        "f5343568f7b0fcedfa4f689f6eaaff275e4306b0ff4aa4f8226565db7bccbddd",
         "aeb3e35d1cd42a5a177a23d1940348b6d154b8ed4005f7b975ea7a066b4daad5"
       ]
     },
-    "signature" : "e493b561c53119bd374143f8016418cd23ef1755c70b6bc7fd07d8a259441a1b",
+    "signature" : "6835911219401b560b54f70327da7236bda4e0f546fd14f1a5ffec5393531b8a",
     "type" : "project"
   },
   {
@@ -934,6 +950,15 @@
 
               ],
               "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:harborkit::MAINGROUP::REF_3::REF_4",
+              "guid" : "PACKAGE-TARGET:HarborKit::BUILDPHASE_0::4",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
             }
           ],
           "guid" : "PACKAGE-TARGET:HarborKit::BUILDPHASE_0",
@@ -960,7 +985,7 @@
       "productTypeIdentifier" : "org.swift.product-type.library.static",
       "type" : "standard"
     },
-    "signature" : "cefc07de72b2858e0f38ba5177ec307cbfbc8bd8bb36f6aba3c7da60096345fa",
+    "signature" : "e5c8dcc6c64f7789e9da5e31f80c2ff8c36fbf69b1c41cfbd046ba7165a8e799",
     "type" : "target"
   },
   {
@@ -1265,6 +1290,15 @@
 
               ],
               "removeHeadersOnCopy" : "false"
+            },
+            {
+              "codeSignOnCopy" : "false",
+              "fileReference" : "PACKAGE:harborkit::MAINGROUP::REF_4::REF_4",
+              "guid" : "PACKAGE-TARGET:HarborKit--26FA74F63756FF71-dynamic::BUILDPHASE_0::4",
+              "platformFilters" : [
+
+              ],
+              "removeHeadersOnCopy" : "false"
             }
           ],
           "guid" : "PACKAGE-TARGET:HarborKit--26FA74F63756FF71-dynamic::BUILDPHASE_0",
@@ -1290,7 +1324,7 @@
       "productTypeIdentifier" : "com.apple.product-type.library.dynamic",
       "type" : "standard"
     },
-    "signature" : "07cb24d4c49876a9db69c80dad22667d3c8ef50f344938a61e6d931cfb0b52f6",
+    "signature" : "f5343568f7b0fcedfa4f689f6eaaff275e4306b0ff4aa4f8226565db7bccbddd",
     "type" : "target"
   },
   {

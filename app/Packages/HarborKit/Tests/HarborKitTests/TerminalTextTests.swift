@@ -22,3 +22,12 @@ final class TerminalTextTests: XCTestCase {
         XCTAssertEqual(TerminalText.lastLines("a\n\n\n\nb\nc", 2), "b\nc")
     }
 }
+
+final class LineDiffTests: XCTestCase {
+    func testDiff() {
+        XCTAssertEqual(LineDiff.diff("a\nb\nc", "a\nB\nc"), [.same("a"), .removed("b"), .added("B"), .same("c")])
+        XCTAssertEqual(LineDiff.diff("", "x\ny"), [.added("x"), .added("y")])
+        XCTAssertEqual(LineDiff.diff("x", ""), [.removed("x")])
+        XCTAssertEqual(LineDiff.diff("# Demo", "# Demo\n\nText"), [.same("# Demo"), .added(""), .added("Text")])
+    }
+}

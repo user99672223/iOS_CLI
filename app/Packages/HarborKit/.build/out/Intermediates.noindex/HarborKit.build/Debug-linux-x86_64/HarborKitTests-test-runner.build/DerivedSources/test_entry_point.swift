@@ -524,6 +524,7 @@ public func __allDiscoveredTests() -> [XCTestCaseEntry] {
             ("testTranscript", ChatStateTests.testTranscript),
             ("testUnparsableAndUnknown", ChatStateTests.testUnparsableAndUnknown),
             ("testUserMessageEncoding", ChatStateTests.testUserMessageEncoding)]),
+        testCase([            ("testDiff", LineDiffTests.testDiff)]),
         testCase([            ("testLastLines", TerminalTextTests.testLastLines),
             ("testStripANSI", TerminalTextTests.testStripANSI),
             ("testURLAndToken", TerminalTextTests.testURLAndToken)]),
