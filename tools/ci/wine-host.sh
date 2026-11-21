@@ -7,6 +7,11 @@ MINGW_BIN="$("$ROOT/tools/ci/setup-mingw.sh")"
 export PATH="$(brew --prefix bison)/bin:$(brew --prefix flex)/bin:$MINGW_BIN:$PATH"
 B="$ROOT/wine/build-macos"
 mkdir -p "$B"
+if [ -f "$B/Makefile" ]; then
+  # A tree restored from the CI cache is older than this fresh checkout; make
+  # the sources older still so make keeps the cached outputs.
+  (cd "$ROOT/wine" && git ls-files -z | xargs -0 touch -h -t 200001010000)
+fi
 if [ ! -f "$B/Makefile" ]; then
   (cd "$B" && ../configure --enable-archs=aarch64 --disable-tests --without-x \
      --without-freetype --without-gnutls --enable-winegstreamer)
