@@ -64,6 +64,7 @@ final class WineHost: @unchecked Sendable {
     private var readyWaiters: [CheckedContinuation<Void, Error>] = []
     private var readSource: DispatchSourceRead?
     private(set) var hostPID: UInt32 = 0
+    private var wineStarted = false
 
     var state: State { lock.lock(); defer { lock.unlock() }; return _state }
     var isReady: Bool { state == .ready }
@@ -76,6 +77,8 @@ final class WineHost: @unchecked Sendable {
     /// Starts Wine and the host program once; later calls wait for it.
     func start() async throws {
         lock.lock()
+        // A start refused for missing JIT memory can be retried once JIT is on.
+        if case .failed = _state, !wineStarted { _state = .stopped }
         let shouldLaunch = _state == .stopped
         if shouldLaunch { _state = .starting }
         lock.unlock()
@@ -105,6 +108,14 @@ final class WineHost: @unchecked Sendable {
     }
 
     private func launch() {
+        // Without the debugger's JIT memory Wine cannot run code and crash-loops:
+        // never start it then.
+        var jitInfo = cli_jit_info()
+        cli_jit_query(&jitInfo)
+        if jitInfo.pool_ready == 0 && jitInfo.simulator == 0 {
+            setState(.failed("JIT isn't ready yet. Enable JIT in Setup first (StikDebug must be attached)."))
+            return
+        }
         try? FileManager.default.createDirectory(at: LiveOutputWatcher.directory, withIntermediateDirectories: true)
         let env = [
             "CLI_CAPTURE_DIR=\(LiveOutputWatcher.directory.path)",
@@ -137,6 +148,7 @@ final class WineHost: @unchecked Sendable {
             setState(.failed("The Wine runtime failed to start (see logs/wine.log)."))
             return
         }
+        lock.lock(); wineStarted = true; lock.unlock()
         let fd = cli_stdout_fd()
         let src = DispatchSource.makeReadSource(fileDescriptor: fd, queue: queue)
         src.setEventHandler { [weak self] in self?.drain() }

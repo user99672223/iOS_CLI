@@ -3,6 +3,7 @@ import SwiftUI
 @main
 struct HarborApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
         WindowGroup {
@@ -12,6 +13,10 @@ struct HarborApp: App {
                 RootView()
                     .environmentObject(AppModel.shared)
                     .task { AppModel.shared.launch() }
+                    // Back from StikDebug: pick up the attached debugger at once.
+                    .onChange(of: scenePhase) { _, phase in
+                        if phase == .active { AppModel.shared.refreshJIT() }
+                    }
             }
         }
     }

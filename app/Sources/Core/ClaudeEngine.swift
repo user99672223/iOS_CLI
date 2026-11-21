@@ -29,6 +29,10 @@ enum ClaudeEnvironment {
             "CLAUDE_CODE_GIT_BASH_PATH": git + "\\clangarm64\\bin\\bash.exe",
             "PATH": "\(git)\\cmd;\(git)\\clangarm64\\bin;\(git)\\usr\\bin;C:\\windows\\system32;C:\\windows",
             "DISABLE_AUTOUPDATER": "1",
+            // JavaScriptCore interpreter only: its JIT needs writable+executable
+            // memory, which iOS does not give Wine.
+            "BUN_JSC_useJIT": "0",
+            "JSC_useJIT": "0",
             "DISABLE_TELEMETRY": "1",
             "DISABLE_ERROR_REPORTING": "1",
             "CLAUDE_CODE_DISABLE_TERMINAL_TITLE": "1",

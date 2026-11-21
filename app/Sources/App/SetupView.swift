@@ -124,13 +124,15 @@ struct JITStep: View {
             StepRow(done: true, title: "JIT", detail: "Simulator: no debugger needed.")
         case .ready:
             StepRow(done: model.jitInfo.pool_ready != 0, title: "JIT is on",
-                    detail: model.jitInfo.pool_ready != 0 ? "JIT memory is ready (\(model.jitInfo.pool_size >> 20) MB)." : "Debugger attached.")
+                    detail: model.jitInfo.pool_ready != 0 ? "JIT memory is ready (\(model.jitInfo.pool_size >> 20) MB)."
+                        : model.jitPreparing ? "StikDebug is preparing JIT memory (up to a minute)…" : "Debugger attached.")
+            if model.jitPreparing { ProgressView() }
         case .enabledDetached:
             if model.jitInfo.pool_ready != 0 {
                 StepRow(done: true, title: "JIT is on", detail: "JIT memory is ready (\(model.jitInfo.pool_size >> 20) MB).")
             } else {
-                StepRow(done: false, title: "JIT is on, but without Harbor's script",
-                        detail: "Relaunch with JIT using the Harbor JIT script (see the guide below).")
+                StepRow(done: false, title: "JIT is on, but StikDebug isn't attached",
+                        detail: "Tap “Enable with StikDebug” below, then come back to LiveContainer.")
                 guide
             }
         case .off:
@@ -142,24 +144,22 @@ struct JITStep: View {
     }
 
     @ViewBuilder private var guide: some View {
-        DisclosureGroup("How to enable JIT") {
+        Button {
+            busy = true
+            Task { await model.enableJIT(); busy = false }
+        } label: {
+            Label(busy ? "Waiting for StikDebug…" : "Enable with StikDebug", systemImage: "bolt")
+        }
+        .disabled(busy)
+        DisclosureGroup("Other ways to enable JIT") {
             VStack(alignment: .leading, spacing: 8) {
-                Text("1. In LiveContainer, long-press Harbor → Settings → turn on “Launch with JIT”.")
-                Text("2. Under “JIT script”, choose harbor-jit.js (export it with the button below).")
-                Text("3. Make sure StikDebug and its VPN are set up, then launch Harbor.")
-                Text("Or tap “Enable with StikDebug” to attach StikDebug to this running copy.")
+                Text("After tapping the button, StikDebug attaches to this running copy and switches back to LiveContainer. If it stays in StikDebug, open LiveContainer yourself; Harbor continues on its own.")
+                Text("Or: in LiveContainer, long-press Harbor → Settings → turn on “Launch with JIT” and choose harbor-jit.js as the JIT script (export it below).")
             }
             .font(.footnote)
             ShareLink(item: JITScriptFile.url, preview: SharePreview("harbor-jit.js")) {
                 Label("Export the JIT script", systemImage: "square.and.arrow.up")
             }
-            Button {
-                busy = true
-                Task { await model.enableJIT(); busy = false }
-            } label: {
-                Label(busy ? "Waiting for StikDebug…" : "Enable with StikDebug", systemImage: "bolt")
-            }
-            .disabled(busy)
         }
     }
 }

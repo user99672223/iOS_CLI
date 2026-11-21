@@ -36,6 +36,8 @@ int cli_jit_available(void);
 /* Ask StikDebug/LiveContainer's attached debugger for nothing: just whether a
  * debugger is attached right now (P_TRACED). */
 int cli_debugger_attached(void);
+/* libproc (not in the iOS SDK headers). */
+int proc_pidpath(int pid, void *buffer, uint32_t buffersize);
 
 /* ---- Session ------------------------------------------------------------ */
 

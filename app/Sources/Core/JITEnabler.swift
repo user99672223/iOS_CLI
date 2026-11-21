@@ -34,18 +34,39 @@ enum JITEnabler {
             ProcessInfo.processInfo.environment["LC_HOME_PATH"] != nil
     }
 
+    /// The bundle ID of the app iOS actually launched. Inside LiveContainer that is
+    /// LiveContainer (Bundle.main is Harbor's guest bundle there), and StikDebug must
+    /// switch back to it, not to Harbor's own ID, which iOS does not know.
+    static var hostBundleID: String? {
+        let sel = NSSelectorFromString("lcMainBundle")
+        if (UserDefaults.self as AnyObject).responds(to: sel),
+           let b = (UserDefaults.self as AnyObject).perform(sel)?.takeUnretainedValue() as? Bundle {
+            var url = b.bundleURL
+            // Multitask mode runs in LiveContainer's LiveProcess.appex: go up to the app.
+            if url.pathExtension == "appex" { url = url.deletingLastPathComponent().deletingLastPathComponent() }
+            if let id = Bundle(url: url)?.bundleIdentifier ?? b.bundleIdentifier { return id }
+        }
+        if inLiveContainer {
+            // .../LiveContainer.app/... from the real executable path.
+            var path = [CChar](repeating: 0, count: 4096)
+            if proc_pidpath(getpid(), &path, 4096) > 0 {
+                var url = URL(fileURLWithPath: String(cString: path)).deletingLastPathComponent()
+                while url.path.count > 1 && url.pathExtension != "app" { url = url.deletingLastPathComponent() }
+                if url.pathExtension == "app", let id = Bundle(url: url)?.bundleIdentifier { return id }
+            }
+        }
+        return Bundle.main.bundleIdentifier
+    }
+
     /// StikDebug: attach to this process (by PID) and run the JIT script.
     static func stikDebugURL() -> URL? {
         guard let script = scriptData?.base64EncodedString() else { return nil }
-        var c = URLComponents()
-        c.scheme = "stikjit"
-        c.host = "enable-jit"
-        c.queryItems = [URLQueryItem(name: "pid", value: String(getpid())),
-                        URLQueryItem(name: "script-data", value: script)]
-        if let id = Bundle.main.bundleIdentifier { c.queryItems?.append(URLQueryItem(name: "bundle-id", value: id)) }
-        // '+' in base64 must survive form decoding.
-        c.percentEncodedQuery = c.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
-        return c.url
+        let scheme = UIApplication.shared.canOpenURL(URL(string: "stikdebug://")!) ? "stikdebug" : "stikjit"
+        let allowed = CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "-._"))
+        func enc(_ v: String) -> String { v.addingPercentEncoding(withAllowedCharacters: allowed) ?? v }
+        var q = "pid=\(getpid())&script-data=\(enc(script))"
+        if let id = hostBundleID { q += "&bundle-id=\(enc(id))" }
+        return URL(string: "\(scheme)://enable-jit?\(q)")
     }
 
     @MainActor

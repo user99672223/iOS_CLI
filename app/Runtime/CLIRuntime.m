@@ -86,7 +86,12 @@ int cli_jit_available(void) {
 }
 
 void cli_jit_query(cli_jit_info *info) {
-    pthread_mutex_lock(&g_jit_lock);
+    /* Never wait for a running cli_jit_setup (it waits on the debugger): the UI
+     * polls this from the main thread. */
+    if (pthread_mutex_trylock(&g_jit_lock) != 0) {
+        if (info) *info = g_jit;
+        return;
+    }
     uint32_t flags = 0;
     g_jit.cs_debugged = jit_cs_status(&flags) && (flags & 0x10000000u /* CS_DEBUGGED */) ? 1 : 0;
 #if TARGET_OS_SIMULATOR

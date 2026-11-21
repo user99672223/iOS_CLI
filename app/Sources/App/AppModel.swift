@@ -12,6 +12,8 @@ final class AppModel: ObservableObject {
     @Published var jit: JITEnabler.State = JITEnabler.state
     @Published var jitInfo = cli_jit_info()
     @Published var jitError: String?
+    @Published var jitPreparing = false
+    private var pendingStart: Bool?
     @Published var sessions: [SessionSummary] = []
     @Published var signedIn = Credentials.isSignedIn
     @Published var toolsInstalled = ToolInstaller.isInstalled
@@ -27,8 +29,8 @@ final class AppModel: ObservableObject {
     private let log = Logger(subsystem: "cli.app", category: "app")
 
     static var poolMB: Int {
-        get { UserDefaults.standard.object(forKey: "jitPoolMB") as? Int ?? 1024 }
-        set { UserDefaults.standard.set(newValue, forKey: "jitPoolMB") }
+        get { UserDefaults.standard.object(forKey: "jitPoolMB2") as? Int ?? 512 }
+        set { UserDefaults.standard.set(newValue, forKey: "jitPoolMB2") }
     }
 
     private init() {
@@ -83,30 +85,55 @@ final class AppModel: ObservableObject {
     func refreshJIT() {
         jit = JITEnabler.state
         cli_jit_query(&jitInfo)
-        if jit == .ready, jitInfo.pool_ready == 0 {
-            makePool()
-            if screen == .setup { finishSetupIfReady() }
+        if jit == .ready, jitInfo.pool_ready == 0 { makePool() }
+    }
+
+    /// Asks the debugger for the JIT memory on a background thread: the debugger
+    /// prepares it page by page, which takes a while, and the UI must stay live.
+    func makePool() {
+        guard !jitPreparing, jitInfo.pool_ready == 0 else { return }
+        jitPreparing = true
+        let mb = Self.poolMB
+        Thread.detachNewThread { [weak self] in
+            var info = cli_jit_info()
+            let rc = cli_jit_setup(size_t(mb), &info)
+            let result = info
+            Task { @MainActor in self?.poolDone(rc: rc, info: result) }
         }
     }
 
-    func makePool() {
-        var info = cli_jit_info()
-        let rc = cli_jit_setup(size_t(Self.poolMB), &info)
+    private func poolDone(rc: Int32, info: cli_jit_info) {
+        jitPreparing = false
         jitInfo = info
         jitError = rc == 0 ? nil : JITStatus.error(info)
         jit = JITEnabler.state
+        poolChanged()
+    }
+
+    private func poolChanged() {
+        guard jitInfo.pool_ready != 0 else {
+            pendingStart = nil
+            if screen == .chat { screen = .setup }
+            return
+        }
+        if let resume = pendingStart {
+            pendingStart = nil
+            startEngine(resumeLatest: resume)
+        } else if screen == .setup {
+            finishSetupIfReady()
+        }
     }
 
     func enableJIT() async {
         jitError = nil
-        if jit == .ready { makePool(); return }
+        if jit == .ready || jitInfo.pool_ready != 0 { makePool(); return }
         guard await JITEnabler.requestFromStikDebug() else {
             jitError = "StikDebug is not installed or did not open. Use LiveContainer's “Launch with JIT” with the Harbor JIT script instead."
             return
         }
-        if await JITEnabler.waitUntilReady(timeout: 90) { makePool() } else {
+        if await JITEnabler.waitUntilReady(timeout: 600) { makePool() } else {
             refreshJIT()
-            jitError = "No debugger attached within 90 seconds."
+            jitError = "StikDebug did not attach. Check its VPN and pairing file, then tap the button again."
         }
     }
 
@@ -124,8 +151,11 @@ final class AppModel: ObservableObject {
     // MARK: sessions
 
     func startEngine(resumeLatest: Bool) {
-        guard jitInfo.pool_ready != 0 || jit == .simulator else { return }
-        if jitInfo.pool_ready == 0 { makePool() }
+        guard jitInfo.pool_ready != 0 else {
+            // Wine needs the JIT memory first; start once it exists.
+            if jit == .ready || jit == .simulator { pendingStart = resumeLatest; makePool() }
+            return
+        }
         try? ToolInstaller.writeConfiguration()
         sessions = SessionStore.list()
         if resumeLatest, let last = sessions.first {
