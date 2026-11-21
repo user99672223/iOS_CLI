@@ -1,0 +1,16 @@
+# Wine aarch64-windows modules shipped in the app (the "DLL farm").
+# Top-level needs: claude.exe (Bun), MinGit-busybox (git, busybox sh),
+# cmd.exe/conhost.exe, and common console tools Claude may call.
+# tools/farm-closure.py adds every module these import.
+ntdll kernel32 kernelbase apisetschema advapi32 sechost msvcrt ucrtbase
+bcrypt bcryptprimitives crypt32 cryptbase rsaenh dssenh ncrypt wintrust cryptnet
+dbghelp fwpuclnt iphlpapi netapi32 netutils tdh userenv winmm wtsapi32
+ws2_32 wsock32 mswsock nsi dnsapi dhcpcsvc winhttp wininet wldap32 secur32 sspicli schannel
+ole32 oleaut32 combase rpcrt4 coml2 shell32 shlwapi shcore propsys
+user32 win32u gdi32 imm32 comctl32 uxtheme version setupapi cfgmgr32 hid powrprof psapi
+msvcp140 vcruntime140 concrt140 msvcp140_1 msvcp140_2
+cmd conhost start explorer services rpcss wineboot plugplay winedevice svchost
+findstr where whoami tasklist taskkill reg hostname xcopy sort find timeout
+ping ipconfig attrib fc cscript net netstat expand icacls robocopy sc setx systeminfo certutil chcp winepath
+# Import closure of the above plus claude.exe and MinGit (build-farm.py --extra), recorded:
+advpack cabinet comdlg32 compstui cryptsp cryptui dinput8 gdiplus imagehlp jsproxy mlang mpr msacm32 msimg32 ntoskrnl shdocvw urlmon windowscodecs winspool

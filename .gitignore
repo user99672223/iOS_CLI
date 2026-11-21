@@ -1,0 +1,9 @@
+/out/
+/toolchains/
+build/*/obj-*/
+app/Resources/nls/
+app/Resources/aarch64-windows/
+app/*.xcodeproj/
+/dist/
+/DerivedData/
+.DS_Store

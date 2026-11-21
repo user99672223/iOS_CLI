@@ -1,0 +1,4 @@
+[submodule "wine"]
+	path = wine
+	url = https://github.com/willfaust/wine.git
+	branch = madeira-lgpl

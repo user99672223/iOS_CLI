@@ -1,0 +1,187 @@
+name: Build
+
+on:
+  push:
+    branches: ['**']
+    paths-ignore: ['docs/**', '**.md', '.github/workflows/probe.yml']
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      selftest_args:
+        description: 'Extra self-test launch arguments'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  RUNNER_XCODE: /Applications/Xcode_26.6.app
+
+jobs:
+  # Wine unix-side static libraries, one job per platform.
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [iphonesimulator, iphoneos]
+    runs-on: macos-26
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Select Xcode
+        run: sudo xcode-select -s "$RUNNER_XCODE" && xcodebuild -version
+      - id: keys
+        run: |
+          echo "xcode=$(xcodebuild -version | shasum | cut -c1-12)" >> "$GITHUB_OUTPUT"
+          echo "wine=$(git rev-parse HEAD:wine)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        id: libs
+        with:
+          path: out/${{ matrix.platform }}
+          key: native-v1-${{ matrix.platform }}-${{ steps.keys.outputs.xcode }}-${{ steps.keys.outputs.wine }}-${{ hashFiles('build/ntdll-unix/**', 'build/wineserver/**', 'build/win32u-unix/**', 'build/madsync/**', 'build/crypto-unix/**', 'build/hidpad/**', 'build/*.h', 'build/platform.sh', 'tools/ci/native.sh', 'tools/ci/wine-host.sh') }}
+      - uses: actions/cache@v4
+        if: steps.libs.outputs.cache-hit != 'true'
+        with:
+          path: toolchains
+          key: mingw-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tools/ci/setup-mingw.sh') }}
+      - uses: actions/cache@v4
+        if: steps.libs.outputs.cache-hit != 'true'
+        with:
+          path: wine/build-macos
+          key: winehost-v1-${{ steps.keys.outputs.xcode }}-${{ steps.keys.outputs.wine }}-${{ hashFiles('tools/ci/wine-host.sh', 'tools/ci/setup-mingw.sh') }}
+      - name: Configure host Wine tree
+        if: steps.libs.outputs.cache-hit != 'true'
+        run: |
+          brew install bison flex >/dev/null
+          tools/ci/wine-host.sh
+      - name: Build unix-side libraries
+        if: steps.libs.outputs.cache-hit != 'true'
+        run: tools/ci/native.sh ${{ matrix.platform }}
+      - name: Show failures
+        if: failure()
+        run: |
+          for f in build/*/obj-${{ matrix.platform }}/*.err build/*/obj-${{ matrix.platform }}/err-*.txt; do
+            [ -s "$f" ] && { echo "=== $f"; head -30 "$f"; }
+          done | head -400
+      - uses: actions/upload-artifact@v4
+        with:
+          name: native-${{ matrix.platform }}
+          path: out/${{ matrix.platform }}
+          retention-days: 3
+
+  # The aarch64-windows DLL farm, built in the arm64 macOS-configured Wine tree.
+  farm:
+    runs-on: macos-26
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Select Xcode
+        run: sudo xcode-select -s "$RUNNER_XCODE"
+      - id: keys
+        run: |
+          echo "xcode=$(xcodebuild -version | shasum | cut -c1-12)" >> "$GITHUB_OUTPUT"
+          echo "wine=$(git rev-parse HEAD:wine)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        id: farm
+        with:
+          path: out/farm
+          key: farm-v1-${{ steps.keys.outputs.wine }}-${{ hashFiles('build/farm-modules.txt', 'build/build-farm.py', 'tools/ci/farm.sh', 'tools/ci/setup-mingw.sh') }}
+      - uses: actions/cache@v4
+        if: steps.farm.outputs.cache-hit != 'true'
+        with:
+          path: toolchains
+          key: mingw-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('tools/ci/setup-mingw.sh') }}
+      - uses: actions/cache@v4
+        if: steps.farm.outputs.cache-hit != 'true'
+        with:
+          path: wine/build-macos
+          key: winehost-v1-${{ steps.keys.outputs.xcode }}-${{ steps.keys.outputs.wine }}-${{ hashFiles('tools/ci/wine-host.sh', 'tools/ci/setup-mingw.sh') }}
+      - name: Build the DLL farm
+        if: steps.farm.outputs.cache-hit != 'true'
+        run: |
+          brew install bison flex >/dev/null
+          tools/ci/wine-host.sh
+          FARM_STRICT=1 tools/ci/farm.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: farm
+          path: out/farm
+          include-hidden-files: true
+          retention-days: 3
+
+  app:
+    needs: [native, farm]
+    runs-on: macos-26
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Select Xcode
+        run: sudo xcode-select -s "$RUNNER_XCODE"
+      - uses: actions/download-artifact@v4
+        with:
+          name: native-iphonesimulator
+          path: out/iphonesimulator
+      - uses: actions/download-artifact@v4
+        with:
+          name: native-iphoneos
+          path: out/iphoneos
+      - uses: actions/download-artifact@v4
+        with:
+          name: farm
+          path: out/farm
+      - uses: actions/cache@v4
+        with:
+          path: ~/Library/Caches/org.swift.swiftpm
+          key: spm-${{ hashFiles('app/project.yml') }}
+      - name: Generate project
+        run: |
+          brew install xcodegen >/dev/null
+          tools/ci/stage.sh
+          (cd app && xcodegen generate)
+      - name: Build for the simulator
+        run: |
+          set -o pipefail
+          mkdir -p results
+          xcodebuild -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' ARCHS=arm64 \
+            -derivedDataPath DerivedData build 2>&1 | tee results/build-sim.log | grep -E "error:|warning: .*(undefined|duplicate)|BUILD" || true
+          test -d DerivedData/Build/Products/Debug-iphonesimulator/Harbor.app
+      - name: Self-test in the simulator
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          tools/ci/selftest-sim.sh DerivedData/Build/Products/Debug-iphonesimulator/Harbor.app results/selftest-iphone15 "iPhone 15" ${{ github.event.inputs.selftest_args }} | tee results/selftest-summary.txt
+      - name: Build for device (unsigned) and package the IPA
+        run: |
+          set -o pipefail
+          xcodebuild -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug \
+            -sdk iphoneos -destination 'generic/platform=iOS' \
+            -derivedDataPath DerivedData CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build 2>&1 \
+            | tee results/build-device.log | grep -E "error:|BUILD" || true
+          tools/ci/package-ipa.sh DerivedData/Build/Products/Debug-iphoneos/Harbor.app dist
+          cp dist/Harbor.ipa.sha256 results/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Harbor-ipa
+          path: dist
+          retention-days: 14
+      - name: Publish results
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p results
+          grep -E "error:" results/build-*.log | head -200 > results/build-errors.txt 2>/dev/null || true
+          tools/ci/publish-results.sh results app
