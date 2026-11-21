@@ -157,7 +157,7 @@ jobs:
         run: |
           mkdir -p results
           rc=0
-          xcodebuild -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug \
+          xcodebuild -skipMacroValidation -skipPackagePluginValidation -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug \
             -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' ARCHS=arm64 \
             -derivedDataPath DerivedData build > results/build-sim.log 2>&1 || rc=$?
           grep -E "error:|Undefined symbols|referenced from|ld: |BUILD (SUCCEEDED|FAILED)" results/build-sim.log | head -150 || true
@@ -172,7 +172,7 @@ jobs:
           rc=0
           TESTED=$(python3 -c 'import json; r=json.load(open("results/selftest-iphone15/selftest/report.json")); print(r["metrics"].get("claude_version_installed","") if r.get("passed") else "")' 2>/dev/null || true)
           echo "self-test passed with Claude Code: ${TESTED:-none}"
-          xcodebuild -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug \
+          xcodebuild -skipMacroValidation -skipPackagePluginValidation -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug \
             -sdk iphoneos -destination 'generic/platform=iOS' HARBOR_TESTED_CLAUDE_VERSION="${TESTED:-untested}" \
             -derivedDataPath DerivedData CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build > results/build-device.log 2>&1 || rc=$?
           grep -E "error:|Undefined symbols|referenced from|ld: |BUILD (SUCCEEDED|FAILED)" results/build-device.log | head -150 || true
@@ -232,7 +232,7 @@ jobs:
           echo "SLUG=$slug" >> "$GITHUB_ENV"
           OS=$(xcrun simctl list runtimes -j | python3 -c 'import json,sys; r=[x for x in json.load(sys.stdin)["runtimes"] if x["platform"]=="iOS" and x["isAvailable"]]; print(sorted(r,key=lambda x:x["version"])[-1]["version"])')
           rc=0
-          xcodebuild test -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug \
+          xcodebuild test -skipMacroValidation -skipPackagePluginValidation -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug \
             -destination "platform=iOS Simulator,name=${{ matrix.device }},OS=$OS" \
             -derivedDataPath DerivedData -resultBundlePath "results/ui-$slug.xcresult" > "results/uitest-$slug.log" 2>&1 || rc=$?
           grep -E "error:|Test Case .* (passed|failed)|TEST (SUCCEEDED|FAILED)|Executed" "results/uitest-$slug.log" | tail -60 || true
