@@ -5,11 +5,11 @@
       "name" : "HarborKit",
       "path" : "/home/user/iOS_CLI/app/Packages/HarborKit",
       "projects" : [
-        "6835911219401b560b54f70327da7236bda4e0f546fd14f1a5ffec5393531b8a",
+        "94a5b270fdfd840aed78fd436d74e23e6e63f5544d8d1f1d46b805c1e8b46798",
         "e80ed6ed4e5e2a3806abde51a7917bd89c93701759c47fb099d1a08dbb79dc8c"
       ]
     },
-    "signature" : "ba9bd8cf5eee0e37a38b2f4629d1b8bb9ae975ac559ab5f7368c824a9280f186",
+    "signature" : "441626cd2860ebcd1448cde0aa3c067f51572da5fed4f83d4412eb6fe70b5d75",
     "type" : "workspace"
   },
   {
@@ -48,8 +48,8 @@
               "DEBUG=1"
             ],
             "INDEX_ENABLE_DATA_STORE" : "YES",
-            "IPHONEOS_DEPLOYMENT_TARGET" : "17.0",
-            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "17.0",
+            "IPHONEOS_DEPLOYMENT_TARGET" : "18.0",
+            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "18.0",
             "KEEP_PRIVATE_EXTERNS" : "NO",
             "LIBTOOL_NO_WARNING_FOR_NO_SYMBOLS" : "YES",
             "LINKER_DRIVER" : "auto",
@@ -129,8 +129,8 @@
               "$(inherited)",
               "SWIFT_PACKAGE"
             ],
-            "IPHONEOS_DEPLOYMENT_TARGET" : "17.0",
-            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "17.0",
+            "IPHONEOS_DEPLOYMENT_TARGET" : "18.0",
+            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "18.0",
             "KEEP_PRIVATE_EXTERNS" : "NO",
             "LIBTOOL_NO_WARNING_FOR_NO_SYMBOLS" : "YES",
             "LINKER_DRIVER" : "auto",
@@ -338,8 +338,8 @@
       "projectIsPackage" : "true",
       "projectName" : "HarborKit",
       "targets" : [
-        "d4ce69183965009bd49e625121f52c6a61ae50ec0769115e8880633d1584d757",
-        "aedda1f1172dd4248e24bac91972c88cfabdf2a126105fdb2e58de8ff883dd6c",
+        "fb024445fde9fbd51cd6a0b29c025166f07a0e0f58711165d2d2129695841170",
+        "79e69aea9656f189cb5ddcdb450a2b43818f1a369b54426d4e3bf739283e12a3",
         "1570fe07f878ac6927d8d43506b3832af03f094c7a191218521c7ae02b9abf6b",
         "1bba78255db5d69464ae8c5cb00663a2a18bcad0f31c52c212d93176294f364b",
         "e5c8dcc6c64f7789e9da5e31f80c2ff8c36fbf69b1c41cfbd046ba7165a8e799",
@@ -347,7 +347,7 @@
         "aeb3e35d1cd42a5a177a23d1940348b6d154b8ed4005f7b975ea7a066b4daad5"
       ]
     },
-    "signature" : "6835911219401b560b54f70327da7236bda4e0f546fd14f1a5ffec5393531b8a",
+    "signature" : "94a5b270fdfd840aed78fd436d74e23e6e63f5544d8d1f1d46b805c1e8b46798",
     "type" : "project"
   },
   {
@@ -369,8 +369,8 @@
             "GENERATE_INFOPLIST_FILE" : "YES",
             "GENERATE_RESOURCE_ACCESSORS" : "YES",
             "INDEX_ENABLE_DATA_STORE" : "YES",
-            "IPHONEOS_DEPLOYMENT_TARGET" : "17.0",
-            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "17.0",
+            "IPHONEOS_DEPLOYMENT_TARGET" : "18.0",
+            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "18.0",
             "LD_RUNPATH_SEARCH_PATHS" : [
               "$(RPATH_ORIGIN)/Frameworks",
               "$(RPATH_ORIGIN)/../Frameworks",
@@ -451,8 +451,8 @@
             "GENERATE_INFOPLIST_FILE" : "YES",
             "GENERATE_RESOURCE_ACCESSORS" : "YES",
             "INDEX_ENABLE_DATA_STORE" : "YES",
-            "IPHONEOS_DEPLOYMENT_TARGET" : "17.0",
-            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "17.0",
+            "IPHONEOS_DEPLOYMENT_TARGET" : "18.0",
+            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "18.0",
             "LD_RUNPATH_SEARCH_PATHS" : [
               "$(RPATH_ORIGIN)/Frameworks",
               "$(RPATH_ORIGIN)/../Frameworks",
@@ -582,7 +582,7 @@
       "productTypeIdentifier" : "com.apple.product-type.bundle.unit-test",
       "type" : "standard"
     },
-    "signature" : "d4ce69183965009bd49e625121f52c6a61ae50ec0769115e8880633d1584d757",
+    "signature" : "fb024445fde9fbd51cd6a0b29c025166f07a0e0f58711165d2d2129695841170",
     "type" : "target"
   },
   {
@@ -592,8 +592,8 @@
         {
           "buildSettings" : {
             "DRIVERKIT_DEPLOYMENT_TARGET" : "21.0",
-            "IPHONEOS_DEPLOYMENT_TARGET" : "17.0",
-            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "17.0",
+            "IPHONEOS_DEPLOYMENT_TARGET" : "18.0",
+            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "18.0",
             "LD_RUNPATH_SEARCH_PATHS" : [
               "$(inherited)",
               "$(RPATH_ORIGIN)"
@@ -624,8 +624,8 @@
         {
           "buildSettings" : {
             "DRIVERKIT_DEPLOYMENT_TARGET" : "21.0",
-            "IPHONEOS_DEPLOYMENT_TARGET" : "17.0",
-            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "17.0",
+            "IPHONEOS_DEPLOYMENT_TARGET" : "18.0",
+            "IPHONEOS_DEPLOYMENT_TARGET[__platform_filter=ios-maccatalyst]" : "18.0",
             "LD_RUNPATH_SEARCH_PATHS" : [
               "$(inherited)",
               "$(RPATH_ORIGIN)"
@@ -700,7 +700,7 @@
       "productTypeIdentifier" : "com.apple.product-type.tool.swiftpm-test-runner",
       "type" : "standard"
     },
-    "signature" : "aedda1f1172dd4248e24bac91972c88cfabdf2a126105fdb2e58de8ff883dd6c",
+    "signature" : "79e69aea9656f189cb5ddcdb450a2b43818f1a369b54426d4e3bf739283e12a3",
     "type" : "target"
   },
   {
