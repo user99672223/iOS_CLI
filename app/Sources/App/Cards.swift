@@ -222,7 +222,7 @@ struct DiffCard: View {
         switch tool.kind {
         case .write: return [("", tool.input["content"]?.string ?? "")]
         case .multiEdit:
-            return tool.input["edits"]?.array?.map { ($0["old_string"]?.string ?? "", $0["new_string"]?.string ?? "") } ?? []
+            return tool.input["edits"]?.array?.map { (old: $0["old_string"]?.string ?? "", new: $0["new_string"]?.string ?? "") } ?? []
         default:
             return [(tool.input["old_string"]?.string ?? "", tool.input["new_string"]?.string ?? "")]
         }

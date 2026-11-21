@@ -169,7 +169,7 @@ extension WineSession {
     static func run(_ o: Options, timeout: TimeInterval) async -> (output: String, exit: Int32, crash: UInt32, timedOut: Bool) {
         let session = WineSession()
         let collected = LockedData()
-        return await withCheckedContinuation { cont in
+        let result: (output: String, exit: Int32, crash: UInt32, timedOut: Bool) = await withCheckedContinuation { cont in
             let done = OnceFlag()
             session.onOutput = { collected.append($0) }
             session.onExit = { code, crash in
@@ -183,6 +183,8 @@ extension WineSession {
                 if done.set() { cont.resume(returning: (collected.string, -1, 0, true)) }
             }
         }
+        withExtendedLifetime(session) {}   // the I/O handlers hold it weakly
+        return result
     }
 }
 

@@ -59,3 +59,26 @@ targets:
         CODE_SIGN_IDENTITY: "-"
         DEVELOPMENT_TEAM: ""
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+  HarborUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: UITests
+    dependencies:
+      - target: Harbor
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.harbor.cli.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGN_IDENTITY: "-"
+        TEST_TARGET_NAME: Harbor
+schemes:
+  Harbor:
+    build:
+      targets:
+        Harbor: all
+        HarborUITests: [test]
+    test:
+      targets:
+        - HarborUITests

@@ -161,7 +161,8 @@ final class ClaudeEngine: ObservableObject {
     private func scheduleFlush() {
         guard !flushScheduled, !pendingOutput.isEmpty else { return }
         flushScheduled = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 50_000_000)
             guard let self else { return }
             self.flushScheduled = false
             var c = self.chat

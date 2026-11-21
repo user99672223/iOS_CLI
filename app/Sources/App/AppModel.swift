@@ -35,7 +35,7 @@ final class AppModel: ObservableObject {
         live.runningCommands = { [weak self] in
             guard let self else { return [] }
             return self.engine.chat.runningCommandIDs.map { id in
-                (id, self.commandText(id))
+                (id: id, command: self.commandText(id))
             }
         }
         live.deliver = { [weak self] id, text in self?.engine.appendLiveOutput(toolID: id, text) }
@@ -71,7 +71,7 @@ final class AppModel: ObservableObject {
 
     func makePool() {
         var info = cli_jit_info()
-        let rc = cli_jit_setup(Self.poolMB, &info)
+        let rc = cli_jit_setup(size_t(Self.poolMB), &info)
         jitInfo = info
         jitError = rc == 0 ? nil : JITStatus.error(info)
         refreshJIT()

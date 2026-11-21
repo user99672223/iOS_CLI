@@ -56,7 +56,7 @@ enum MemoryStats {
         if let i = taskVMInfo() {
             d["vm_min"] = JITStatus.hex(i.min_address)
             d["vm_max"] = JITStatus.hex(i.max_address)
-            d["footprint_peak"] = mb(i.ledger_phys_footprint_peak)
+            d["footprint_peak"] = mb(UInt64(max(0, i.ledger_phys_footprint_peak)))
         }
         return d
     }

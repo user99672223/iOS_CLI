@@ -156,7 +156,7 @@ final class DiagnosticsSampler: ObservableObject {
         var out: [ThreadCPU] = []
         for i in 0..<Int(count) {
             var basic = thread_basic_info()
-            var n = mach_msg_type_number_t(THREAD_BASIC_INFO_COUNT)
+            var n = mach_msg_type_number_t(MemoryLayout<thread_basic_info>.size / MemoryLayout<natural_t>.size)
             let kr = withUnsafeMutablePointer(to: &basic) {
                 $0.withMemoryRebound(to: integer_t.self, capacity: Int(n)) {
                     thread_info(list[i], thread_flavor_t(THREAD_BASIC_INFO), $0, &n)

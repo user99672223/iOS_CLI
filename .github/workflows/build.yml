@@ -187,3 +187,68 @@ jobs:
           mkdir -p results
           grep -E "error:" results/build-*.log | head -200 > results/build-errors.txt 2>/dev/null || true
           tools/ci/publish-results.sh results app
+
+  uitest:
+    needs: [native, farm]
+    strategy:
+      fail-fast: false
+      matrix:
+        device: ['iPhone 15', 'iPad Pro 13-inch (M5)']
+    runs-on: macos-26
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Select Xcode
+        run: sudo xcode-select -s "$RUNNER_XCODE"
+      - uses: actions/download-artifact@v4
+        with:
+          name: native-iphonesimulator
+          path: out/iphonesimulator
+      - uses: actions/download-artifact@v4
+        with:
+          name: farm
+          path: out/farm
+      - uses: actions/cache@v4
+        with:
+          path: ~/Library/Caches/org.swift.swiftpm
+          key: spm-${{ hashFiles('app/project.yml') }}
+      - name: Generate project
+        run: |
+          brew install xcodegen >/dev/null
+          tools/ci/stage.sh
+          (cd app && xcodegen generate)
+      - name: UI tests with screenshots
+        run: |
+          mkdir -p results
+          slug=$(echo "${{ matrix.device }}" | tr ' ()' '---' | tr -s '-' | tr 'A-Z' 'a-z')
+          echo "SLUG=$slug" >> "$GITHUB_ENV"
+          OS=$(xcrun simctl list runtimes -j | python3 -c 'import json,sys; r=[x for x in json.load(sys.stdin)["runtimes"] if x["platform"]=="iOS" and x["isAvailable"]]; print(sorted(r,key=lambda x:x["version"])[-1]["version"])')
+          rc=0
+          xcodebuild test -project app/Harbor.xcodeproj -scheme Harbor -configuration Debug \
+            -destination "platform=iOS Simulator,name=${{ matrix.device }},OS=$OS" \
+            -derivedDataPath DerivedData -resultBundlePath "results/ui-$slug.xcresult" > "results/uitest-$slug.log" 2>&1 || rc=$?
+          grep -E "error:|Test Case .* (passed|failed)|TEST (SUCCEEDED|FAILED)|Executed" "results/uitest-$slug.log" | tail -60 || true
+          mkdir -p "results/screenshots-$slug"
+          xcrun xcresulttool export attachments --path "results/ui-$slug.xcresult" --output-path "results/screenshots-$slug" || true
+          # Name files after the attachment names.
+          python3 - "results/screenshots-$slug" <<'PY'
+          import json, os, sys
+          d = sys.argv[1]
+          m = os.path.join(d, "manifest.json")
+          if os.path.exists(m):
+              for test in json.load(open(m)):
+                  for a in test.get("attachments", []):
+                      src = os.path.join(d, a["exportedFileName"])
+                      name = a.get("suggestedHumanReadableName", a["exportedFileName"]).split("_0_")[0]
+                      if os.path.exists(src):
+                          os.rename(src, os.path.join(d, name + os.path.splitext(src)[1]))
+          PY
+          rm -rf "results/ui-$slug.xcresult"
+          exit $rc
+      - name: Publish results
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: tools/ci/publish-results.sh results "uitest-$SLUG"
