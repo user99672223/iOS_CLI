@@ -1,6 +1,6 @@
 import SwiftUI
 import HarborKit
-import SwiftStreamingMarkdown
+import Textual
 
 struct ChatItemView: View {
     let item: ChatItem
@@ -46,7 +46,7 @@ struct AssistantText: View {
     let text: String
     let streaming: Bool
     var body: some View {
-        MarkdownView(text: text)
+        StructuredText(markdown: text)
             .frame(maxWidth: .infinity, alignment: .leading)
             .textSelection(.enabled)
             .accessibilityLabel(text)
@@ -345,7 +345,7 @@ struct TaskCard: View {
                         ForEach(children) { ChatItemView(item: $0, chat: chat) }
                         if !tool.result.isEmpty {
                             Divider()
-                            MarkdownView(text: tool.result)
+                            StructuredText(markdown: tool.result)
                         }
                     }
                     .padding(.leading, 10)

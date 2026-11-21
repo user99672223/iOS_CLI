@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "HarborKit",
-    platforms: [.iOS(.v17), .macOS(.v14)],
+    platforms: [.iOS(.v18), .macOS(.v14)],
     products: [.library(name: "HarborKit", targets: ["HarborKit"])],
     targets: [
         .target(name: "HarborKit"),

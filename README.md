@@ -36,4 +36,4 @@ Anthropic's release server and verifies it against the release manifest.
 GPL-3.0-or-later (`LICENSE`), as Madeira, whose runtime code this builds on.
 Wine (the `wine/` submodule and the files derived from it under `build/`) is
 LGPL-2.1-or-later (`LICENSES/LGPL-2.1.txt`). Third-party Swift packages keep
-their own licenses (ZIPFoundation: MIT; SwiftStreamingMarkdown: MIT).
+their own licenses (ZIPFoundation: MIT; Textual: MIT).
