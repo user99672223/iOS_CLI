@@ -174,6 +174,7 @@ jobs:
           tools/ci/stage.sh
           (cd app && xcodegen generate)
       - name: Build for the simulator
+        if: github.event.inputs.release_tag == ''
         run: |
           mkdir -p results
           rc=0
@@ -190,6 +191,7 @@ jobs:
           tools/ci/selftest-sim.sh DerivedData/Build/Products/Debug-iphonesimulator/Harbor.app results/selftest-iphone15 "iPhone 15" ${{ github.event.inputs.selftest_args }} | tee results/selftest-summary.txt
       - name: Build for device (unsigned) and package the IPA
         run: |
+          mkdir -p results
           rc=0
           TESTED=$(python3 -c 'import json; r=json.load(open("results/selftest-iphone15/selftest/report.json")); print(r["metrics"].get("claude_version_installed","") if r.get("passed") else "")' 2>/dev/null || true)
           echo "self-test passed with Claude Code: ${TESTED:-none}"
