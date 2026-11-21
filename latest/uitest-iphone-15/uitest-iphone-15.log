@@ -7,9 +7,9 @@ Fetching from https://github.com/weichsel/ZIPFoundation
 
 Fetching from https://github.com/gonzalezreal/textual
 
-Fetching from https://github.com/pointfreeco/swift-concurrency-extras
-
 Fetching from https://github.com/gonzalezreal/swiftui-math
+
+Fetching from https://github.com/pointfreeco/swift-concurrency-extras
 
 Creating working copy of package ‘textual’
 
@@ -30,10 +30,10 @@ Checking out 0.1.0 of package ‘swiftui-math’
 
 Resolved source packages:
   ZIPFoundation: https://github.com/weichsel/ZIPFoundation @ 0.9.20
-  HarborKit: /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
-  textual: https://github.com/gonzalezreal/textual @ 0.5.0
   swift-concurrency-extras: https://github.com/pointfreeco/swift-concurrency-extras @ 1.4.3
   swiftui-math: https://github.com/gonzalezreal/swiftui-math @ 0.1.0
+  textual: https://github.com/gonzalezreal/textual @ 0.5.0
+  HarborKit: /Users/runner/work/iOS_CLI/iOS_CLI/app/Packages/HarborKit
 
 Writing result bundle at path:
 	/Users/runner/work/iOS_CLI/iOS_CLI/results/ui-iphone-15.xcresult
@@ -44,7 +44,7 @@ xcodebuild: error: Unable to find a device matching the provided destination spe
 	The requested device could not be found because no available devices matched the request.
 
 	Available destinations for the "Harbor" scheme:
-		{ platform:macOS, arch:arm64, variant:Designed for [iPad,iPhone], id:b824d9e199d2e3efaf2991f9d99cdad8689ef890, name:My Mac }
+		{ platform:macOS, arch:arm64, variant:Designed for [iPad,iPhone], id:951211fbb7d583206d5cb7021bcf8ddc0f3aad4e, name:My Mac }
 		{ platform:iOS, id:dvtdevice-DVTiPhonePlaceholder-iphoneos:placeholder, name:Any iOS Device }
 		{ platform:iOS Simulator, id:dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder, name:Any iOS Simulator Device }
 		{ platform:visionOS Simulator, arch:arm64, variant:Designed for [iPad,iPhone], id:9C68DD66-0BB9-4C08-B7BF-9A91F7FA547B, OS:26.2, name:Apple Vision Pro }
