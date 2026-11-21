@@ -287,8 +287,8 @@ jobs:
         run: tools/ci/publish-results.sh results "uitest-$SLUG"
 
   release:
-    needs: [app, uitest]
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_tag != ''
+    needs: [app]
+    if: always() && github.event_name == 'workflow_dispatch' && github.event.inputs.release_tag != ''
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
