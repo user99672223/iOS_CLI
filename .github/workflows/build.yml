@@ -193,6 +193,9 @@ jobs:
           mkdir -p results
           grep -E "error:" results/build-*.log | head -200 > results/build-errors.txt 2>/dev/null || true
           tools/ci/publish-results.sh results app
+      - name: Self-test verdict
+        run: |
+          python3 -c 'import json,sys; r=json.load(open("results/selftest-iphone15/selftest/report.json")); sys.exit(0 if r.get("passed") else 1)'
 
   uitest:
     needs: [native, farm]
