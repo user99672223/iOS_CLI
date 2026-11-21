@@ -142,8 +142,13 @@ static kern_return_t make_rw_alias(vm_address_t rx, vm_size_t size, vm_address_t
 
 /* The pool must not land inside the 0x140000000 exe window and should stay
  * above 0x119000000, where Wine maps sub-floor images (Madeira ml977). */
+/* Wine's own allocation window (TEBs, stacks, heaps): the pool must never be there,
+ * or Wine maps over it (device log: pool at 0x7000000000, first exec faulted). */
+#define GUEST_LO 0x7000000000ul
+#define GUEST_HI 0x8000000000ul
 static int pool_placement_ok(vm_address_t rx, vm_size_t size) {
     if (rx < 0x119000000ul) return 0;
+    if (rx < GUEST_HI && rx + size > GUEST_LO) return 0;
     if (madeira_early_window_base &&
         rx < madeira_early_window_base + madeira_early_window_size &&
         rx + size > madeira_early_window_base) return 0;
@@ -209,17 +214,28 @@ int cli_jit_setup(size_t pool_mb, cli_jit_info *info) {
         unsigned long pb = 0, ps = 0;
         madeira_early_pool_placeholder(&pb, &ps);
         if (pb && ps) vm_deallocate(mach_task_self(), pb, ps);
+        /* Plug Wine's window (1 GB chunks, whatever is free) so the debugger's
+         * allocation lands elsewhere; released right after (Madeira does the same). */
+        vm_address_t plugs[64]; int nplugs = 0;
+        for (vm_address_t a = GUEST_LO; a < GUEST_HI && nplugs < 64; a += (1ul << 30)) {
+            vm_address_t t = a;
+            if (vm_allocate(mach_task_self(), &t, 1ul << 30, VM_FLAGS_FIXED) == KERN_SUCCESS) plugs[nplugs++] = t;
+        }
         void *rxp = NULL;
+        void *bad[3]; int nbad = 0;
         for (int attempt = 0; attempt < 3 && !rxp; attempt++) {
             void *got = jit26_prepare_region(NULL, size);
             if (!got) break;
             if (!pool_placement_ok((vm_address_t)got, size)) {
                 /* Keep the bad placement mapped so the next request lands elsewhere. */
                 LOG("JIT pool: rejected placement %p", got);
+                bad[nbad++] = got;
                 continue;
             }
             rxp = got;
         }
+        for (int i = 0; i < nbad; i++) vm_deallocate(mach_task_self(), (vm_address_t)bad[i], size);
+        for (int i = 0; i < nplugs; i++) vm_deallocate(mach_task_self(), plugs[i], 1ul << 30);
         if (!rxp) {
             snprintf(g_jit.error, sizeof g_jit.error,
                      "the debugger did not prepare a JIT region (is the app's JIT script selected?)");
