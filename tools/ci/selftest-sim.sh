@@ -16,13 +16,16 @@ echo "data container: $DATA"
 # Optional secret for the stream-json conversation step.
 SIMCTL_CHILD_CLAUDE_CODE_OAUTH_TOKEN="${CLAUDE_CODE_OAUTH_TOKEN:-}" \
   xcrun simctl launch "$UDID" "$BUNDLE" --selftest "$@" > "$OUT/launch.txt" 2>&1
+APP_PID=$(grep -oE '[0-9]+$' "$OUT/launch.txt" | tail -1)
+echo "app pid: ${APP_PID:-unknown}"
 START=$(date +%s)
 TIMEOUT=${SELFTEST_TIMEOUT:-1500}
 while :; do
   if [ -f "$DATA/Documents/selftest/report.json" ] && grep -q '"finished"' "$DATA/Documents/selftest/report.json"; then break; fi
-  if ! xcrun simctl spawn "$UDID" launchctl list 2>/dev/null | grep -q "$BUNDLE"; then
+  # Simulator apps are host processes: check the PID simctl reported.
+  if [ -n "$APP_PID" ] && ! kill -0 "$APP_PID" 2>/dev/null; then
     sleep 3
-    grep -q '"finished"' "$DATA/Documents/selftest/report.json" 2>/dev/null || { echo "app is gone before finishing"; break; }
+    grep -q '"finished"' "$DATA/Documents/selftest/report.json" 2>/dev/null || { echo "app (pid $APP_PID) exited before finishing"; break; }
   fi
   [ $(( $(date +%s) - START )) -gt "$TIMEOUT" ] && { echo "self-test timed out"; break; }
   sleep 5
@@ -31,7 +34,7 @@ echo "self-test took $(( $(date +%s) - START )) s"
 cp -R "$DATA/Documents/selftest" "$OUT/" 2>/dev/null || true
 cp -R "$DATA/Documents/logs" "$OUT/" 2>/dev/null || true
 # Crash reports for the app process, if any.
-find ~/Library/Logs/DiagnosticReports -name 'Harbor*' -newermt "@$START" -exec cp {} "$OUT/" \; 2>/dev/null || true
+find ~/Library/Logs/DiagnosticReports -newermt "@$START" \( -name '*Harbor*' -o -name '*.ips' \) -exec cp {} "$OUT/" \; 2>/dev/null || true
 xcrun simctl spawn "$UDID" log show --last 30m --style compact --predicate 'subsystem BEGINSWITH "cli."' > "$OUT/oslog.txt" 2>/dev/null || true
 # Redact anything token-shaped from every collected text file.
 find "$OUT" -type f \( -name '*.txt' -o -name '*.log' -o -name '*.json' -o -name '*.ips' \) -exec \
